@@ -47,11 +47,11 @@ export default function Navigation() {
   const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -62,84 +62,106 @@ export default function Navigation() {
   }, [pathname]);
 
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+    const handleClick = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
         setOpenDropdown(null);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
   }, []);
+
+  // Lock body scroll when mobile menu open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  const monoStyle = { fontFamily: "'Space Mono', monospace" };
+
   return (
     <>
       <nav
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        ref={navRef}
+        className="fixed top-0 left-0 right-0 z-50"
         style={{
           height: "72px",
-          background: scrolled ? "rgba(0,0,0,0.95)" : "#000000",
-          backdropFilter: "blur(12px)",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          background: scrolled ? "rgba(0,0,0,0.96)" : "#000000",
+          backdropFilter: "blur(16px)",
+          borderBottom: "1px solid rgba(255,255,255,0.07)",
+          transition: "background 0.3s ease",
         }}
-        ref={dropdownRef}
       >
-        <div className="max-w-[1440px] mx-auto h-full px-6 lg:px-12 flex items-center justify-between">
+        <div
+          className="h-full flex items-center justify-between"
+          style={{ maxWidth: "1440px", margin: "0 auto", padding: "0 3rem" }}
+        >
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 shrink-0">
             <div
-              className="w-9 h-9 bg-[#C6FF02] flex items-center justify-center"
-              style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "20px", color: "#000" }}
+              className="flex items-center justify-center shrink-0"
+              style={{
+                width: "36px",
+                height: "36px",
+                background: "#C6FF02",
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: "20px",
+                color: "#000",
+                lineHeight: 1,
+              }}
             >
               M
             </div>
             <span
-              className="text-white tracking-[0.18em] uppercase"
-              style={{ fontFamily: "'Space Mono', monospace", fontSize: "13px" }}
+              className="text-white uppercase"
+              style={{ ...monoStyle, fontSize: "13px", letterSpacing: "0.18em" }}
             >
               MODSOL
             </span>
           </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-8">
+          {/* Desktop nav links */}
+          <div className="hidden lg:flex items-center gap-7">
             {navItems.map((item) => (
-              <div key={item.label} className="relative">
+              <div
+                key={item.label}
+                className="relative"
+                onMouseEnter={() => item.children && setOpenDropdown(item.label)}
+                onMouseLeave={() => item.children && setOpenDropdown(null)}
+              >
                 {item.children ? (
-                  <button
-                    className={`flex items-center gap-1 uppercase transition-colors duration-200 ${
-                      isActive(item.href)
-                        ? "text-[#C6FF02]"
-                        : "text-white/70 hover:text-white"
-                    }`}
-                    style={{
-                      fontFamily: "'Space Mono', monospace",
-                      fontSize: "11px",
-                      letterSpacing: "0.1em",
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
-                    onMouseEnter={() => setOpenDropdown(item.label)}
-                    onMouseLeave={() => setOpenDropdown(null)}
-                    onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
-                  >
-                    {item.label}
-                    <span
-                      className={`transition-transform duration-200 ${openDropdown === item.label ? "rotate-180" : ""}`}
-                      style={{ fontSize: "10px", color: "#C6FF02" }}
+                  <>
+                    {/* Parent label — not a button, just a div for hover area */}
+                    <div
+                      className="flex items-center gap-1 select-none"
+                      style={{ cursor: "default" }}
                     >
-                      ▾
-                    </span>
+                      <Link
+                        href={item.href}
+                        className="uppercase transition-colors duration-150"
+                        style={{
+                          ...monoStyle,
+                          fontSize: "11px",
+                          letterSpacing: "0.1em",
+                          color: isActive(item.href) ? "#C6FF02" : "rgba(255,255,255,0.65)",
+                        }}
+                      >
+                        {item.label}
+                      </Link>
+                      <span style={{ color: "#C6FF02", fontSize: "10px", lineHeight: 1 }}>▾</span>
+                    </div>
 
-                    {/* Dropdown */}
+                    {/* Dropdown panel */}
                     {openDropdown === item.label && (
                       <div
-                        className="absolute top-full left-0 mt-3 min-w-[220px] z-50"
+                        className="absolute top-full left-0 z-50"
                         style={{
-                          background: "#0A0A0A",
+                          marginTop: "12px",
+                          minWidth: "230px",
+                          background: "#080808",
                           borderLeft: "2px solid #C6FF02",
                           borderBottom: "1px solid rgba(255,255,255,0.08)",
                           borderRight: "1px solid rgba(255,255,255,0.08)",
@@ -149,31 +171,33 @@ export default function Navigation() {
                           <Link
                             key={child.href}
                             href={child.href}
-                            className="block px-5 py-3 text-white/70 hover:text-[#C6FF02] hover:bg-white/5 transition-colors duration-150"
+                            className="block transition-colors duration-150"
                             style={{
-                              fontFamily: "'Space Mono', monospace",
+                              ...monoStyle,
                               fontSize: "11px",
-                              letterSpacing: "0.08em",
+                              letterSpacing: "0.07em",
+                              padding: "12px 20px",
+                              color: "rgba(255,255,255,0.6)",
+                              borderBottom: "1px solid rgba(255,255,255,0.05)",
                             }}
+                            onMouseEnter={(e) => (e.currentTarget.style.color = "#C6FF02")}
+                            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
                           >
                             {child.label}
                           </Link>
                         ))}
                       </div>
                     )}
-                  </button>
+                  </>
                 ) : (
                   <Link
                     href={item.href}
-                    className={`uppercase transition-colors duration-200 ${
-                      isActive(item.href)
-                        ? "text-[#C6FF02]"
-                        : "text-white/70 hover:text-white"
-                    }`}
+                    className="uppercase transition-colors duration-150"
                     style={{
-                      fontFamily: "'Space Mono', monospace",
+                      ...monoStyle,
                       fontSize: "11px",
                       letterSpacing: "0.1em",
+                      color: isActive(item.href) ? "#C6FF02" : "rgba(255,255,255,0.65)",
                     }}
                   >
                     {item.label}
@@ -183,89 +207,110 @@ export default function Navigation() {
             ))}
           </div>
 
-          {/* CTA + hamburger */}
+          {/* CTA + Hamburger */}
           <div className="flex items-center gap-4">
             <Link
               href="/contact"
-              className="hidden lg:inline-block bg-[#C6FF02] text-black px-5 py-2 uppercase font-semibold hover:bg-white transition-colors duration-200"
+              className="hidden lg:inline-block uppercase transition-colors duration-150"
               style={{
-                fontFamily: "'Space Mono', monospace",
+                ...monoStyle,
                 fontSize: "11px",
                 letterSpacing: "0.12em",
+                background: "#C6FF02",
+                color: "#000",
+                padding: "10px 20px",
+                fontWeight: 700,
               }}
+              onMouseEnter={(e) => ((e.target as HTMLElement).style.background = "#fff")}
+              onMouseLeave={(e) => ((e.target as HTMLElement).style.background = "#C6FF02")}
             >
               Get In Touch
             </Link>
 
             {/* Hamburger */}
             <button
-              className="lg:hidden flex flex-col gap-1.5 p-1"
+              className="lg:hidden flex flex-col justify-center gap-1.5 p-2"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
+              style={{ background: "none", border: "none" }}
             >
               <span
-                className={`block w-6 h-px bg-white transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-2.5" : ""}`}
+                style={{
+                  display: "block",
+                  width: "24px",
+                  height: "1px",
+                  background: "#fff",
+                  transition: "transform 0.3s, opacity 0.3s",
+                  transform: mobileOpen ? "rotate(45deg) translate(4px, 4px)" : "none",
+                }}
               />
               <span
-                className={`block w-6 h-px bg-white transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`}
+                style={{
+                  display: "block",
+                  width: "24px",
+                  height: "1px",
+                  background: "#fff",
+                  transition: "opacity 0.3s",
+                  opacity: mobileOpen ? 0 : 1,
+                }}
               />
               <span
-                className={`block w-6 h-px bg-white transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-2.5" : ""}`}
+                style={{
+                  display: "block",
+                  width: "24px",
+                  height: "1px",
+                  background: "#fff",
+                  transition: "transform 0.3s, opacity 0.3s",
+                  transform: mobileOpen ? "rotate(-45deg) translate(4px, -4px)" : "none",
+                }}
               />
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile overlay */}
+      {/* Mobile full-screen overlay */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 flex flex-col overflow-y-auto"
+          className="fixed inset-0 z-40 overflow-y-auto"
           style={{ background: "#000000", paddingTop: "72px" }}
         >
-          <div className="flex flex-col px-6 py-8 gap-2">
+          <div style={{ padding: "2rem 2rem 4rem" }}>
             {navItems.map((item) => (
-              <div key={item.label}>
+              <div key={item.label} style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
                 {item.children ? (
                   <>
                     <button
-                      className="flex items-center justify-between w-full py-4 text-white/80 border-b border-white/10"
+                      onClick={() => setMobileOpenDropdown(mobileOpenDropdown === item.label ? null : item.label)}
+                      className="w-full flex items-center justify-between"
                       style={{
-                        fontFamily: "'Space Mono', monospace",
-                        fontSize: "13px",
-                        letterSpacing: "0.1em",
                         background: "none",
                         border: "none",
-                        cursor: "pointer",
-                        borderBottom: "1px solid rgba(255,255,255,0.1)",
+                        padding: "1.25rem 0",
+                        color: "rgba(255,255,255,0.8)",
+                        ...monoStyle,
+                        fontSize: "13px",
+                        letterSpacing: "0.1em",
+                        textTransform: "uppercase",
+                        textAlign: "left",
                       }}
-                      onClick={() =>
-                        setMobileOpenDropdown(
-                          mobileOpenDropdown === item.label ? null : item.label
-                        )
-                      }
                     >
-                      <span className="uppercase">{item.label}</span>
-                      <span
-                        className={`text-[#C6FF02] transition-transform duration-200 ${mobileOpenDropdown === item.label ? "rotate-180" : ""}`}
-                      >
-                        ▾
-                      </span>
+                      <span>{item.label}</span>
+                      <span style={{ color: "#C6FF02", transform: mobileOpenDropdown === item.label ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}>▾</span>
                     </button>
                     {mobileOpenDropdown === item.label && (
-                      <div
-                        className="pl-4 border-l-2 border-[#C6FF02] ml-2 my-2"
-                        style={{ borderLeft: "2px solid #C6FF02" }}
-                      >
+                      <div style={{ borderLeft: "2px solid #C6FF02", paddingLeft: "1rem", marginBottom: "0.75rem" }}>
                         {item.children.map((child) => (
                           <Link
                             key={child.href}
                             href={child.href}
-                            className="block py-3 text-white/60 hover:text-[#C6FF02] transition-colors"
+                            className="block"
                             style={{
-                              fontFamily: "'Space Mono', monospace",
+                              ...monoStyle,
                               fontSize: "12px",
-                              letterSpacing: "0.08em",
+                              letterSpacing: "0.07em",
+                              color: "rgba(255,255,255,0.55)",
+                              padding: "0.6rem 0",
                             }}
                           >
                             {child.label}
@@ -277,12 +322,14 @@ export default function Navigation() {
                 ) : (
                   <Link
                     href={item.href}
-                    className="block py-4 uppercase text-white/80 hover:text-[#C6FF02] transition-colors"
+                    className="block"
                     style={{
-                      fontFamily: "'Space Mono', monospace",
+                      ...monoStyle,
                       fontSize: "13px",
                       letterSpacing: "0.1em",
-                      borderBottom: "1px solid rgba(255,255,255,0.1)",
+                      color: "rgba(255,255,255,0.8)",
+                      padding: "1.25rem 0",
+                      textTransform: "uppercase",
                     }}
                   >
                     {item.label}
@@ -290,14 +337,19 @@ export default function Navigation() {
                 )}
               </div>
             ))}
-            <div className="mt-6">
+            <div style={{ marginTop: "2rem" }}>
               <Link
                 href="/contact"
-                className="block text-center bg-[#C6FF02] text-black py-4 uppercase font-semibold"
+                className="block text-center"
                 style={{
-                  fontFamily: "'Space Mono', monospace",
+                  ...monoStyle,
                   fontSize: "13px",
                   letterSpacing: "0.12em",
+                  background: "#C6FF02",
+                  color: "#000",
+                  padding: "1rem",
+                  textTransform: "uppercase",
+                  fontWeight: 700,
                 }}
               >
                 Get In Touch

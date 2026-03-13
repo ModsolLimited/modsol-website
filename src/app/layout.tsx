@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
+import CustomCursor from "@/components/ui/CustomCursor";
 
 export const metadata: Metadata = {
   title: {
@@ -34,9 +35,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body style={{ width: "100%", minHeight: "100vh" }}>
+        <CustomCursor />
         <Navigation />
-        <main>{children}</main>
+        <main style={{ width: "100%" }}>{children}</main>
         <Footer />
       </body>
     </html>
