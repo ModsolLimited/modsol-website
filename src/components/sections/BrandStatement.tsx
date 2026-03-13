@@ -6,21 +6,27 @@ export default function BrandStatement() {
     <section className="brand-statement">
       <div style={{ padding: "0 40px" }}>
         <div className="statement-words">
-          {/* Row 1 — left */}
+          {/* Row 1 */}
           <div className="statement-row">
             <span className="big-word filled">BUILD.</span>
             <div className="dot-separator" />
+            <span className="big-word">SUSTAINABLE.</span>
+            <div className="dot-separator" />
             <span className="big-word">MODULAR.</span>
           </div>
-          {/* Row 2 — right */}
-          <div className="statement-row" style={{ marginTop: "-16px" }}>
+          {/* Row 2 */}
+          <div className="statement-row" style={{ marginTop: "-10px" }}>
             <span className="big-word">SCALABLE.</span>
             <div className="dot-separator" />
-            <span className="big-word yellow-fill">BOLD.</span>
+            <span className="big-word yellow-fill">DIFFERENT.</span>
+            <div className="dot-separator" />
+            <span className="big-word">BOLD.</span>
           </div>
-          {/* Row 3 — left */}
-          <div className="statement-row" style={{ marginTop: "-16px" }}>
+          {/* Row 3 */}
+          <div className="statement-row" style={{ marginTop: "-10px" }}>
             <span className="big-word">ADAPTABLE.</span>
+            <div className="dot-separator" />
+            <span className="big-word">IMAGINATION.</span>
             <div className="dot-separator" />
             <span className="big-word filled">PRECISE.</span>
           </div>
@@ -30,8 +36,8 @@ export default function BrandStatement() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "flex-end",
-          marginTop: "80px",
-          paddingTop: "60px",
+          marginTop: "64px",
+          paddingTop: "48px",
           borderTop: "1px solid rgba(255,255,255,0.06)",
         }}>
           <div>
