@@ -1,55 +1,76 @@
 import type { Metadata } from "next";
-import SolutionLayout from "@/components/solutions/SolutionLayout";
+import Link from "next/link";
+import PageHero from "@/components/layout/PageHero";
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 
-export const metadata: Metadata = {
-  title: "Hospitality Solutions — Premium Temporary Hospitality Environments",
-  description:
-    "Modsol builds premium temporary hospitality environments — trackside suites, VIP lounges, corporate entertainment structures, and more.",
-};
+export const metadata: Metadata = { title: "Hospitality" };
 
-export default function HospitalitySolutionsPage() {
+const capabilities = [
+  { title: "VIP Pavilions", body: "Private hospitality pavilions for sponsor entertaining at sport, culture, and music events. Designed to impress. Built to spec." },
+  { title: "Brand Hospitality Villages", body: "Multi-unit brand villages with catering, service infrastructure, and front-of-house environments at scale." },
+  { title: "Team & Crew Facilities", body: "Technical team facilities, broadcast compounds, and crew amenity villages that perform behind the scenes." },
+  { title: "Corporate Entertainment", body: "Private and semi-private corporate entertaining environments designed around your guest experience brief." },
+];
+
+export default function HospitalityPage() {
   return (
-    <SolutionLayout
-      label="Solutions / Hospitality"
-      title="Hospitality Solutions"
-      subtitle="Premium temporary hospitality environments built to the standard of permanent architecture — for the world's most demanding venues and occasions."
-      heroImageLabel="HOSPITALITY SOLUTIONS HERO — Replace with premium hospitality suite or VIP lounge photography"
-      intro="The best hospitality doesn't feel temporary. Modsol's premium surface systems and structural precision deliver environments that feel permanent, polished, and entirely on-brand — whether trackside at a grand prix or front-of-house at a major concert."
-      capabilities={[
-        {
-          title: "Trackside Hospitality Suites",
-          description: "Motorsport hospitality structures with full fit-out — branded surfaces, acoustic interiors, bar installations, and viewing terraces.",
-        },
-        {
-          title: "VIP Lounges",
-          description: "Premium enclosed and partially open VIP environments — designed for comfort, brand expression, and guest experience.",
-        },
-        {
-          title: "Corporate Entertainment Pods",
-          description: "Self-contained corporate entertainment structures for sporting events, festivals, and corporate occasions.",
-        },
-        {
-          title: "Premium Bar Structures",
-          description: "Branded bar and service structures with integrated back-bar, refrigeration routing, and full Modwall surface finishes.",
-        },
-        {
-          title: "Catering & BOH Infrastructure",
-          description: "Back-of-house kitchen, preparation, and service infrastructure built from the Modframe chassis system.",
-        },
-        {
-          title: "Interior Fit-Out",
-          description: "Full interior specification — flooring, lighting, furniture, and AV integration alongside the Modsol structural platform.",
-        },
-      ]}
-      systems={["The Modwall (SYS-02)", "The Modblock (SYS-01)", "The Modframe (SYS-03)"]}
-      galleryImages={[
-        { label: "HOSPITALITY — Trackside suite exterior photography" },
-        { label: "HOSPITALITY — VIP lounge interior photography" },
-        { label: "HOSPITALITY — Bar structure photography" },
-        { label: "HOSPITALITY — Corporate pod or entertainment suite" },
-        { label: "HOSPITALITY — Interior fit-out detail" },
-        { label: "HOSPITALITY — Viewing terrace or deck photography" },
-      ]}
-    />
+    <>
+      <PageHero label="Solution — Hospitality" title="Hospitality<br/>Built Bolder." subtitle="Temporary hospitality structures for sport, culture, and corporate entertainment that reflect the quality of your brand." />
+
+      <section className="section-pad" style={{ background: "var(--black)" }}>
+        <div className="container">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
+            <div className="reveal">
+              <p className="section-label">Hospitality Capability</p>
+              <h2 className="section-title" style={{ marginBottom: "24px" }}>The Guest<br /><span style={{ color: "var(--yellow)" }}>Experience Starts Here.</span></h2>
+              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.8", marginBottom: "24px" }}>
+                VIP hospitality environments are where your most important relationships are maintained. They should communicate the quality of your brand the moment a guest steps inside. Modsol's hospitality builds are designed and engineered to do exactly that.
+              </p>
+              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.8" }}>
+                From 50-cover private pavilions to 2,000-cover brand villages, we design and deliver hospitality structures that work as hard as your hosting team.
+              </p>
+            </div>
+            <div className="reveal">
+              <ImagePlaceholder label="Hospitality — VIP Pavilion" aspectRatio="4/5" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--dark)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container">
+          <p className="section-label">Capabilities</p>
+          <div className="platform-cards reveal" style={{ marginTop: "48px" }}>
+            {capabilities.map((c) => (
+              <div className="platform-card" key={c.title}>
+                <h3>{c.title}</h3>
+                <p>{c.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--black)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container">
+          <p className="section-label">Hospitality Gallery</p>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: "rgba(255,255,255,0.06)", marginTop: "48px" }}>
+            <ImagePlaceholder label="Hospitality — Sport Paddock" aspectRatio="16/9" />
+            <ImagePlaceholder label="Hospitality — Brand Village" aspectRatio="16/9" />
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--dark2)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container" style={{ textAlign: "center" }}>
+          <p className="section-label" style={{ justifyContent: "center" }}>Brief us</p>
+          <h2 className="section-title reveal" style={{ marginBottom: "32px" }}>Elevate Your<br /><span style={{ color: "var(--yellow)" }}>Hospitality.</span></h2>
+          <div style={{ display: "flex", gap: "16px", justifyContent: "center" }}>
+            <Link href="/contact" className="btn-primary">Start a Project</Link>
+            <Link href="/solutions" className="btn-secondary">All Solutions</Link>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

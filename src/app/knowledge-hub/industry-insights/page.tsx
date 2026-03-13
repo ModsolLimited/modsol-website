@@ -1,125 +1,45 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
-import SectionLabel from "@/components/ui/SectionLabel";
-import AccentLine from "@/components/ui/AccentLine";
 
-export const metadata: Metadata = {
-  title: "Industry Insights — Knowledge Hub",
-  description:
-    "Market trends, sector analysis, and forward-looking commentary on temporary architecture, events, exhibitions, and branded environments.",
-};
+export const metadata: Metadata = { title: "Industry Insights" };
 
 const insights = [
-  {
-    title: "The Rise of Permanent-Quality Temporary Architecture",
-    excerpt: "Why brands and event producers are demanding higher standards from temporary structures — and how modular systems are delivering.",
-    date: "March 2025",
-    readTime: "8 min read",
-    tag: "Market Trend",
-  },
-  {
-    title: "Why Exhibition Stand Design Is Finally Getting Serious",
-    excerpt: "After a decade of declining standards, the exhibition industry is experiencing a quality renaissance driven by brand-led demand.",
-    date: "December 2024",
-    readTime: "7 min read",
-    tag: "Exhibitions",
-  },
-  {
-    title: "The Sustainability Shift in Temporary Architecture",
-    excerpt: "How the events industry is rethinking the lifecycle of temporary structures — and why modularity is the most honest answer.",
-    date: "October 2024",
-    readTime: "6 min read",
-    tag: "Sustainability",
-  },
-  {
-    title: "Live Events Post-2020: What's Changed in Structural Requirements",
-    excerpt: "The regulatory and insurance landscape for temporary structures at live events has shifted significantly. Here's what operators need to know.",
-    date: "September 2024",
-    readTime: "9 min read",
-    tag: "Regulation",
-  },
-  {
-    title: "Brand Activation Budgets in 2025: Where the Money Is Moving",
-    excerpt: "Analysis of brand activation investment trends — and why physical, spatial experiences are gaining share from digital.",
-    date: "August 2024",
-    readTime: "5 min read",
-    tag: "Brand Activations",
-  },
-  {
-    title: "The Future of Exhibition Infrastructure: A 2030 Outlook",
-    excerpt: "How technology integration, sustainability requirements, and changing event formats will reshape exhibition stand design by the end of the decade.",
-    date: "June 2024",
-    readTime: "10 min read",
-    tag: "Future Outlook",
-  },
+  { date: "Jan 2025", title: "The Event Industry's Sustainability Problem", body: "Single-use structures are the dirty secret of the events industry. Modular systems aren't just better design — they're the only credible sustainability answer." },
+  { date: "Nov 2024", title: "Motorsport Paddock Club Design: Raising the Standard", body: "Formula 1 hospitality is the most demanding temporary architecture brief in sport. What it takes to deliver at this level, week after week." },
+  { date: "Oct 2024", title: "The State of UK Exhibition Design", body: "Why UK brands are underinvesting in exhibition environments — and the commercial cost of standing on a shell scheme instead of a statement." },
+  { date: "Sep 2024", title: "Experiential Retail: Beyond the Pop-up", body: "The shift from temporary retail as a tactical tool to a strategic brand channel. What the leading brands are doing differently." },
+  { date: "Aug 2024", title: "Live Events Post-Pandemic: The New Expectations", body: "Audiences returned to live events with higher expectations for physical environments. The brands that understood this invested in structure. The ones that didn't are still catching up." },
+  { date: "Jul 2024", title: "The Rise of the Hybrid Event Environment", body: "Event structures increasingly have to serve both live audiences and broadcast cameras simultaneously. How modular architecture is adapting to the hybrid era." },
 ];
 
 export default function IndustryInsightsPage() {
   return (
     <>
-      <PageHero
-        label="Knowledge Hub / Industry Insights"
-        title="Industry Insights"
-        subtitle="Market trends, sector analysis, and forward-looking commentary on temporary architecture, events, and branded environments."
-      />
+      <PageHero label="Knowledge Hub — Industry Insights" title="Industry<br/>Intelligence." subtitle="Data, trends, and informed perspectives on the sectors Modsol operates in — from people who build in them every day." />
 
-      <section className="py-24 lg:py-32" style={{ background: "#000000" }}>
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-          <SectionLabel className="mb-12">All Insights</SectionLabel>
-          <div className="space-y-px" style={{ background: "rgba(255,255,255,0.06)" }}>
-            {insights.map((insight, i) => (
-              <div
-                key={i}
-                className="group p-8 flex flex-col md:flex-row md:items-start md:justify-between gap-6 hover:bg-white/02 transition-colors cursor-pointer"
-                style={{ background: "#000" }}
-              >
-                <div className="flex items-start gap-6 flex-1">
-                  <div className="shrink-0 mt-1">
-                    <span
-                      className="text-[#C6FF02] uppercase block"
-                      style={{ fontFamily: "'Space Mono', monospace", fontSize: "9px", letterSpacing: "0.2em" }}
-                    >
-                      {insight.tag}
-                    </span>
-                  </div>
-                  <div>
-                    <AccentLine className="w-6 mb-4" />
-                    <h3
-                      className="text-white mb-2 group-hover:text-[#C6FF02] transition-colors"
-                      style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.125rem", fontWeight: 500 }}
-                    >
-                      {insight.title}
-                    </h3>
-                    <p
-                      className="text-white/40 text-sm leading-relaxed"
-                      style={{ fontFamily: "'DM Sans', sans-serif" }}
-                    >
-                      {insight.excerpt}
-                    </p>
-                  </div>
-                </div>
-                <div className="shrink-0 flex flex-col items-end gap-2">
-                  <span
-                    className="text-white/30"
-                    style={{ fontFamily: "'Space Mono', monospace", fontSize: "9px", letterSpacing: "0.12em" }}
-                  >
-                    {insight.date}
-                  </span>
-                  <span
-                    className="text-white/20"
-                    style={{ fontFamily: "'Space Mono', monospace", fontSize: "9px" }}
-                  >
-                    {insight.readTime}
-                  </span>
-                  <span
-                    className="text-[#C6FF02] mt-2"
-                    style={{ fontFamily: "'Space Mono', monospace", fontSize: "11px" }}
-                  >
-                    →
-                  </span>
-                </div>
+      <section className="section-pad" style={{ background: "var(--black)" }}>
+        <div className="container">
+          <div className="articles-grid reveal">
+            {insights.map((a) => (
+              <div key={a.title} className="article-card">
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "var(--muted)", letterSpacing: "0.1em", marginBottom: "20px" }}>{a.date}</div>
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "22px", color: "var(--white)", marginBottom: "12px", lineHeight: "1.1", letterSpacing: "0.02em" }}>{a.title}</h3>
+                <p style={{ fontSize: "13px", color: "var(--muted)", lineHeight: "1.6" }}>{a.body}</p>
+                <div style={{ marginTop: "24px", fontFamily: "var(--font-mono)", fontSize: "9px", color: "var(--yellow)", letterSpacing: "0.2em", textTransform: "uppercase" }}>Read →</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--dark2)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container" style={{ textAlign: "center" }}>
+          <p className="section-label" style={{ justifyContent: "center" }}>More knowledge</p>
+          <h2 className="section-title reveal" style={{ marginBottom: "32px" }}>Browse All<br /><span style={{ color: "var(--yellow)" }}>Categories.</span></h2>
+          <div style={{ display: "flex", gap: "16px", justifyContent: "center" }}>
+            <Link href="/knowledge-hub/articles" className="btn-secondary">Articles</Link>
+            <Link href="/knowledge-hub/technical-guides" className="btn-secondary">Technical Guides</Link>
           </div>
         </div>
       </section>

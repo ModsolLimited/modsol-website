@@ -1,112 +1,45 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/layout/PageHero";
-import SectionLabel from "@/components/ui/SectionLabel";
-import AccentLine from "@/components/ui/AccentLine";
 import Link from "next/link";
+import PageHero from "@/components/layout/PageHero";
 
-export const metadata: Metadata = {
-  title: "Articles — Knowledge Hub",
-  description:
-    "Thinking, perspective, and case-based writing from the Modsol team on temporary architecture, modular design, and the events industry.",
-};
+export const metadata: Metadata = { title: "Articles" };
 
 const articles = [
-  {
-    title: "Designing for Repeatability: The Modsol Approach to Brand Activations",
-    excerpt: "How modular thinking allows brands to maintain visual consistency across dozens of activations without starting from scratch.",
-    date: "January 2025",
-    readTime: "6 min read",
-  },
-  {
-    title: "The Case for Engineering-Led Temporary Architecture",
-    excerpt: "When your temporary structure carries your brand, the standard of engineering communicates as loudly as the graphics.",
-    date: "November 2024",
-    readTime: "5 min read",
-  },
-  {
-    title: "What Film Productions Get Wrong About Temporary Structures",
-    excerpt: "On-location build requirements are some of the most demanding in any sector — and most productions underestimate them.",
-    date: "October 2024",
-    readTime: "7 min read",
-  },
-  {
-    title: "The Real Cost of Non-Modular Exhibition Stands",
-    excerpt: "Custom bespoke sounds expensive. Non-modular custom is almost always more expensive — once you factor in the full lifecycle.",
-    date: "September 2024",
-    readTime: "5 min read",
-  },
-  {
-    title: "Five Reasons Hospitality Structures Fail at Events",
-    excerpt: "From structural integrity to service flow — the avoidable mistakes that turn premium hospitality into an ordeal.",
-    date: "August 2024",
-    readTime: "6 min read",
-  },
-  {
-    title: "How to Brief a Modular Structure Supplier",
-    excerpt: "The information your modular supplier actually needs to quote accurately and deliver confidently — a practical guide.",
-    date: "July 2024",
-    readTime: "4 min read",
-  },
+  { date: "Feb 2025", title: "Why Temporary Architecture Fails Brands", body: "The standard of temporary architecture in event and exhibition environments consistently underdelivers. Here's why — and how to fix it." },
+  { date: "Jan 2025", title: "The Brief That Changes Everything", body: "How a single well-written brief determines whether a temporary structure is a cost or an investment. The questions your structural partner should be asking." },
+  { date: "Dec 2024", title: "Designing for Strike: The Hidden Cost of Temporary Architecture", body: "Most temporary structures are designed to go up. The best ones are designed to come down just as efficiently. Why strike planning is where cost is really controlled." },
+  { date: "Nov 2024", title: "When Permanent Isn't the Answer", body: "The case for modular over permanent in retail, hospitality, and brand environments. Flexibility isn't a compromise — it's a competitive advantage." },
+  { date: "Oct 2024", title: "Material Honesty in Temporary Architecture", body: "Raw concrete block, exposed aluminium, honest structure. Why the authenticity of Modsol's aesthetic works harder than surface-level finishes." },
+  { date: "Sep 2024", title: "Five Years of Formula 1 Paddock Builds", body: "What five years of building in the most demanding hospitality environment in sport has taught Modsol about precision, pressure, and delivery." },
 ];
 
 export default function ArticlesPage() {
   return (
     <>
-      <PageHero
-        label="Knowledge Hub / Articles"
-        title="Articles"
-        subtitle="Thinking, perspective, and case-based writing from the Modsol team on temporary architecture, modular design, and the events industry."
-      />
+      <PageHero label="Knowledge Hub — Articles" title="Long-Form<br/>Thinking." subtitle="Editorial and analysis on temporary architecture, brand environments, and the events industry from the Modsol team." />
 
-      <section className="py-24 lg:py-32" style={{ background: "#000000" }}>
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-          <SectionLabel className="mb-12">All Articles</SectionLabel>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px" style={{ background: "rgba(255,255,255,0.06)" }}>
-            {articles.map((article, i) => (
-              <div key={i} className="group p-8 cursor-pointer hover:bg-white/02 transition-colors" style={{ background: "#000" }}>
-                <div className="flex items-center justify-between mb-6">
-                  <span
-                    className="text-[#C6FF02] uppercase"
-                    style={{ fontFamily: "'Space Mono', monospace", fontSize: "9px", letterSpacing: "0.2em" }}
-                  >
-                    Article
-                  </span>
-                  <span
-                    className="text-white/20"
-                    style={{ fontFamily: "'Space Mono', monospace", fontSize: "9px", letterSpacing: "0.1em" }}
-                  >
-                    {article.date}
-                  </span>
-                </div>
-                <AccentLine className="w-6 mb-5" />
-                <h3
-                  className="text-white mb-3 group-hover:text-[#C6FF02] transition-colors leading-snug"
-                  style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.125rem", fontWeight: 500 }}
-                >
-                  {article.title}
-                </h3>
-                <p
-                  className="text-white/40 text-sm leading-relaxed mb-6"
-                  style={{ fontFamily: "'DM Sans', sans-serif" }}
-                >
-                  {article.excerpt}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span
-                    className="text-[#C6FF02] uppercase"
-                    style={{ fontFamily: "'Space Mono', monospace", fontSize: "9px", letterSpacing: "0.15em" }}
-                  >
-                    Read →
-                  </span>
-                  <span
-                    className="text-white/20"
-                    style={{ fontFamily: "'Space Mono', monospace", fontSize: "9px" }}
-                  >
-                    {article.readTime}
-                  </span>
-                </div>
+      <section className="section-pad" style={{ background: "var(--black)" }}>
+        <div className="container">
+          <div className="articles-grid reveal">
+            {articles.map((a) => (
+              <div key={a.title} className="article-card">
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "var(--muted)", letterSpacing: "0.1em", marginBottom: "20px" }}>{a.date}</div>
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "22px", color: "var(--white)", marginBottom: "12px", lineHeight: "1.1", letterSpacing: "0.02em" }}>{a.title}</h3>
+                <p style={{ fontSize: "13px", color: "var(--muted)", lineHeight: "1.6" }}>{a.body}</p>
+                <div style={{ marginTop: "24px", fontFamily: "var(--font-mono)", fontSize: "9px", color: "var(--yellow)", letterSpacing: "0.2em", textTransform: "uppercase" }}>Read →</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--dark2)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container" style={{ textAlign: "center" }}>
+          <p className="section-label" style={{ justifyContent: "center" }}>More knowledge</p>
+          <h2 className="section-title reveal" style={{ marginBottom: "32px" }}>Browse All<br /><span style={{ color: "var(--yellow)" }}>Categories.</span></h2>
+          <div style={{ display: "flex", gap: "16px", justifyContent: "center" }}>
+            <Link href="/knowledge-hub/industry-insights" className="btn-secondary">Industry Insights</Link>
+            <Link href="/knowledge-hub/technical-guides" className="btn-secondary">Technical Guides</Link>
           </div>
         </div>
       </section>

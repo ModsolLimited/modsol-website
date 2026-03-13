@@ -1,78 +1,85 @@
-import YellowButton from "@/components/ui/YellowButton";
-import OutlineButton from "@/components/ui/OutlineButton";
-import AccentLine from "@/components/ui/AccentLine";
+"use client";
 
 export default function ContactCTA() {
   return (
-    <section
-      className="py-24 lg:py-36 relative overflow-hidden"
-      style={{ background: "#0A0A0A", borderTop: "1px solid rgba(255,255,255,0.06)" }}
-    >
-      {/* Yellow accent top line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-[#C6FF02]" />
+    <section className="contact-cta" id="contact">
+      <div className="container">
+        <div className="contact-inner">
+          {/* Left */}
+          <div>
+            <p className="section-label">07 — Contact</p>
+            <h2 className="section-title reveal" style={{ marginBottom: "24px" }}>
+              Let&apos;s Build<br />
+              <span style={{ color: "var(--yellow)" }}>Something</span><br />
+              Bold.
+            </h2>
+            <p className="section-body reveal" style={{ marginBottom: "40px" }}>
+              Tell us about your project. Whether you&apos;re planning an event structure, exhibition environment or branded activation — Modsol has the system.
+            </p>
 
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 text-center">
-        <div className="flex justify-center mb-6">
-          <div className="flex items-center gap-3">
-            <AccentLine className="w-8" />
-            <span
-              className="text-[#C6FF02] uppercase"
-              style={{ fontFamily: "'Space Mono', monospace", fontSize: "11px", letterSpacing: "0.2em" }}
-            >
-              Start Your Project
-            </span>
-            <AccentLine className="w-8" />
-          </div>
-        </div>
-
-        <h2
-          className="text-white uppercase leading-none mb-8 mx-auto"
-          style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(3rem, 8vw, 8rem)",
-            letterSpacing: "0.02em",
-            maxWidth: "900px",
-          }}
-        >
-          Ready to<br />
-          <span className="text-[#C6FF02]">Build Bold?</span>
-        </h2>
-
-        <p
-          className="text-white/40 mb-12 mx-auto max-w-lg"
-          style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.0625rem", lineHeight: "1.75" }}
-        >
-          Tell us about your project and our team will get back to you within one business day.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <YellowButton href="/contact">Get In Touch</YellowButton>
-          <OutlineButton href="/products">Explore The Platform</OutlineButton>
-        </div>
-
-        {/* Stats row */}
-        <div className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-px" style={{ background: "rgba(255,255,255,0.06)", maxWidth: "900px", margin: "5rem auto 0" }}>
-          {[
-            { value: "500+", label: "Projects Delivered" },
-            { value: "12+", label: "Years Experience" },
-            { value: "40+", label: "Countries" },
-            { value: "100%", label: "Bespoke Builds" },
-          ].map((stat) => (
-            <div key={stat.label} className="py-8 px-6" style={{ background: "#0A0A0A" }}>
-              <div
-                className="text-[#C6FF02] mb-1"
-                style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "2.5rem", letterSpacing: "0.04em" }}
-              >
-                {stat.value}
+            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }} className="reveal">
+              <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                <div style={{ width: "36px", height: "36px", border: "1px solid rgba(198,255,2,0.3)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C6FF02" strokeWidth="1.5">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                </div>
+                <span style={{ fontSize: "14px", color: "var(--off-white)" }}>hello@modsolltd.com</span>
               </div>
-              <div
-                className="text-white/40 uppercase"
-                style={{ fontFamily: "'Space Mono', monospace", fontSize: "9px", letterSpacing: "0.18em" }}
-              >
-                {stat.label}
+              <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                <div style={{ width: "36px", height: "36px", border: "1px solid rgba(198,255,2,0.3)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C6FF02" strokeWidth="1.5">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </div>
+                <span style={{ fontSize: "14px", color: "var(--off-white)" }}>United Kingdom</span>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Right — Form */}
+          <form className="contact-form reveal" onSubmit={(e) => e.preventDefault()}>
+            <div className="form-row">
+              <div className="form-field">
+                <label>First Name</label>
+                <input type="text" placeholder="John" />
+              </div>
+              <div className="form-field">
+                <label>Last Name</label>
+                <input type="text" placeholder="Smith" />
+              </div>
+            </div>
+            <div className="form-field">
+              <label>Company</label>
+              <input type="text" placeholder="Company Name" />
+            </div>
+            <div className="form-field">
+              <label>Email Address</label>
+              <input type="email" placeholder="john@company.com" />
+            </div>
+            <div className="form-field">
+              <label>Project Type</label>
+              <select>
+                <option value="">Select project type</option>
+                <option>Event Structure</option>
+                <option>Exhibition Environment</option>
+                <option>Hospitality Suite</option>
+                <option>Retail Activation</option>
+                <option>Brand Activation</option>
+                <option>Temporary Office</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div className="form-field">
+              <label>Tell Us About Your Project</label>
+              <textarea placeholder="Brief project description, timeline, scale..." />
+            </div>
+            <button className="btn-primary" type="submit" style={{ alignSelf: "flex-start" }}>
+              Send Enquiry
+            </button>
+          </form>
         </div>
       </div>
     </section>

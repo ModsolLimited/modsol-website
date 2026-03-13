@@ -1,125 +1,88 @@
 import Link from "next/link";
-import SectionLabel from "@/components/ui/SectionLabel";
-import YellowButton from "@/components/ui/YellowButton";
-import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 
-const featuredProjects = [
+const projects = [
   {
-    client: "Aston Martin",
-    title: "Global Brand Pavilion",
-    sector: "Brand Activation",
-    href: "/projects",
-    image: "ASTON MARTIN PROJECT — Replace with event photography",
-    wide: true,
+    cls: "proj-am",
+    cat: "Hospitality · Motorsport",
+    title: "Aston Martin\nHospitality Suite",
+    desc: "Premium modular hospitality environment for Aston Martin's Formula 1 programme. Flat-packed. Deployed in 48 hours. Delivered at race pace.",
+    watermark: "ASTON\nMARTIN",
+    watermarkColor: "rgba(198,255,2,0.15)",
+    watermarkSize: "80px",
   },
   {
-    client: "Politico",
-    title: "Politico Pub Summit",
-    sector: "Exhibition",
-    href: "/projects",
-    image: "POLITICO PUB — Replace with event photography",
-    wide: false,
+    cls: "proj-pp",
+    cat: "Hospitality · Media",
+    title: "The Politico Pub",
+    desc: "Fully branded modular pub environment for Politico's political convention activation.",
+    watermark: "THE\nPOLITICO\nPUB",
+    watermarkColor: "rgba(255,255,255,0.08)",
+    watermarkSize: "60px",
   },
   {
-    client: "Oasis Live '25",
-    title: "Fan Experience Village",
-    sector: "Events",
-    href: "/projects",
-    image: "OASIS LIVE 25 — Replace with event photography",
-    wide: false,
+    cls: "proj-oa",
+    cat: "Retail · Music",
+    title: "Oasis Live '25\nMerch Environment",
+    desc: "Large-scale modular merchandise retail environment for the Oasis reunion tour.",
+    watermark: "OASIS\nLIVE '25",
+    watermarkColor: "rgba(198,255,2,0.1)",
+    watermarkSize: "60px",
   },
   {
-    client: "NFL",
-    title: "NFL Fan Experience",
-    sector: "Events",
-    href: "/projects",
-    image: "NFL FAN EXPERIENCE — Replace with event photography",
-    wide: false,
+    cls: "proj-nfl",
+    cat: "Retail · Sport",
+    title: "NFL Fan\nRetail Experience",
+    desc: "Fan retail activation and brand environment for the NFL's London series.",
+    watermark: "NFL\nFAN\nZONE",
+    watermarkColor: "rgba(255,255,255,0.07)",
+    watermarkSize: "60px",
   },
 ];
 
 export default function ProjectsSection() {
   return (
-    <section className="py-24 lg:py-32" style={{ background: "#0A0A0A" }}>
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 gap-6">
+    <section className="projects-section section-pad" id="projects">
+      <div className="container">
+        <div className="projects-header">
           <div>
-            <SectionLabel className="mb-4">Featured Projects</SectionLabel>
-            <h2
-              className="text-white uppercase leading-none"
-              style={{
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: "clamp(2.5rem, 6vw, 5rem)",
-                letterSpacing: "0.02em",
-              }}
-            >
-              Built for the<br />
-              <span className="text-[#C6FF02]">World's Best Brands.</span>
-            </h2>
+            <p className="section-label">05 — The Projects</p>
+            <h2 className="section-title reveal">Selected<br />Work</h2>
           </div>
-          <YellowButton href="/projects">All Projects</YellowButton>
+          <Link href="/projects" className="btn-secondary reveal">View All Projects</Link>
         </div>
 
-        {/* Project grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-px" style={{ background: "rgba(255,255,255,0.06)" }}>
-          {/* Wide feature */}
-          <div className="lg:col-span-8 group" style={{ background: "#0A0A0A" }}>
-            <ImagePlaceholder
-              label={featuredProjects[0].image}
-              aspectRatio="16/9"
-            />
-            <div className="p-8 flex items-start justify-between">
-              <div>
-                <span
-                  className="text-[#C6FF02] block mb-2"
-                  style={{ fontFamily: "'Space Mono', monospace", fontSize: "10px", letterSpacing: "0.2em" }}
-                >
-                  {featuredProjects[0].sector}
-                </span>
-                <h3
-                  className="text-white uppercase group-hover:text-[#C6FF02] transition-colors"
-                  style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "2rem", letterSpacing: "0.04em" }}
-                >
-                  {featuredProjects[0].client}
-                </h3>
-                <p className="text-white/40 text-sm" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                  {featuredProjects[0].title}
-                </p>
-              </div>
-              <span
-                className="text-white/20 group-hover:text-[#C6FF02] transition-colors mt-1"
-                style={{ fontFamily: "'Space Mono', monospace", fontSize: "14px" }}
-              >
-                →
-              </span>
-            </div>
-          </div>
-
-          {/* Stack of 3 */}
-          <div className="lg:col-span-4 flex flex-col gap-px" style={{ background: "rgba(255,255,255,0.06)" }}>
-            {featuredProjects.slice(1).map((project) => (
-              <Link key={project.client} href={project.href} className="group flex-1" style={{ background: "#0A0A0A" }}>
-                <ImagePlaceholder
-                  label={project.image}
-                  aspectRatio="16/9"
-                />
-                <div className="px-6 py-4">
-                  <span
-                    className="text-[#C6FF02] block mb-1"
-                    style={{ fontFamily: "'Space Mono', monospace", fontSize: "9px", letterSpacing: "0.2em" }}
-                  >
-                    {project.sector}
-                  </span>
-                  <h3
-                    className="text-white uppercase group-hover:text-[#C6FF02] transition-colors"
-                    style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "1.4rem", letterSpacing: "0.04em" }}
-                  >
-                    {project.client}
-                  </h3>
+        <div className="projects-grid">
+          {projects.map((proj, i) => (
+            <Link key={i} href="/projects" style={{ textDecoration: "none" }}>
+              <div className="project-card">
+                <div className="project-card-image">
+                  <div className={`project-image-fill ${proj.cls}`}>
+                    <div className="proj-grid-pattern" />
+                    <div style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: proj.watermarkSize,
+                      color: proj.watermarkColor,
+                      letterSpacing: "0.1em",
+                      zIndex: 2,
+                      position: "relative",
+                      textAlign: "center",
+                      whiteSpace: "pre-line",
+                    }}>
+                      {proj.watermark}
+                    </div>
+                  </div>
                 </div>
-              </Link>
-            ))}
-          </div>
+                <div className="project-card-info">
+                  <div>
+                    <div className="project-card-cat">{proj.cat}</div>
+                    <div className="project-card-title" style={{ whiteSpace: "pre-line" }}>{proj.title}</div>
+                    <div className="project-card-desc">{proj.desc}</div>
+                  </div>
+                  <div className="project-card-arrow">→</div>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

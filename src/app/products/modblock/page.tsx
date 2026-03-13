@@ -1,97 +1,116 @@
 import type { Metadata } from "next";
-import ProductHero from "@/components/products/ProductHero";
-import ProductFeatures from "@/components/products/ProductFeatures";
-import ProductApplications from "@/components/products/ProductApplications";
-import ContactCTA from "@/components/sections/ContactCTA";
+import Link from "next/link";
+import PageHero from "@/components/layout/PageHero";
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 
-export const metadata: Metadata = {
-  title: "The Modblock — Structural Modular Block System",
-  description:
-    "The Modblock is Modsol's precision-engineered structural block system — the foundational element for temporary architecture, events, and exhibitions.",
-};
+export const metadata: Metadata = { title: "The Modblock" };
 
 const specs = [
-  { label: "System Code", value: "SYS-01 / Modblock" },
-  { label: "Material", value: "6061-T6 Aluminium Extrusion" },
-  { label: "Surface Finish", value: "Anodised — Silver, Black, or Powder Coat" },
-  { label: "Connection Type", value: "Tool-Free Interlocking Pin System" },
-  { label: "Load Rating", value: "500kg per module (stacked)" },
-  { label: "Standard Dimensions", value: "600mm × 600mm × 300mm" },
-  { label: "Weight per Module", value: "12kg" },
-  { label: "Assembly Time", value: "2 min per module (2-person team)" },
+  { label: "Unit Weight", value: "320 kg" },
+  { label: "Unit Dimensions", value: "1200 × 600 × 400mm" },
+  { label: "Load Capacity", value: "800 kg / unit" },
+  { label: "Stack Height", value: "Up to 6m" },
+  { label: "Surface Options", value: "Raw / Painted / Wrapped" },
+  { label: "Assembly Time", value: "48hrs (standard config)" },
+  { label: "Crew Required", value: "4-person minimum" },
+  { label: "Certification", value: "CE / TÜV Certified" },
 ];
 
-const features = [
-  {
-    number: "F-01",
-    title: "Tool-Free Assembly",
-    description:
-      "Every Modblock connects with a patent-pending pin and slide system — no tools required. A 2-person team can assemble a complete wall section in under 20 minutes.",
-  },
-  {
-    number: "F-02",
-    title: "500kg Load Rating",
-    description:
-      "Independently tested and certified to carry 500kg per stacked module. Safe for signage, AV equipment, and shelving applications without additional bracing.",
-  },
-  {
-    number: "F-03",
-    title: "Infinite Configuration",
-    description:
-      "Modblocks combine in any direction — linear runs, 90° corners, T-junctions, and curves. The system scales from a single display unit to a full exhibition stand.",
-  },
-  {
-    number: "F-04",
-    title: "Surface Ready",
-    description:
-      "All external faces accept direct-print vinyl, timber face panels, or fabric stretching — integrating seamlessly with The Modwall face panel system.",
-  },
-  {
-    number: "F-05",
-    title: "Compact Flat-Pack",
-    description:
-      "Modules stack and nest for transport efficiency. A standard flatbed can carry enough Modblocks to build a 200m² exhibition environment.",
-  },
-  {
-    number: "F-06",
-    title: "10-Year Service Life",
-    description:
-      "Anodised aluminium resists corrosion, UV degradation, and mechanical damage. Every Modblock is designed and tested for a minimum 10-year service life.",
-  },
-];
-
-const applications = [
-  {
-    sector: "Exhibition Stands",
-    description: "Floor-to-ceiling stand structures that integrate brand graphics with structural precision.",
-    imageLabel: "MODBLOCK — Exhibition stand application photography",
-  },
-  {
-    sector: "Retail Environments",
-    description: "Modular shelving, display plinths, and branded retail fixtures built overnight.",
-    imageLabel: "MODBLOCK — Retail environment application photography",
-  },
-  {
-    sector: "Event Staging",
-    description: "Stage risers, DJ booths, speaker plinths, and branded event furniture.",
-    imageLabel: "MODBLOCK — Event staging application photography",
-  },
+const useCases = [
+  { title: "Event Stages", body: "Elevated stage structures with integrated cable management and PA rigging points. Configured for amphitheatre, thrust, and in-the-round formats." },
+  { title: "Brand Facades", body: "Stacked wall elevations that accept any surface treatment — vinyl, paint, timber, metal cladding, or illuminated panel systems." },
+  { title: "Architectural Features", body: "Monolithic statement features, plinths, columns, and pavilion structures that command attention at any scale." },
+  { title: "Retail Podiums", body: "Product display podiums and counter units built to the same system, consistent across your entire footprint." },
 ];
 
 export default function ModblockPage() {
   return (
     <>
-      <ProductHero
-        code="SYS-01 — The Modblock"
-        name="The Modblock"
-        tagline="The structural backbone of temporary architecture."
-        description="A precision-engineered structural block system built from aerospace-grade aluminium. The Modblock is the foundational element of every Modsol build — enabling rapid assembly, infinite configuration, and load-rated performance across events, exhibitions, and branded environments."
-        imageLabel="MODBLOCK HERO — Replace with large format product or installation photography"
-        specs={specs}
+      <PageHero
+        label="Product 01"
+        title="The<br/>Modblock"
+        subtitle="Heavyweight modular blocks engineered for load-bearing walls, branded facades, and architectural statement structures."
       />
-      <ProductFeatures features={features} />
-      <ProductApplications applications={applications} productName="Modblock" />
-      <ContactCTA />
+
+      <section className="section-pad" style={{ background: "var(--black)" }}>
+        <div className="container">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
+            <div className="reveal">
+              <ImagePlaceholder label="Modblock — System Overview" aspectRatio="4/5" />
+            </div>
+            <div className="reveal">
+              <p className="section-label">System Overview</p>
+              <h2 className="section-title" style={{ marginBottom: "24px" }}>Precision-Cast.<br /><span style={{ color: "var(--yellow)" }}>Precision-Stacked.</span></h2>
+              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.8", marginBottom: "24px" }}>
+                The Modblock is Modsol's flagship structural platform. Engineered from high-density polymer composite with a steel-reinforced core, each unit is cast to tolerance and tested to load before it leaves our facility.
+              </p>
+              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.8", marginBottom: "40px" }}>
+                The interlocking dovetail connection system means no tools, no pins, no guesswork. Stack vertically, arrange laterally, curve, or step — the geometry is yours.
+              </p>
+              <div className="stats-row" style={{ gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
+                {[["800kg","Load / Unit"],["6m","Max Stack"],["48h","Build Time"]].map(([n, l]) => (
+                  <div className="stat-item" key={l}>
+                    <div className="stat-num">{n}</div>
+                    <div className="stat-label">{l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--dark)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container">
+          <p className="section-label">Technical Specification</p>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: "rgba(255,255,255,0.06)", marginTop: "48px" }}>
+            {specs.map(({ label, value }) => (
+              <div key={label} style={{ background: "var(--dark)", padding: "24px 32px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--muted)", letterSpacing: "0.2em", textTransform: "uppercase" }}>{label}</span>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: "13px", color: "var(--white)" }}>{value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--black)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container">
+          <p className="section-label">Use Cases</p>
+          <div className="platform-cards reveal" style={{ marginTop: "48px" }}>
+            {useCases.map((u) => (
+              <div className="platform-card" key={u.title}>
+                <h3>{u.title}</h3>
+                <p>{u.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--dark)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container">
+          <p className="section-label">Project Gallery</p>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "1px", background: "rgba(255,255,255,0.06)", marginTop: "48px" }}>
+            <ImagePlaceholder label="Modblock — Aston Martin Stage" aspectRatio="16/9" />
+            <div style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
+              <ImagePlaceholder label="Modblock — Brand Facade" aspectRatio="4/3" />
+              <ImagePlaceholder label="Modblock — Retail Podium" aspectRatio="4/3" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--dark2)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container" style={{ textAlign: "center" }}>
+          <p className="section-label" style={{ justifyContent: "center" }}>Specify the Modblock</p>
+          <h2 className="section-title reveal" style={{ marginBottom: "32px" }}>Build Something<br /><span style={{ color: "var(--yellow)" }}>Unmissable.</span></h2>
+          <div style={{ display: "flex", gap: "16px", justifyContent: "center" }}>
+            <Link href="/contact" className="btn-primary">Start a Project</Link>
+            <Link href="/products" className="btn-secondary">All Products</Link>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

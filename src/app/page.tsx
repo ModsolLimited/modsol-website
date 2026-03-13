@@ -10,9 +10,7 @@ import KnowledgePreview from "@/components/sections/KnowledgePreview";
 import ContactCTA from "@/components/sections/ContactCTA";
 
 export const metadata: Metadata = {
-  title: "Modsol Limited — Modular Architecture Systems | BUILD. BOLD.",
-  description:
-    "Modsol designs and manufactures precision modular systems for temporary architecture, events, exhibitions, branded environments and commercial spaces.",
+  title: "Modsol Limited — Build. Bold. Modular Systems for Temporary Architecture.",
 };
 
 export default function HomePage() {
@@ -20,7 +18,9 @@ export default function HomePage() {
     <>
       <HeroSection />
       <TickerBar />
+      <div className="y-line" />
       <PlatformSection />
+      <div className="y-line" />
       <ProductsSection />
       <IndustriesSection />
       <ProjectsSection />

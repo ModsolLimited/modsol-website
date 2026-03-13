@@ -1,40 +1,22 @@
-import SectionLabel from "@/components/ui/SectionLabel";
-import AccentLine from "@/components/ui/AccentLine";
-
 interface PageHeroProps {
   label: string;
   title: string;
   subtitle?: string;
-  className?: string;
 }
 
-export default function PageHero({ label, title, subtitle, className = "" }: PageHeroProps) {
+export default function PageHero({ label, title, subtitle }: PageHeroProps) {
   return (
-    <section
-      className={`pt-32 pb-16 arch-grid ${className}`}
-      style={{ background: "#000000", borderBottom: "1px solid rgba(255,255,255,0.06)" }}
-    >
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-        <SectionLabel className="mb-6">{label}</SectionLabel>
+    <section className="page-hero">
+      <div className="container" style={{ position: "relative", zIndex: 1 }}>
+        <p className="section-label">{label}</p>
         <h1
-          className="text-white uppercase leading-none mb-6"
-          style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(3rem, 8vw, 7rem)",
-            letterSpacing: "0.02em",
-          }}
-        >
-          {title}
-        </h1>
+          className="section-title"
+          style={{ marginBottom: subtitle ? "24px" : 0, maxWidth: "800px" }}
+          dangerouslySetInnerHTML={{ __html: title }}
+        />
         {subtitle && (
-          <p
-            className="text-white/50 max-w-2xl"
-            style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(1rem, 1.5vw, 1.125rem)", lineHeight: "1.7" }}
-          >
-            {subtitle}
-          </p>
+          <p className="section-body" style={{ marginTop: "16px" }}>{subtitle}</p>
         )}
-        <AccentLine className="mt-10 w-24" />
       </div>
     </section>
   );

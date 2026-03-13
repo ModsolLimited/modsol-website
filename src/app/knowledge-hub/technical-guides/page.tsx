@@ -1,138 +1,53 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
-import SectionLabel from "@/components/ui/SectionLabel";
-import AccentLine from "@/components/ui/AccentLine";
-import YellowButton from "@/components/ui/YellowButton";
 
-export const metadata: Metadata = {
-  title: "Technical Guides — Knowledge Hub",
-  description:
-    "Practical technical documentation for the Modsol platform — load tables, system guides, specification sheets, and installation references.",
-};
+export const metadata: Metadata = { title: "Technical Guides" };
 
 const guides = [
-  {
-    system: "Modblock",
-    title: "Modblock Load Calculations: What You Need to Know",
-    excerpt: "A practical guide to understanding load ratings, stack heights, and safe configurations for the Modblock system — with worked examples.",
-    date: "February 2025",
-    type: "Load Guide",
-    pages: "12 pages",
-  },
-  {
-    system: "Modwall",
-    title: "Modwall Panel Specification Guide",
-    excerpt: "Complete reference for Modwall panel sizes, face finish options, acoustic specifications, and connection details.",
-    date: "January 2025",
-    type: "Specification",
-    pages: "18 pages",
-  },
-  {
-    system: "Modframe",
-    title: "Modframe Span Tables and Configuration Reference",
-    excerpt: "Span tables, configuration diagrams, and permissible load guidance for all standard Modframe configurations up to 12m clear span.",
-    date: "November 2024",
-    type: "Engineering Reference",
-    pages: "24 pages",
-  },
-  {
-    system: "All Systems",
-    title: "Modsol System Integration Guide",
-    excerpt: "How The Modblock, Modwall, and Modframe systems connect and combine — connection details, tolerance guidance, and hybrid configuration examples.",
-    date: "October 2024",
-    type: "Integration Guide",
-    pages: "16 pages",
-  },
-  {
-    system: "Modblock",
-    title: "Modblock Assembly & Installation Manual",
-    excerpt: "Step-by-step installation reference for the Modblock system — team requirements, sequence, common configurations, and de-rig guidance.",
-    date: "September 2024",
-    type: "Installation Manual",
-    pages: "20 pages",
-  },
-  {
-    system: "Modframe",
-    title: "Temporary Structure Wind Load Reference",
-    excerpt: "Wind load guidance for Modsol temporary structures — Eurocode compliance, site condition adjustments, and documentation requirements.",
-    date: "August 2024",
-    type: "Compliance Guide",
-    pages: "14 pages",
-  },
+  { date: "Jan 2025", tag: "Specification", title: "Specifying Modular Systems: A Structural Engineer's Guide", body: "Load tables, connection details, and certification requirements for the Modsol platform — everything a structural engineer needs to specify with confidence." },
+  { date: "Dec 2024", tag: "Project Management", title: "48-Hour Builds: Project Management for Fast Turnarounds", body: "How Modsol manages complex builds in compressed windows — planning methodology, crew sequencing, and the checklist that keeps every build on track." },
+  { date: "Nov 2024", tag: "Specification", title: "Modblock Load Tables: Complete Reference", body: "Full load capacity data for single-unit, stacked, and combined Modblock configurations. CE-certified, updated for 2024." },
+  { date: "Oct 2024", tag: "Installation", title: "Modwall Surface Finish Options: Specification Guide", body: "Complete guide to surface treatment options for the Modwall system — from raw aluminium to full LED array, with specification requirements for each." },
+  { date: "Sep 2024", tag: "Installation", title: "Modframe Fabric Tensioning: Installation Manual", body: "Step-by-step installation guide for keder-track fabric systems on the Modframe. Includes torque settings, failure modes, and inspection checklist." },
+  { date: "Aug 2024", tag: "Certification", title: "CE Certification and the Modsol Platform", body: "What CE certification means for the Modsol platform, how to reference our certification in planning submissions, and how to request documentation." },
 ];
 
 export default function TechnicalGuidesPage() {
   return (
     <>
-      <PageHero
-        label="Knowledge Hub / Technical Guides"
-        title="Technical Guides"
-        subtitle="Practical technical documentation for the Modsol platform — load tables, system guides, specification sheets, and installation references."
-      />
+      <PageHero label="Knowledge Hub — Technical Guides" title="Built on<br/>Engineering." subtitle="Specification documents, technical drawings, and installation guides for the Modsol platform. Everything you need to specify with confidence." />
 
-      <section className="py-24 lg:py-32" style={{ background: "#000000" }}>
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-          <SectionLabel className="mb-12">All Technical Guides</SectionLabel>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px" style={{ background: "rgba(255,255,255,0.06)" }}>
-            {guides.map((guide, i) => (
-              <div
-                key={i}
-                className="group p-8 hover:bg-white/02 transition-colors cursor-pointer"
-                style={{ background: "#000" }}
-              >
-                <div className="flex items-center justify-between mb-6">
-                  <span
-                    className="text-[#C6FF02] uppercase"
-                    style={{ fontFamily: "'Space Mono', monospace", fontSize: "9px", letterSpacing: "0.2em" }}
-                  >
-                    {guide.system} — {guide.type}
-                  </span>
-                  <span
-                    className="text-white/20"
-                    style={{ fontFamily: "'Space Mono', monospace", fontSize: "9px" }}
-                  >
-                    {guide.pages}
-                  </span>
+      <section className="section-pad" style={{ background: "var(--black)" }}>
+        <div className="container">
+          <div className="articles-grid reveal">
+            {guides.map((a) => (
+              <div key={a.title} className="article-card">
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "var(--yellow)", letterSpacing: "0.2em", textTransform: "uppercase" }}>{a.tag}</span>
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "var(--muted)", letterSpacing: "0.1em" }}>{a.date}</span>
                 </div>
-                <AccentLine className="w-6 mb-5" />
-                <h3
-                  className="text-white mb-3 group-hover:text-[#C6FF02] transition-colors leading-snug"
-                  style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.125rem", fontWeight: 500 }}
-                >
-                  {guide.title}
-                </h3>
-                <p
-                  className="text-white/40 text-sm leading-relaxed mb-6"
-                  style={{ fontFamily: "'DM Sans', sans-serif" }}
-                >
-                  {guide.excerpt}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span
-                    className="text-[#C6FF02] uppercase"
-                    style={{ fontFamily: "'Space Mono', monospace", fontSize: "9px", letterSpacing: "0.15em" }}
-                  >
-                    Download PDF →
-                  </span>
-                  <span
-                    className="text-white/20"
-                    style={{ fontFamily: "'Space Mono', monospace", fontSize: "9px" }}
-                  >
-                    {guide.date}
-                  </span>
-                </div>
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "22px", color: "var(--white)", marginBottom: "12px", lineHeight: "1.1", letterSpacing: "0.02em" }}>{a.title}</h3>
+                <p style={{ fontSize: "13px", color: "var(--muted)", lineHeight: "1.6" }}>{a.body}</p>
+                <div style={{ marginTop: "24px", fontFamily: "var(--font-mono)", fontSize: "9px", color: "var(--yellow)", letterSpacing: "0.2em", textTransform: "uppercase" }}>Download →</div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="mt-16 text-center">
-            <p
-              className="text-white/40 mb-6"
-              style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1rem" }}
-            >
-              Need a specific technical document not listed here?
-            </p>
-            <YellowButton href="/contact">Contact the Technical Team</YellowButton>
+      <section className="section-pad" style={{ background: "var(--dark)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
+            <div className="reveal">
+              <p className="section-label">Need a specific document?</p>
+              <h2 className="section-title" style={{ marginBottom: "24px" }}>Can&apos;t Find<br /><span style={{ color: "var(--yellow)" }}>What You Need?</span></h2>
+              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.8" }}>Our technical team can provide custom load calculations, project-specific structural drawings, and certification documents on request. Contact us with your specific requirement.</p>
+            </div>
+            <div className="reveal" style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+              <Link href="/contact" className="btn-primary" style={{ textAlign: "center" }}>Request a Document</Link>
+              <Link href="/knowledge-hub" className="btn-secondary" style={{ textAlign: "center" }}>Back to Knowledge Hub</Link>
+            </div>
           </div>
         </div>
       </section>

@@ -1,46 +1,17 @@
-const tickerItems = [
-  "MODULAR",
-  "SCALABLE",
-  "ADAPTABLE",
-  "BUILD BOLD",
-  "TEMPORARY ARCHITECTURE",
-  "ENGINEERED SYSTEMS",
-  "MODBLOCK",
-  "MODWALL",
-  "MODFRAME",
+const items = [
+  "Build Bold", "Modblock", "Modwall", "Modframe",
+  "Events", "Exhibitions", "Hospitality", "Retail",
+  "Brand Activations", "Modular Architecture",
 ];
 
 export default function TickerBar() {
-  // Triple repeat to ensure seamless loop at all viewport widths
-  const repeated = [...tickerItems, ...tickerItems, ...tickerItems];
-
+  // Doubled for seamless loop
+  const all = [...items, ...items];
   return (
-    <div
-      className="w-full overflow-hidden"
-      style={{ background: "#C6FF02", height: "46px" }}
-      aria-hidden="true"
-    >
-      <div className="ticker-animate flex items-center h-full whitespace-nowrap" style={{ width: "max-content" }}>
-        {repeated.map((item, i) => (
-          <span key={i} className="flex items-center shrink-0">
-            <span
-              className="text-black uppercase px-8"
-              style={{
-                fontFamily: "'Space Mono', monospace",
-                fontSize: "11px",
-                letterSpacing: "0.18em",
-                fontWeight: 700,
-              }}
-            >
-              {item}
-            </span>
-            <span
-              className="text-black shrink-0"
-              style={{ fontSize: "8px", opacity: 0.5 }}
-            >
-              ◆
-            </span>
-          </span>
+    <div className="ticker-bar" aria-hidden="true">
+      <div className="ticker-inner">
+        {all.map((item, i) => (
+          <span key={i} className="ticker-item">{item}</span>
         ))}
       </div>
     </div>

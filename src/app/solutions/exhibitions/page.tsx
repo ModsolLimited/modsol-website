@@ -1,55 +1,77 @@
 import type { Metadata } from "next";
-import SolutionLayout from "@/components/solutions/SolutionLayout";
+import Link from "next/link";
+import PageHero from "@/components/layout/PageHero";
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 
-export const metadata: Metadata = {
-  title: "Exhibition Solutions — Modular Exhibition Stand Systems",
-  description:
-    "Modsol delivers modular exhibition stand systems and branded environments for trade shows, exhibitions, and corporate events worldwide.",
-};
+export const metadata: Metadata = { title: "Exhibitions" };
 
-export default function ExhibitionSolutionsPage() {
+const capabilities = [
+  { title: "Exhibition Stand Builds", body: "Custom-built exhibition stands using the Modblock, Modwall, and Modframe platforms. Consistent quality from 9m² to 900m²." },
+  { title: "Feature Installations", body: "Hero installations, product launch centrepieces, and interactive brand features that drive floor traffic and dwell time." },
+  { title: "Show Management", body: "Turnkey delivery from CAD design through build, show management, and strike. One team, total accountability." },
+  { title: "Multi-Show Touring", body: "The same stand, rebuilt to the same specification across a global trade show calendar. Consistent brand, lower cost per show." },
+];
+
+export default function ExhibitionsPage() {
   return (
-    <SolutionLayout
-      label="Solutions / Exhibitions"
-      title="Exhibition Solutions"
-      subtitle="Stand systems and exhibition environments that command attention — from shell scheme upgrades to full custom builds."
-      heroImageLabel="EXHIBITION SOLUTIONS HERO — Replace with exhibition stand or trade show environment photography"
-      intro="Your exhibition stand is the physical expression of your brand — it needs to stop people in their tracks. Modsol delivers exhibition environments that combine architectural precision with creative ambition, built from a modular platform that makes every square metre work harder."
-      capabilities={[
-        {
-          title: "Bespoke Stand Design",
-          description: "Full custom exhibition stand design and build — from concept through to installation. Every stand is engineered to your exact footprint and brand identity.",
-        },
-        {
-          title: "Reusable Stand Systems",
-          description: "Modular stands designed for multiple show cycles — the same structure reconfigured, rebranded, and redeployed across your exhibition calendar.",
-        },
-        {
-          title: "Double-Deck Stands",
-          description: "Modframe-based double-deck stand structures for maximum meeting and hospitality space within your footprint.",
-        },
-        {
-          title: "Graphic Systems",
-          description: "Modwall panel systems deliver seamless large-format graphics — direct print, backlit, fabric, or timber veneer finishes.",
-        },
-        {
-          title: "Storage & Meeting Integration",
-          description: "Integrated storage rooms, private meeting pods, and hospitality counters built into every stand structure.",
-        },
-        {
-          title: "International Delivery",
-          description: "Exhibition delivery across Europe, the Middle East, and North America — with local installation crews managed by Modsol.",
-        },
-      ]}
-      systems={["The Modblock (SYS-01)", "The Modwall (SYS-02)", "The Modframe (SYS-03)"]}
-      galleryImages={[
-        { label: "EXHIBITION — Large custom stand photography" },
-        { label: "EXHIBITION — Double-deck stand photography" },
-        { label: "EXHIBITION — Graphic wall / Modwall detail" },
-        { label: "EXHIBITION — Meeting pod or private room" },
-        { label: "EXHIBITION — Stand reception counter" },
-        { label: "EXHIBITION — Wide-angle exhibition hall shot" },
-      ]}
-    />
+    <>
+      <PageHero label="Solution — Exhibitions" title="Command<br/>the Hall." subtitle="Exhibition stands and feature builds that stop the floor. Designed for brand impact, engineered for delivery confidence." />
+
+      <section className="section-pad" style={{ background: "var(--black)" }}>
+        <div className="container">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
+            <div className="reveal">
+              <ImagePlaceholder label="Exhibitions — Feature Stand Build" aspectRatio="4/5" />
+            </div>
+            <div className="reveal">
+              <p className="section-label">Exhibitions Capability</p>
+              <h2 className="section-title" style={{ marginBottom: "24px" }}>Stand Out.<br /><span style={{ color: "var(--yellow)" }}>Not Just Up.</span></h2>
+              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.8", marginBottom: "24px" }}>
+                The Modsol platform gives exhibition designers a structural language that can keep up with ambitious design. No compromise between what the render promises and what gets built.
+              </p>
+              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.8" }}>
+                We work with exhibition designers, brand agencies, and direct clients — bringing structural engineering, project management, and build capability under one roof.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--dark)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container">
+          <p className="section-label">Capabilities</p>
+          <div className="platform-cards reveal" style={{ marginTop: "48px" }}>
+            {capabilities.map((c) => (
+              <div className="platform-card" key={c.title}>
+                <h3>{c.title}</h3>
+                <p>{c.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--black)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container">
+          <p className="section-label">Exhibition Gallery</p>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1px", background: "rgba(255,255,255,0.06)", marginTop: "48px" }}>
+            <ImagePlaceholder label="Exhibitions — Feature Stand" aspectRatio="4/3" />
+            <ImagePlaceholder label="Exhibitions — Product Launch" aspectRatio="4/3" />
+            <ImagePlaceholder label="Exhibitions — Multi-Show Tour" aspectRatio="4/3" />
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--dark2)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container" style={{ textAlign: "center" }}>
+          <p className="section-label" style={{ justifyContent: "center" }}>Brief us</p>
+          <h2 className="section-title reveal" style={{ marginBottom: "32px" }}>Your Next<br /><span style={{ color: "var(--yellow)" }}>Show?</span></h2>
+          <div style={{ display: "flex", gap: "16px", justifyContent: "center" }}>
+            <Link href="/contact" className="btn-primary">Start a Project</Link>
+            <Link href="/solutions" className="btn-secondary">All Solutions</Link>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

@@ -1,148 +1,110 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
-import SectionLabel from "@/components/ui/SectionLabel";
-import AccentLine from "@/components/ui/AccentLine";
 import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
-import YellowButton from "@/components/ui/YellowButton";
 
-export const metadata: Metadata = {
-  title: "The Products — Modular Architecture Systems",
-  description:
-    "Three precision modular systems — The Modblock, The Modwall, and The Modframe — engineered for events, exhibitions, and branded environments.",
-};
+export const metadata: Metadata = { title: "Products" };
 
 const products = [
   {
-    code: "SYS-01",
+    num: "01",
+    slug: "modblock",
     name: "The Modblock",
-    href: "/products/modblock",
-    tagline: "The structural backbone.",
-    description:
-      "A precision-engineered structural block system. The foundational element of every Modsol build — rapid assembly, infinite configuration, rated for demanding temporary architecture.",
-    imageLabel: "MODBLOCK — Replace with hero product photography",
-    specs: ["Load-rated to 500kg", "Tool-free connection system", "6061 Aluminium extrusion", "Anodised finish options"],
+    tag: "Structure",
+    desc: "Heavyweight modular blocks engineered for load-bearing walls, branded facades, and architectural statement structures. Precision-cast, precision-stacked.",
+    specs: ["800kg load capacity", "Interlocking dovetail system", "48hr assembly"],
   },
   {
-    code: "SYS-02",
+    num: "02",
+    slug: "modwall",
     name: "The Modwall",
-    href: "/products/modwall",
-    tagline: "Surface systems for maximum impact.",
-    description:
-      "High-impact surface panels engineered for branded environments. Seamless graphics, acoustic options, and interchangeable face finishes across a single panel grid.",
-    imageLabel: "MODWALL — Replace with panel/surface product photography",
-    specs: ["Full bleed print-ready surface", "Acoustic variants available", "10mm, 18mm panel depths", "Flush edge-to-edge finish"],
+    tag: "Boundary",
+    desc: "Configurable wall panels for perimeter definition, acoustic separation, and large-format brand canvas. Skinnable to any surface specification.",
+    specs: ["Infinite skin options", "Sound-dampening core", "Freestanding or fixed"],
   },
   {
-    code: "SYS-03",
+    num: "03",
+    slug: "modframe",
     name: "The Modframe",
-    href: "/products/modframe",
-    tagline: "Large-span temporary frameworks.",
-    description:
-      "A skeletal framework system for large-format temporary architecture. Spanning, cantilevering, and multi-storey configurations — all from a single connection standard.",
-    imageLabel: "MODFRAME — Replace with structural/framework photography",
-    specs: ["Engineered steel pin joints", "Span configurations up to 12m", "Multi-level capable", "Wind & load certified"],
+    tag: "Overhead",
+    desc: "Lightweight aluminium frame system for overhead structures, tension fabric canopies, and branded superstructures at scale.",
+    specs: ["6m span unaided", "Tension fabric ready", "Rapid strike"],
   },
 ];
 
 export default function ProductsPage() {
   return (
     <>
-      <PageHero
-        label="The Products"
-        title="The Modsol Platform"
-        subtitle="Three precision-engineered modular systems — designed to work independently or in combination, across any temporary architecture brief."
-      />
+      <PageHero label="02 — Products" title="Three Systems.<br/>Infinite Form." subtitle="Every Modsol structure is built from one of three engineered platforms. Combined or standalone, they define the state of the art in temporary architecture." />
 
-      {/* Product listing */}
-      {products.map((product, i) => (
-        <section
-          key={product.code}
-          className="py-24 lg:py-32"
-          style={{ background: i % 2 === 0 ? "#000000" : "#0A0A0A" }}
-        >
-          <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-            <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center ${i % 2 !== 0 ? "lg:[&>*:first-child]:order-2" : ""}`}>
-              {/* Image */}
-              <ImagePlaceholder
-                label={product.imageLabel}
-                aspectRatio="4/3"
-              />
-
-              {/* Content */}
-              <div>
-                <div className="flex items-center gap-4 mb-6">
-                  <span
-                    className="text-[#C6FF02] uppercase"
-                    style={{ fontFamily: "'Space Mono', monospace", fontSize: "10px", letterSpacing: "0.2em" }}
-                  >
-                    {product.code}
-                  </span>
-                  <AccentLine className="w-8" />
+      <section className="section-pad" style={{ background: "var(--black)" }}>
+        <div className="container">
+          <div style={{ display: "flex", flexDirection: "column", gap: "1px", background: "rgba(255,255,255,0.06)" }}>
+            {products.map((p) => (
+              <Link
+                key={p.slug}
+                href={`/products/${p.slug}`}
+                style={{ textDecoration: "none", display: "block", background: "var(--black)", transition: "background 0.3s" }}
+                className="product-row-link"
+              >
+                <div style={{ display: "grid", gridTemplateColumns: "120px 1fr 1fr auto", gap: "40px", alignItems: "center", padding: "48px 40px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                  <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--muted)", letterSpacing: "0.2em" }}>{p.num}</div>
+                  <div>
+                    <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.3em", color: "var(--yellow)", textTransform: "uppercase", marginBottom: "12px" }}>{p.tag}</div>
+                    <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 4vw, 56px)", color: "var(--white)", letterSpacing: "0.02em", lineHeight: 1 }}>{p.name}</h2>
+                  </div>
+                  <p style={{ fontSize: "14px", color: "var(--muted)", lineHeight: "1.7", maxWidth: "360px" }}>{p.desc}</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-end" }}>
+                    {p.specs.map((s) => (
+                      <span key={s} style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "rgba(255,255,255,0.4)", letterSpacing: "0.15em", textTransform: "uppercase", whiteSpace: "nowrap" }}>{s}</span>
+                    ))}
+                    <span style={{ marginTop: "12px", fontFamily: "var(--font-mono)", fontSize: "9px", color: "var(--yellow)", letterSpacing: "0.2em", textTransform: "uppercase" }}>View System →</span>
+                  </div>
                 </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                <h2
-                  className="text-white uppercase leading-none mb-3"
-                  style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: "clamp(3rem, 6vw, 5.5rem)",
-                    letterSpacing: "0.02em",
-                  }}
-                >
-                  {product.name}
-                </h2>
-                <p
-                  className="text-[#C6FF02] uppercase mb-6"
-                  style={{ fontFamily: "'Space Mono', monospace", fontSize: "12px", letterSpacing: "0.12em" }}
-                >
-                  {product.tagline}
-                </p>
-                <AccentLine className="w-10 mb-6" />
-                <p
-                  className="text-white/50 mb-8 leading-relaxed"
-                  style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.0625rem", lineHeight: "1.75" }}
-                >
-                  {product.description}
-                </p>
+      <section className="section-pad" style={{ background: "var(--dark)" }}>
+        <div className="container">
+          <p className="section-label">Platform Gallery</p>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1px", background: "rgba(255,255,255,0.06)", marginTop: "48px" }}>
+            <ImagePlaceholder label="Modblock — Event Structure" aspectRatio="4/3" />
+            <ImagePlaceholder label="Modwall — Branded Perimeter" aspectRatio="4/3" />
+            <ImagePlaceholder label="Modframe — Canopy Structure" aspectRatio="4/3" />
+          </div>
+        </div>
+      </section>
 
-                <SectionLabel className="mb-4">Key Specs</SectionLabel>
-                <ul className="space-y-2 mb-10">
-                  {product.specs.map((spec) => (
-                    <li key={spec} className="flex items-center gap-3">
-                      <div className="w-1 h-1 bg-[#C6FF02]" />
-                      <span
-                        className="text-white/50"
-                        style={{ fontFamily: "'Space Mono', monospace", fontSize: "11px", letterSpacing: "0.08em" }}
-                      >
-                        {spec}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Link
-                  href={product.href}
-                  className="inline-block bg-[#C6FF02] text-black px-8 py-4 uppercase font-semibold hover:bg-white transition-colors"
-                  style={{ fontFamily: "'Space Mono', monospace", fontSize: "12px", letterSpacing: "0.12em" }}
-                >
-                  Learn More →
-                </Link>
+      <section className="section-pad" style={{ background: "var(--dark2)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
+            <div className="reveal">
+              <p className="section-label">System Compatibility</p>
+              <h2 className="section-title" style={{ marginBottom: "24px" }}>Designed to Work<br /><span style={{ color: "var(--yellow)" }}>Together.</span></h2>
+              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.8" }}>All three systems share the same dimensional language and connection methodology. Mix, match, stack, and span without compromise. One platform, infinite configurations.</p>
+            </div>
+            <div className="reveal">
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+                {[["Shared Modular Grid","All systems align to a 400mm base grid"],["Universal Connectors","One hardware set across all three systems"],["Combined Load Tables","Pre-certified mixed-system configurations"],["Unified Strike Process","One crew strikes all three systems"]].map(([title, body]) => (
+                  <div key={title} style={{ padding: "24px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                    <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "var(--yellow)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "12px" }}>{title}</div>
+                    <p style={{ fontSize: "13px", color: "var(--muted)", lineHeight: "1.6" }}>{body}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        </section>
-      ))}
+        </div>
+      </section>
 
-      {/* CTA */}
-      <section className="py-24 text-center" style={{ background: "#111111", borderTop: "1px solid rgba(198,255,2,0.15)" }}>
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-          <h2
-            className="text-white uppercase leading-none mb-8"
-            style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(2.5rem, 6vw, 6rem)", letterSpacing: "0.02em" }}
-          >
-            Specify your<br /><span className="text-[#C6FF02]">next build.</span>
-          </h2>
-          <YellowButton href="/contact">Talk to the Team</YellowButton>
+      <section className="section-pad" style={{ background: "var(--black)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container" style={{ textAlign: "center" }}>
+          <p className="section-label" style={{ justifyContent: "center" }}>Specify a system</p>
+          <h2 className="section-title reveal" style={{ marginBottom: "32px" }}>Ready to<br /><span style={{ color: "var(--yellow)" }}>Spec Up?</span></h2>
+          <Link href="/contact" className="btn-primary">Start a Project</Link>
         </div>
       </section>
     </>

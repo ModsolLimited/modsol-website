@@ -1,97 +1,114 @@
 import type { Metadata } from "next";
-import ProductHero from "@/components/products/ProductHero";
-import ProductFeatures from "@/components/products/ProductFeatures";
-import ProductApplications from "@/components/products/ProductApplications";
-import ContactCTA from "@/components/sections/ContactCTA";
+import Link from "next/link";
+import PageHero from "@/components/layout/PageHero";
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 
-export const metadata: Metadata = {
-  title: "The Modwall — Modular Surface Panel System",
-  description:
-    "The Modwall is Modsol's modular surface panel system — engineered for high-impact branded environments, seamless graphics, and acoustic performance.",
-};
+export const metadata: Metadata = { title: "The Modwall" };
 
 const specs = [
-  { label: "System Code", value: "SYS-02 / Modwall" },
-  { label: "Panel Material", value: "Aluminium composite core with timber backing" },
-  { label: "Face Finishes", value: "Direct print, fabric, timber veneer, glass" },
-  { label: "Panel Depths", value: "10mm, 18mm, 25mm" },
-  { label: "Standard Panel Size", value: "1200mm × 2400mm (bespoke available)" },
-  { label: "Edge Detail", value: "Flush, reveal, or shadow gap" },
-  { label: "Acoustic Option", value: "50dB Rw reduction panel available" },
-  { label: "Weight (std)", value: "8kg per panel" },
+  { label: "Panel Dimensions", value: "1200 × 2400mm" },
+  { label: "Panel Weight", value: "28 kg" },
+  { label: "Core Construction", value: "Honeycomb aluminium" },
+  { label: "Surface Options", value: "Unlimited skin options" },
+  { label: "Acoustic Rating", value: "Rw 32 dB" },
+  { label: "Max Height", value: "4.8m (freestanding)" },
+  { label: "Assembly Time", value: "2hr / 10m run (2 crew)" },
+  { label: "Certification", value: "EN 13964 / BS 8000" },
 ];
 
-const features = [
-  {
-    number: "F-01",
-    title: "Seamless Face Finish",
-    description:
-      "Panel-to-panel joints achieve ≤0.5mm gap tolerance — enabling full-bleed graphics and premium surface finishes with no visible fixing points.",
-  },
-  {
-    number: "F-02",
-    title: "Interchangeable Faces",
-    description:
-      "Face panels clip to a fixed backing frame, allowing complete graphic refreshes in under an hour. Perfect for multi-use or touring applications.",
-  },
-  {
-    number: "F-03",
-    title: "Acoustic Performance",
-    description:
-      "Our 25mm acoustic Modwall panels provide up to 50dB Rw sound reduction — engineered for hospitality suites, conference rooms, and broadcast environments.",
-  },
-  {
-    number: "F-04",
-    title: "Backlit Ready",
-    description:
-      "Modwall backing frames accept LED strip installations for seamless backlit graphic panels — no secondary framing required.",
-  },
-  {
-    number: "F-05",
-    title: "Modblock Compatible",
-    description:
-      "Modwall face panels attach directly to Modblock structural cores — the two systems integrate in a single structural and surface solution.",
-  },
-  {
-    number: "F-06",
-    title: "Print-Ready Surface",
-    description:
-      "All standard panels are supplied with a print-ready white laminate face. Direct UV printing available across the full Modsol supply network.",
-  },
-];
-
-const applications = [
-  {
-    sector: "Branded Environments",
-    description: "Full-room wall graphics and immersive brand environments built from a modular panel grid.",
-    imageLabel: "MODWALL — Branded environment photography",
-  },
-  {
-    sector: "Exhibition Stands",
-    description: "Floor-to-ceiling graphic panels with seamless joints for exhibition and trade show applications.",
-    imageLabel: "MODWALL — Exhibition stand application photography",
-  },
-  {
-    sector: "Hospitality Suites",
-    description: "Acoustic and aesthetic wall solutions for temporary hospitality environments.",
-    imageLabel: "MODWALL — Hospitality suite application photography",
-  },
+const useCases = [
+  { title: "Exhibition Perimeters", body: "Define your footprint with walls that carry your brand, not just your boundary. Full-face graphics, backlit panels, or raw industrial finishes." },
+  { title: "Acoustic Divisions", body: "Conference and hospitality environments where noise separation matters. The Modwall's honeycomb core absorbs and isolates without bulk." },
+  { title: "Brand Canvas", body: "The Modwall is the largest flat canvas in temporary architecture. Seamless graphic application across any run length." },
+  { title: "Temporary Offices", body: "Private meeting rooms, green rooms, production suites, and sponsor hospitality built overnight and struck in hours." },
 ];
 
 export default function ModwallPage() {
   return (
     <>
-      <ProductHero
-        code="SYS-02 — The Modwall"
-        name="The Modwall"
-        tagline="Surface systems built for maximum brand impact."
-        description="The Modwall is a high-performance modular surface panel system designed to deliver seamless brand graphics, acoustic control, and premium finishes across any temporary environment. From exhibition stands to hospitality suites — The Modwall defines the space."
-        imageLabel="MODWALL HERO — Replace with large format installation or surface detail photography"
-        specs={specs}
+      <PageHero
+        label="Product 02"
+        title="The<br/>Modwall"
+        subtitle="Configurable wall panels for perimeter definition, acoustic separation, and large-format brand canvas."
       />
-      <ProductFeatures features={features} />
-      <ProductApplications applications={applications} productName="Modwall" />
-      <ContactCTA />
+
+      <section className="section-pad" style={{ background: "var(--black)" }}>
+        <div className="container">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
+            <div className="reveal">
+              <ImagePlaceholder label="Modwall — System Overview" aspectRatio="4/5" />
+            </div>
+            <div className="reveal">
+              <p className="section-label">System Overview</p>
+              <h2 className="section-title" style={{ marginBottom: "24px" }}>Skinnable to<br /><span style={{ color: "var(--yellow)" }}>Any Specification.</span></h2>
+              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.8", marginBottom: "24px" }}>
+                The Modwall panel system is built on a lightweight aluminium honeycomb chassis that accepts any surface treatment from raw paint to backlit LED arrays. The connection rail system means panels align and lock in seconds — no tools.
+              </p>
+              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.8", marginBottom: "40px" }}>
+                Run lengths from one panel to one hundred. Configure as straight walls, L-shapes, U-shapes, or curved using our flexible connector range. Freestanding or fixed to floor and ceiling.
+              </p>
+              <div className="stats-row" style={{ gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
+                {[["Rw32","Acoustic Rating"],["4.8m","Max Height"],["2hr","/ 10m Run"]].map(([n, l]) => (
+                  <div className="stat-item" key={l}>
+                    <div className="stat-num">{n}</div>
+                    <div className="stat-label">{l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--dark)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container">
+          <p className="section-label">Technical Specification</p>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: "rgba(255,255,255,0.06)", marginTop: "48px" }}>
+            {specs.map(({ label, value }) => (
+              <div key={label} style={{ background: "var(--dark)", padding: "24px 32px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--muted)", letterSpacing: "0.2em", textTransform: "uppercase" }}>{label}</span>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: "13px", color: "var(--white)" }}>{value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--black)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container">
+          <p className="section-label">Use Cases</p>
+          <div className="platform-cards reveal" style={{ marginTop: "48px" }}>
+            {useCases.map((u) => (
+              <div className="platform-card" key={u.title}>
+                <h3>{u.title}</h3>
+                <p>{u.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--dark)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container">
+          <p className="section-label">Project Gallery</p>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1px", background: "rgba(255,255,255,0.06)", marginTop: "48px" }}>
+            <ImagePlaceholder label="Modwall — Exhibition Perimeter" aspectRatio="4/3" />
+            <ImagePlaceholder label="Modwall — Brand Canvas" aspectRatio="4/3" />
+            <ImagePlaceholder label="Modwall — Acoustic Division" aspectRatio="4/3" />
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--dark2)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container" style={{ textAlign: "center" }}>
+          <p className="section-label" style={{ justifyContent: "center" }}>Specify the Modwall</p>
+          <h2 className="section-title reveal" style={{ marginBottom: "32px" }}>Define Your<br /><span style={{ color: "var(--yellow)" }}>Space.</span></h2>
+          <div style={{ display: "flex", gap: "16px", justifyContent: "center" }}>
+            <Link href="/contact" className="btn-primary">Start a Project</Link>
+            <Link href="/products" className="btn-secondary">All Products</Link>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

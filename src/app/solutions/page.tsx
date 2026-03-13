@@ -1,111 +1,73 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
-import SectionLabel from "@/components/ui/SectionLabel";
-import AccentLine from "@/components/ui/AccentLine";
-import YellowButton from "@/components/ui/YellowButton";
 
-export const metadata: Metadata = {
-  title: "The Solutions — Modular Systems for Every Application",
-  description:
-    "Modsol delivers modular solutions across events, exhibitions, hospitality, retail, brand activations, and temporary offices.",
-};
+export const metadata: Metadata = { title: "Solutions" };
 
 const solutions = [
-  {
-    number: "01",
-    name: "Event Solutions",
-    href: "/solutions/events",
-    description: "Stages, grandstands, VIP structures, and temporary event architecture built to any brief.",
-  },
-  {
-    number: "02",
-    name: "Exhibition Solutions",
-    href: "/solutions/exhibitions",
-    description: "Stand systems and exhibition environments that put your brand centre-stage across any floorplan.",
-  },
-  {
-    number: "03",
-    name: "Hospitality Solutions",
-    href: "/solutions/hospitality",
-    description: "Premium temporary hospitality environments — from trackside suites to corporate entertainment pods.",
-  },
-  {
-    number: "04",
-    name: "Retail Solutions",
-    href: "/solutions/retail",
-    description: "Pop-up retail, seasonal flagships, and in-store brand moments delivered with architectural precision.",
-  },
-  {
-    number: "05",
-    name: "Brand Activation Solutions",
-    href: "/solutions/brand-activations",
-    description: "Immersive brand experiences that stop traffic — modular, repeatable, unforgettable.",
-  },
-  {
-    number: "06",
-    name: "Temporary Office Solutions",
-    href: "/solutions/temporary-offices",
-    description: "Professional workspace structures for construction sites, film productions, and interim operations.",
-  },
+  { num: "01", slug: "events", label: "Events", desc: "From festival main stages to sporting GP paddocks. Structures that perform under pressure." },
+  { num: "02", slug: "exhibitions", label: "Exhibitions", desc: "Exhibition stands and feature builds that command the hall. Defined by design, delivered on time." },
+  { num: "03", slug: "hospitality", label: "Hospitality", desc: "Hospitality structures and brand environments for sport, culture, and corporate entertainment." },
+  { num: "04", slug: "retail", label: "Retail & Pop-up", desc: "Temporary retail, pop-up flagships, and brand activation spaces that drive footfall and dwell time." },
+  { num: "05", slug: "brand-activations", label: "Brand Activations", desc: "Experiential environments for product launches, press activations, and consumer campaigns." },
+  { num: "06", slug: "temporary-offices", label: "Temporary Offices", desc: "Modular office, site cabin, and command centre environments that work as hard as your team." },
 ];
 
 export default function SolutionsPage() {
   return (
     <>
-      <PageHero
-        label="The Solutions"
-        title="Where Modsol Delivers"
-        subtitle="Six sectors. One modular platform. Modsol has the structural system, the delivery expertise, and the creative capability to bring any temporary environment to life."
-      />
+      <PageHero label="03 — Solutions" title="Built for<br/>Every Brief." subtitle="Six industry verticals. One platform. Modsol's systems are deployed across the most demanding event, exhibition, and brand environments on Earth." />
 
-      <section className="py-24 lg:py-32" style={{ background: "#000000" }}>
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-          <SectionLabel className="mb-12">All Solutions</SectionLabel>
-
-          <div className="space-y-px" style={{ background: "rgba(255,255,255,0.06)" }}>
-            {solutions.map((sol) => (
+      <section className="section-pad" style={{ background: "var(--black)" }}>
+        <div className="container">
+          <div style={{ display: "flex", flexDirection: "column", gap: "1px", background: "rgba(255,255,255,0.06)" }}>
+            {solutions.map((s) => (
               <Link
-                key={sol.name}
-                href={sol.href}
-                className="group flex items-center justify-between p-8 transition-colors hover:bg-white/03"
-                style={{ background: "#000" }}
+                key={s.slug}
+                href={`/solutions/${s.slug}`}
+                style={{ textDecoration: "none", display: "block", background: "var(--black)", transition: "background 0.3s" }}
               >
-                <div className="flex items-start gap-8">
-                  <span
-                    className="text-[#C6FF02] shrink-0 mt-1"
-                    style={{ fontFamily: "'Space Mono', monospace", fontSize: "10px", letterSpacing: "0.2em" }}
-                  >
-                    {sol.number}
-                  </span>
-                  <div>
-                    <AccentLine className="w-6 mb-4" />
-                    <h2
-                      className="text-white uppercase group-hover:text-[#C6FF02] transition-colors duration-200 mb-2"
-                      style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(1.75rem, 3vw, 2.5rem)", letterSpacing: "0.04em" }}
-                    >
-                      {sol.name}
-                    </h2>
-                    <p
-                      className="text-white/40 max-w-md text-sm"
-                      style={{ fontFamily: "'DM Sans', sans-serif", lineHeight: "1.6" }}
-                    >
-                      {sol.description}
-                    </p>
-                  </div>
+                <div style={{ display: "grid", gridTemplateColumns: "120px 1fr 1fr auto", gap: "40px", alignItems: "center", padding: "40px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                  <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--muted)", letterSpacing: "0.2em" }}>{s.num}</div>
+                  <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 3.5vw, 48px)", color: "var(--white)", letterSpacing: "0.02em", lineHeight: 1 }}>{s.label}</h2>
+                  <p style={{ fontSize: "14px", color: "var(--muted)", lineHeight: "1.7" }}>{s.desc}</p>
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "var(--yellow)", letterSpacing: "0.2em", textTransform: "uppercase", whiteSpace: "nowrap" }}>Explore →</span>
                 </div>
-                <span
-                  className="text-white/20 group-hover:text-[#C6FF02] transition-colors shrink-0 text-xl"
-                >
-                  →
-                </span>
               </Link>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="mt-16 text-center">
-            <YellowButton href="/contact">Discuss Your Requirements</YellowButton>
+      <section className="section-pad" style={{ background: "var(--dark)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
+            <div className="reveal">
+              <p className="section-label">Cross-Sector Capability</p>
+              <h2 className="section-title" style={{ marginBottom: "24px" }}>One Platform.<br /><span style={{ color: "var(--yellow)" }}>Every Brief.</span></h2>
+              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.8" }}>
+                The Modblock, Modwall, and Modframe are specified across all six sectors — often in combination within a single project. Our cross-sector experience means that when a brief is complex, we've usually built something harder.
+              </p>
+            </div>
+            <div className="reveal">
+              <div className="stats-row" style={{ gridTemplateColumns: "repeat(2, 1fr)", gap: "40px" }}>
+                {[["500+","Projects"],["40+","Countries"],["6","Sectors"],["12+","Years"]].map(([n, l]) => (
+                  <div className="stat-item" key={l}>
+                    <div className="stat-num">{n}</div>
+                    <div className="stat-label">{l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section-pad" style={{ background: "var(--dark2)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container" style={{ textAlign: "center" }}>
+          <p className="section-label" style={{ justifyContent: "center" }}>Tell us your brief</p>
+          <h2 className="section-title reveal" style={{ marginBottom: "32px" }}>What Are<br /><span style={{ color: "var(--yellow)" }}>You Building?</span></h2>
+          <Link href="/contact" className="btn-primary">Start a Project</Link>
         </div>
       </section>
     </>

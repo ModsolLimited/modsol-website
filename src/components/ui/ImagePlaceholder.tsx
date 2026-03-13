@@ -1,50 +1,23 @@
-interface ImagePlaceholderProps {
-  label: string;
-  aspectRatio?: string;
-  className?: string;
-  height?: string;
-}
-
-export default function ImagePlaceholder({
-  label,
-  aspectRatio,
-  className = "",
-  height,
-}: ImagePlaceholderProps) {
+interface Props { label: string; aspectRatio?: string; height?: string; className?: string; }
+export default function ImagePlaceholder({ label, aspectRatio, height, className = "" }: Props) {
   return (
     <div
-      className={`relative w-full flex items-center justify-center overflow-hidden ${className}`}
+      className={className}
       style={{
-        aspectRatio: aspectRatio,
-        height: height,
-        backgroundColor: "#111111",
-        backgroundImage: `
-          linear-gradient(rgba(198, 255, 2, 0.07) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(198, 255, 2, 0.07) 1px, transparent 1px)
-        `,
-        backgroundSize: "40px 40px",
+        aspectRatio,
+        height,
+        background: "var(--dark3)",
+        backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(198,255,2,0.06) 39px,rgba(198,255,2,0.06) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(198,255,2,0.04) 39px,rgba(198,255,2,0.04) 40px)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-      {/* Corner marks */}
-      <div className="absolute top-4 left-4 w-8 h-8 border-t border-l border-[#C6FF02] opacity-60" />
-      <div className="absolute top-4 right-4 w-8 h-8 border-t border-r border-[#C6FF02] opacity-60" />
-      <div className="absolute bottom-4 left-4 w-8 h-8 border-b border-l border-[#C6FF02] opacity-60" />
-      <div className="absolute bottom-4 right-4 w-8 h-8 border-b border-r border-[#C6FF02] opacity-60" />
-
-      <div className="text-center px-8">
-        <div
-          className="text-[#C6FF02] uppercase mb-2"
-          style={{ fontFamily: "'Space Mono', monospace", fontSize: "10px", letterSpacing: "0.15em" }}
-        >
-          ▣ IMAGE PLACEHOLDER
-        </div>
-        <div
-          className="text-white/60 uppercase"
-          style={{ fontFamily: "'Space Mono', monospace", fontSize: "11px", letterSpacing: "0.1em" }}
-        >
-          {label}
-        </div>
-      </div>
+      <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.25em", color: "rgba(198,255,2,0.3)", textTransform: "uppercase", textAlign: "center", padding: "0 20px" }}>
+        {label}
+      </span>
     </div>
   );
 }
