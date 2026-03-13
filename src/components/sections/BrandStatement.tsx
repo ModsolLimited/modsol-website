@@ -8,7 +8,7 @@ export default function BrandStatement() {
         <div className="statement-words">
           {/* Row 1 */}
           <div className="statement-row">
-            <span className="big-word filled">BUILD.</span>
+            <span className="big-word yellow-fill">BUILD.</span>
             <div className="dot-separator" />
             <span className="big-word">SUSTAINABLE.</span>
             <div className="dot-separator" />
@@ -20,7 +20,7 @@ export default function BrandStatement() {
             <div className="dot-separator" />
             <span className="big-word yellow-fill">DIFFERENT.</span>
             <div className="dot-separator" />
-            <span className="big-word">BOLD.</span>
+            <span className="big-word yellow-fill">BOLD.</span>
           </div>
           {/* Row 3 */}
           <div className="statement-row" style={{ marginTop: "-10px" }}>
@@ -28,7 +28,7 @@ export default function BrandStatement() {
             <div className="dot-separator" />
             <span className="big-word">IMAGINATION.</span>
             <div className="dot-separator" />
-            <span className="big-word filled">PRECISE.</span>
+            <span className="big-word">PRECISE.</span>
           </div>
         </div>
 

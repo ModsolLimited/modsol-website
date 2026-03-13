@@ -1,5 +1,7 @@
-interface Props { label: string; aspectRatio?: string; height?: string; className?: string; }
-export default function ImagePlaceholder({ label, aspectRatio, height, className = "" }: Props) {
+import type { CSSProperties } from "react";
+
+interface Props { label: string; aspectRatio?: string; height?: string; className?: string; style?: CSSProperties; }
+export default function ImagePlaceholder({ label, aspectRatio, height, className = "", style }: Props) {
   return (
     <div
       className={className}
@@ -13,6 +15,7 @@ export default function ImagePlaceholder({ label, aspectRatio, height, className
         justifyContent: "center",
         position: "relative",
         overflow: "hidden",
+        ...style,
       }}
     >
       <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.25em", color: "rgba(198,255,2,0.3)", textTransform: "uppercase", textAlign: "center", padding: "0 20px" }}>

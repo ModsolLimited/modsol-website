@@ -7,11 +7,11 @@ export const metadata: Metadata = { title: "Projects" };
 const projects = [
   {
     id: "proj-am",
-    label: "Aston Martin Racing",
+    label: "Aston Martin Aramco F1",
     sector: "Motorsport / Hospitality",
-    year: "2024",
+    year: "2023–2024",
     system: "Modblock + Modwall",
-    desc: "Full-season F1 paddock club hospitality for Aston Martin Aramco. Built and struck at 23 race weekends across five continents. Zero build failures.",
+    desc: "Full-season paddock club hospitality for Aston Martin Aramco Formula 1 team. Built and struck at 23 race weekends across five continents — Bahrain to Las Vegas. Identical structural specification at every venue. Zero build failures across a two-season programme.",
     span: true,
   },
   {
@@ -20,43 +20,43 @@ const projects = [
     sector: "Music / Events",
     year: "2025",
     system: "Modframe + Modwall",
-    desc: "Canopy and perimeter structures for the Oasis reunion world tour. 17 stadium shows, 1.2M+ audience.",
+    desc: "Canopy, perimeter and VIP structures for the Oasis reunion world tour. 17 stadium shows, 1.2M+ audience across the UK and Europe.",
     span: false,
   },
   {
     id: "proj-pp",
-    label: "Politico Pub Summit",
-    sector: "Media / Events",
+    label: "Politico EU Summit",
+    sector: "Media / Conference",
     year: "2024",
     system: "Modwall + Modblock",
-    desc: "Conference and media environment for the Politico European Political Summit. 3,000 delegates, 48hr build window.",
+    desc: "Media conference environment for the Politico European Political Summit. 3,000 delegates, accreditation infrastructure and press facilities — 48hr build window.",
     span: false,
   },
   {
     id: "proj-nfl",
     label: "NFL London Games",
-    sector: "Sport / Events",
+    sector: "Sport / Sponsorship",
     year: "2024",
     system: "Modblock + Modframe",
-    desc: "NFL sponsor activation village, Wembley Stadium. Four games, four full builds, consistent delivery across the series.",
+    desc: "NFL sponsor activation village and fan experience infrastructure at Wembley Stadium. Four games, four full build cycles, consistent quality across the entire series.",
     span: false,
   },
   {
     id: "proj-luxury",
-    label: "Luxury Retail Pop-up",
+    label: "Luxury Fashion Flagship",
     sector: "Retail / Brand",
-    year: "2024",
+    year: "2023–2024",
     system: "Modwall + Modblock",
-    desc: "Six-month temporary flagship for a luxury fashion house. 400m² over three floors — engineered to permanent quality.",
+    desc: "Six-month temporary flagship for a global luxury fashion house in central London. 400m² across three floors — engineered to permanent retail quality. Full structural planning consent obtained in under three weeks.",
     span: false,
   },
   {
     id: "proj-tech",
-    label: "Global Tech Brand Launch",
+    label: "Global Technology Launch",
     sector: "Brand Activation",
     year: "2023",
     system: "Modframe + Modwall + Modblock",
-    desc: "Immersive product launch environment for a global tech brand. Combined platform deployment across 2,800m².",
+    desc: "Immersive product launch environment across 2,800m² for a global technology brand. Full platform deployment — the largest combined system build in Modsol's history at the time.",
     span: false,
   },
 ];
@@ -79,14 +79,29 @@ const watermarks: Record<string, string> = {
   "proj-tech": "TECH",
 };
 
+const track = [
+  { year: "2008–2010", label: "Premium Event Marquees", detail: "Building the UK's finest temporary event structures — frame marquees, tensile canopies, high-end event shelters. First 50 projects completed." },
+  { year: "2011–2013", label: "Transitional Period", detail: "Development of first Modblock prototype. First hybrid marquee/modular builds for premium clients who wanted more than tent systems could deliver." },
+  { year: "2014–2016", label: "Platform Launch", detail: "Modblock and Modwall systems commercially launched. First international projects. F1 paddock hospitality built for the first time." },
+  { year: "2017–2019", label: "Global Expansion", detail: "Modframe launched. Operations in 30+ countries. First world expo pavilion. Revenue doubles in 18 months." },
+  { year: "2020–2022", label: "Pandemic Pivot", detail: "Systems deployed for emergency healthcare, welfare and command infrastructure. Client base expands beyond events. First permanent-planning approvals." },
+  { year: "2023–Present", label: "Architectural Era", detail: "500+ projects completed. Recognised as a temporary architecture company. Platform specified by architects, not just events producers." },
+];
+
 export default function ProjectsPage() {
   return (
     <>
-      <PageHero label="04 — Projects" title="500+<br/>Projects." subtitle="A track record built across five continents, the world's biggest events, and the most demanding clients in sport, brand, and culture." />
+      <PageHero
+        label="04 — Projects"
+        title="500+<br/>Projects."
+        subtitle="A track record built across five continents, the world's biggest events, and the most demanding clients in sport, brand, culture and commerce. Fifteen years. Zero missed deadlines."
+      />
 
+      {/* Featured projects grid */}
       <section className="section-pad" style={{ background: "var(--black)" }}>
         <div className="container">
-          <div className="projects-grid">
+          <p className="section-label">Featured Projects</p>
+          <div className="projects-grid" style={{ marginTop: "48px" }}>
             {projects.map((p) => (
               <div
                 key={p.id}
@@ -118,10 +133,28 @@ export default function ProjectsPage() {
         </div>
       </section>
 
+      {/* Project track record timeline */}
       <section className="section-pad" style={{ background: "var(--dark)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <div className="container">
+          <p className="section-label">Track Record</p>
+          <h2 className="section-title reveal" style={{ marginBottom: "48px" }}>15 Years<br /><span style={{ color: "var(--yellow)" }}>of Projects.</span></h2>
+          <div style={{ display: "flex", flexDirection: "column", gap: "1px", background: "rgba(255,255,255,0.06)" }}>
+            {track.map((t) => (
+              <div key={t.year} style={{ background: "var(--dark)", padding: "32px 40px", display: "grid", gridTemplateColumns: "160px 240px 1fr", gap: "40px", alignItems: "center" }}>
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--yellow)", letterSpacing: "0.15em" }}>{t.year}</div>
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "20px", color: "var(--white)", letterSpacing: "0.05em" }}>{t.label}</h3>
+                <p style={{ fontSize: "13px", color: "var(--muted)", lineHeight: "1.7" }}>{t.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section className="section-pad" style={{ background: "var(--black)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container">
           <div className="stats-row">
-            {[["500+","Projects Delivered"],["40+","Countries"],["5","Continents"],["12+","Years"]].map(([n, l]) => (
+            {[["500+","Projects Delivered"],["40+","Countries"],["5","Continents"],["0","Missed Deadlines"]].map(([n, l]) => (
               <div className="stat-item" key={l}>
                 <div className="stat-num">{n}</div>
                 <div className="stat-label">{l}</div>
@@ -131,11 +164,22 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      <section className="section-pad" style={{ background: "var(--dark2)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <div className="container" style={{ textAlign: "center" }}>
-          <p className="section-label" style={{ justifyContent: "center" }}>Add your project</p>
-          <h2 className="section-title reveal" style={{ marginBottom: "32px" }}>Ready to Be<br /><span style={{ color: "var(--yellow)" }}>Project 501?</span></h2>
-          <Link href="/contact" className="btn-primary">Start a Project</Link>
+      {/* Work with us */}
+      <section className="section-pad" style={{ background: "var(--dark)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="container">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
+            <div className="reveal">
+              <p className="section-label">Add your project</p>
+              <h2 className="section-title" style={{ marginBottom: "24px" }}>Ready to Be<br /><span style={{ color: "var(--yellow)" }}>Project 501?</span></h2>
+              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.9" }}>
+                Every project in our portfolio started with a brief. The brief for number 501 might be yours. Tell us what you're building, where, and when — and we'll tell you exactly how we can deliver it.
+              </p>
+            </div>
+            <div className="reveal" style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+              <Link href="/contact" className="btn-primary" style={{ textAlign: "center" }}>Start a Project</Link>
+              <Link href="/solutions" className="btn-secondary" style={{ textAlign: "center" }}>View Our Solutions</Link>
+            </div>
+          </div>
         </div>
       </section>
     </>
