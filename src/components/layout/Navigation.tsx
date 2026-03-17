@@ -65,8 +65,7 @@ export default function Navigation() {
       <nav className={`site-nav${scrolled ? " scrolled" : ""}`}>
         {/* Logo */}
         <Link href="/" className="nav-logo">
-          <div className="nav-logo-mark"><span>M</span></div>
-          MODSOL
+          <img src="/logo.png" alt="Modsol" style={{ height: "40px", width: "auto", display: "block" }} />
         </Link>
 
         {/* Desktop links */}
