@@ -101,12 +101,12 @@ export default function BrandStatement() {
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLElement
                   el.style.color = word.yellow ? '#C6FF02' : '#fff'
-                  if (!word.yellow) el.style.WebkitTextStroke = 'none'
+                  if (!word.yellow) (el.style as any).webkitTextStroke = 'none'
                 }}
                 onMouseLeave={e => {
                   const el = e.currentTarget as HTMLElement
                   el.style.color = word.yellow ? '#C6FF02' : 'transparent'
-                  if (!word.yellow) el.style.WebkitTextStroke = '1px rgba(255,255,255,0.5)'
+                  if (!word.yellow) (el.style as any).webkitTextStroke = '1px rgba(255,255,255,0.5)'
                 }}
               >
                 {word.text}
