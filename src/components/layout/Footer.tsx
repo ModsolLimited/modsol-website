@@ -28,12 +28,14 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Solutions</h4>
             <ul>
-              <li><Link href="/solutions/events">Events</Link></li>
-              <li><Link href="/solutions/exhibitions">Exhibitions</Link></li>
-              <li><Link href="/solutions/hospitality">Hospitality</Link></li>
-              <li><Link href="/solutions/retail">Retail</Link></li>
-              <li><Link href="/solutions/brand-activations">Brand Activation</Link></li>
-              <li><Link href="/solutions/temporary-offices">Temporary Offices</Link></li>
+              <li><Link href="/solutions/shows-festivals">Shows & Festivals</Link></li>
+              <li><Link href="/solutions/exhibitions-conference">Exhibitions & Conferences</Link></li>
+              <li><Link href="/solutions/hospitality-restaurants">Hospitality & Restaurants</Link></li>
+              <li><Link href="/solutions/retail-merchandise">Retail & Merchandise</Link></li>
+              <li><Link href="/solutions/brand-activations">Brand Activations</Link></li>
+              <li><Link href="/solutions/experiential-marketing">Experiential Marketing</Link></li>
+              <li><Link href="/solutions/automotive-motorsport">Automotive & Motorsport</Link></li>
+              <li><Link href="/solutions/domestic-commercial">Domestic & Commercial</Link></li>
             </ul>
           </div>
 

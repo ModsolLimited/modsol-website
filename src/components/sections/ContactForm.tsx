@@ -53,10 +53,10 @@ export default function ContactForm() {
 
       <div>
         <label style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "var(--muted)", letterSpacing: "0.2em", textTransform: "uppercase", display: "block", marginBottom: "8px" }}>Project Type</label>
-        <select name="projectType" className="form-field" style={{ appearance: "none", cursor: "pointer" }}>
-          <option value="">Select a project type</option>
+        <select name="projectType" className="form-field" style={{ appearance: "none", cursor: "auto", background: "#1a1a1a", color: "#ffffff", border: "1px solid rgba(255,255,255,0.1)" }}>
+          <option value="" style={{ background: "#1a1a1a", color: "#ffffff" }}>Select a project type</option>
           {projectTypes.map((t) => (
-            <option key={t} value={t}>{t}</option>
+            <option key={t} value={t} style={{ background: "#1a1a1a", color: "#ffffff" }}>{t}</option>
           ))}
         </select>
       </div>

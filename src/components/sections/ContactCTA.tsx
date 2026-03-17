@@ -7,7 +7,7 @@ export default function ContactCTA() {
         <div className="contact-inner">
           {/* Left */}
           <div>
-            <p className="section-label">07 — Contact</p>
+            <p className="section-label">Contact</p>
             <h2 className="section-title reveal" style={{ marginBottom: "24px" }}>
               Let&apos;s Build<br />
               <span style={{ color: "var(--yellow)" }}>Something</span><br />
@@ -25,7 +25,7 @@ export default function ContactCTA() {
                     <polyline points="22,6 12,13 2,6"/>
                   </svg>
                 </div>
-                <span style={{ fontSize: "14px", color: "var(--off-white)" }}>hello@modsolltd.com</span>
+                <span style={{ fontSize: "14px", color: "var(--off-white)" }}>sales@modsol.co.uk</span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
                 <div style={{ width: "36px", height: "36px", border: "1px solid rgba(198,255,2,0.3)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -61,15 +61,15 @@ export default function ContactCTA() {
             </div>
             <div className="form-field">
               <label>Project Type</label>
-              <select>
-                <option value="">Select project type</option>
-                <option>Event Structure</option>
-                <option>Exhibition Environment</option>
-                <option>Hospitality Suite</option>
-                <option>Retail Activation</option>
-                <option>Brand Activation</option>
-                <option>Temporary Office</option>
-                <option>Other</option>
+              <select style={{ background: "#1a1a1a", color: "#ffffff", border: "1px solid rgba(255,255,255,0.1)", cursor: "auto" }}>
+                <option value="" style={{ background: "#1a1a1a", color: "#ffffff" }}>Select project type</option>
+                <option style={{ background: "#1a1a1a", color: "#ffffff" }}>Event Structure</option>
+                <option style={{ background: "#1a1a1a", color: "#ffffff" }}>Exhibition Environment</option>
+                <option style={{ background: "#1a1a1a", color: "#ffffff" }}>Hospitality Suite</option>
+                <option style={{ background: "#1a1a1a", color: "#ffffff" }}>Retail Activation</option>
+                <option style={{ background: "#1a1a1a", color: "#ffffff" }}>Brand Activation</option>
+                <option style={{ background: "#1a1a1a", color: "#ffffff" }}>Temporary Office</option>
+                <option style={{ background: "#1a1a1a", color: "#ffffff" }}>Other</option>
               </select>
             </div>
             <div className="form-field">

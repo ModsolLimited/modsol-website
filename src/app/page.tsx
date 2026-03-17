@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import HeroSection from "@/components/sections/HeroSection";
 import TickerBar from "@/components/sections/TickerBar";
 import PlatformSection from "@/components/sections/PlatformSection";
-import ProductsSection from "@/components/sections/ProductsSection";
+import ProductCardsSection from "@/components/sections/ProductCardsSection";
 import IndustriesSection from "@/components/sections/IndustriesSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import BrandStatement from "@/components/sections/BrandStatement";
@@ -19,8 +19,7 @@ export default function HomePage() {
       <TickerBar />
       <div className="y-line" />
       <PlatformSection />
-      <div className="y-line" />
-      <ProductsSection />
+      <ProductCardsSection />
       <IndustriesSection />
       <ProjectsSection />
       <BrandStatement />

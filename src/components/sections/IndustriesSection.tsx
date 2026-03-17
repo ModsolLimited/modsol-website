@@ -2,10 +2,10 @@ import Link from "next/link";
 
 const industries = [
   {
-    href: "/solutions/events",
-    title: "Events",
-    tag: "Live & Corporate",
-    desc: "Festival main stages, F1 paddock clubs, concert touring infrastructure, sporting overlays. Temporary structures that carry the full weight of the world's biggest live moments.",
+    href: "/solutions/shows-festivals",
+    title: "Shows & Festivals",
+    tag: "Live & Touring",
+    desc: "Festival main stages, touring concert infrastructure, sporting stadia overlays and corporate event environments. Temporary structures that carry the full weight of the world's biggest live moments.",
     stat: "200+",
     statLabel: "Events Delivered",
     icon: (
@@ -15,10 +15,10 @@ const industries = [
     ),
   },
   {
-    href: "/solutions/exhibitions",
-    title: "Exhibitions",
+    href: "/solutions/exhibitions-conference",
+    title: "Exhibitions & Conferences",
     tag: "Stands & Installs",
-    desc: "Custom exhibition stands, gallery environments and feature installations for trade shows, world expos and branded display environments from 9m² to 900m².",
+    desc: "Custom exhibition stands, conference environments, world expo pavilions and feature installations. Structural quality from 9m² to 900m² across a global show calendar.",
     stat: "150+",
     statLabel: "Stands Built",
     icon: (
@@ -28,10 +28,10 @@ const industries = [
     ),
   },
   {
-    href: "/solutions/hospitality",
-    title: "Hospitality",
-    tag: "VIP & Corporate",
-    desc: "VIP pavilions, paddock clubs, brand hospitality villages and corporate entertaining environments built to the quality your most important guests expect.",
+    href: "/solutions/hospitality-restaurants",
+    title: "Hospitality & Restaurants",
+    tag: "VIP & Dining",
+    desc: "VIP pavilions, temporary restaurants, paddock clubs and championship hospitality. Structures that communicate quality before a single word is spoken.",
     stat: "80+",
     statLabel: "VIP Structures",
     icon: (
@@ -42,10 +42,10 @@ const industries = [
     ),
   },
   {
-    href: "/solutions/retail",
-    title: "Retail & Pop-up",
+    href: "/solutions/retail-merchandise",
+    title: "Retail & Merchandise",
     tag: "Brand Retail",
-    desc: "Temporary flagship stores, seasonal pop-ups and permanent-quality retail environments. From weekend market units to six-month brand destinations.",
+    desc: "Pop-up flagships, seasonal retail destinations and luxury brand environments. Permanent-quality retail built and trading in days, not months.",
     stat: "60+",
     statLabel: "Retail Builds",
     icon: (
@@ -57,9 +57,9 @@ const industries = [
   },
   {
     href: "/solutions/brand-activations",
-    title: "Activation",
+    title: "Brand Activations",
     tag: "Experiential",
-    desc: "Immersive brand environments for product launches, consumer campaigns and press events. Three-dimensional brand storytelling built to specification.",
+    desc: "Product launches, consumer campaigns and immersive brand installations. Structural partners for creative teams who refuse to let the physical environment underdeliver.",
     stat: "90+",
     statLabel: "Activations",
     icon: (
@@ -69,12 +69,12 @@ const industries = [
     ),
   },
   {
-    href: "/solutions/temporary-offices",
-    title: "Workspace",
-    tag: "Offices & Command",
-    desc: "Site command centres, production offices, interim headquarters and deployable workspace solutions. Professional environments wherever the work is happening.",
+    href: "/solutions/domestic-commercial",
+    title: "Domestic & Commercial",
+    tag: "Offices & Welfare",
+    desc: "Site command centres, interim offices, welfare facilities and domestic annexes. Professional-grade environments wherever the work is happening.",
     stat: "40+",
-    statLabel: "Office Deploys",
+    statLabel: "Deployments",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="24" height="24">
         <rect x="2" y="3" width="20" height="14"/><line x1="8" y1="21" x2="16" y2="21"/>
@@ -90,12 +90,12 @@ export default function IndustriesSection() {
       <div className="container">
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: "64px" }}>
           <div>
-            <p className="section-label">04 — The Solutions</p>
+            <p className="section-label">THE SOLUTIONS</p>
             <h2 className="section-title reveal">Built for<br />Every Brief.</h2>
           </div>
           <div style={{ maxWidth: "400px" }}>
             <p className="section-body reveal" style={{ paddingBottom: "8px" }}>
-              From our roots in premium marquee and event structures, Modsol now deploys across six sectors — wherever temporary architecture is expected to perform at the level of permanent design.
+              From our roots in premium marquee and event structures, Modsol now deploys across eight sectors — wherever temporary architecture is expected to perform at the level of permanent design.
             </p>
             <Link href="/solutions" className="link-arrow reveal">View all solutions</Link>
           </div>
@@ -103,7 +103,7 @@ export default function IndustriesSection() {
 
         <div className="industries-grid reveal">
           {industries.map((ind) => (
-            <Link key={ind.title} href={ind.href} style={{ textDecoration: "none" }}>
+            <Link key={ind.title} href={ind.href} style={{ textDecoration: "none", display: "flex", flexDirection: "column" }}>
               <div className="industry-item">
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "20px" }}>
                   <div className="industry-icon">{ind.icon}</div>
@@ -114,7 +114,7 @@ export default function IndustriesSection() {
                 </div>
                 <div style={{ fontFamily: "var(--font-mono)", fontSize: "8px", color: "var(--yellow)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "8px" }}>{ind.tag}</div>
                 <h4>{ind.title}</h4>
-                <p style={{ marginTop: "10px" }}>{ind.desc}</p>
+                <p style={{ marginTop: "10px", flex: 1 }}>{ind.desc}</p>
                 <div style={{ marginTop: "20px", fontFamily: "var(--font-mono)", fontSize: "9px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.15em", textTransform: "uppercase" }}>Explore →</div>
               </div>
             </Link>

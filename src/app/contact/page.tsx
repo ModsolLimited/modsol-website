@@ -27,7 +27,7 @@ export default function ContactPage() {
 
               <div style={{ display: "flex", flexDirection: "column", gap: "32px", marginBottom: "48px" }}>
                 {[
-                  { label: "Email", value: "hello@modsol.co.uk" },
+                  { label: "Email", value: "sales@modsol.co.uk" },
                   { label: "Phone", value: "+44 (0)20 0000 0000" },
                   { label: "Location", value: "London, United Kingdom" },
                   { label: "Response Time", value: "Within one business day" },

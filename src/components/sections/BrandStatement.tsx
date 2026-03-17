@@ -1,55 +1,120 @@
-"use client";
-import Link from "next/link";
+'use client'
+
+import { useEffect, useRef } from 'react'
+
+const ROWS = [
+  [{ text: 'BUILD.', yellow: true }, { text: 'DEMOUNTABLE.', yellow: false }],
+  [{ text: 'DIFFERENT.', yellow: false }, { text: 'SCALABLE.', yellow: false }],
+  [{ text: 'SUSTAINABLE.', yellow: false }, { text: 'BOLD.', yellow: true }],
+]
 
 export default function BrandStatement() {
-  return (
-    <section className="brand-statement">
-      <div className="statement-words">
-        {/* Row 1 — left aligned: yellow BUILD. + outline MODULAR. */}
-        <div className="statement-row statement-left">
-          <span className="big-word big-yellow">BUILD.</span>
-          <div className="dot-sep" />
-          <span className="big-word big-outline">MODULAR.</span>
-        </div>
-        {/* Row 2 — right aligned: outline SCALABLE. + outline ADAPTABLE. */}
-        <div className="statement-row statement-right">
-          <span className="big-word big-outline">SCALABLE.</span>
-          <div className="dot-sep" />
-          <span className="big-word big-outline">ADAPTABLE.</span>
-        </div>
-        {/* Row 3 — left aligned: outline PRECISE. + yellow BOLD. */}
-        <div className="statement-row statement-left">
-          <span className="big-word big-outline">PRECISE.</span>
-          <div className="dot-sep" />
-          <span className="big-word big-yellow">BOLD.</span>
-        </div>
-      </div>
+  const containerRef = useRef<HTMLDivElement>(null)
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([])
 
-      <div style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "flex-end",
-        marginTop: "64px",
-        padding: "48px 40px 0",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-      }}>
-        <div>
-          <p style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: "10px",
-            letterSpacing: "0.25em",
-            textTransform: "uppercase",
-            color: "var(--yellow)",
-            marginBottom: "16px",
-          }}>
-            Modsol Limited — Modular Systems
-          </p>
-          <p style={{ fontSize: "15px", color: "var(--muted)", maxWidth: "480px", lineHeight: "1.7" }}>
-            Temporary environments should achieve the ambition of permanent architecture. That belief is engineered into every Modsol system, every component, every deployment.
-          </p>
-        </div>
-        <Link href="/contact" className="btn-primary">Start a Project</Link>
+  useEffect(() => {
+    const calculate = () => {
+      const container = containerRef.current
+      if (!container) return
+      const availableWidth = container.offsetWidth * 0.82
+
+      ROWS.forEach((_, ri) => {
+        const row = rowRefs.current[ri]
+        if (!row) return
+        const spans = row.querySelectorAll('span')
+        if (spans.length < 2) return
+
+        let low = 10
+        let high = 400
+        let best = 10
+
+        while (low <= high) {
+          const mid = Math.floor((low + high) / 2)
+          spans.forEach(s => {
+            (s as HTMLElement).style.fontSize = mid + 'px'
+          })
+          const rowWidth = row.scrollWidth
+          if (rowWidth <= availableWidth) {
+            best = mid
+            low = mid + 1
+          } else {
+            high = mid - 1
+          }
+        }
+
+        spans.forEach(s => {
+          (s as HTMLElement).style.fontSize = best + 'px'
+        })
+      })
+    }
+
+    calculate()
+    const ro = new ResizeObserver(calculate)
+    if (containerRef.current) ro.observe(containerRef.current)
+    return () => ro.disconnect()
+  }, [])
+
+  return (
+    <section className="section-pad" style={{
+      background: '#000',
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+    }}>
+      <div
+        ref={containerRef}
+        style={{
+          width: '100%',
+          maxWidth: '1440px',
+          margin: '0 auto',
+          padding: '0 40px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        {ROWS.map((row, ri) => (
+          <div
+            key={ri}
+            ref={el => { rowRefs.current[ri] = el }}
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'baseline',
+              lineHeight: '0.9',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {row.map((word, wi) => (
+              <span
+                key={wi}
+                style={{
+                  fontFamily: "'Bebas Neue', sans-serif",
+                  fontSize: '100px',
+                  lineHeight: '0.9',
+                  color: word.yellow ? '#C6FF02' : 'transparent',
+                  WebkitTextStroke: word.yellow ? 'none' : '1px rgba(255,255,255,0.5)',
+                  cursor: 'default',
+                  transition: 'color 0.2s ease',
+                  paddingRight: wi === 0 ? '0.08em' : '0',
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.color = word.yellow ? '#C6FF02' : '#fff'
+                  if (!word.yellow) el.style.WebkitTextStroke = 'none'
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.color = word.yellow ? '#C6FF02' : 'transparent'
+                  if (!word.yellow) el.style.WebkitTextStroke = '1px rgba(255,255,255,0.5)'
+                }}
+              >
+                {word.text}
+              </span>
+            ))}
+          </div>
+        ))}
       </div>
     </section>
-  );
+  )
 }
