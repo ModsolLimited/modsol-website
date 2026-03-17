@@ -4,7 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { label: "The Company", href: "/company" },
+  {
+    label: "The Company",
+    href: "/company",
+    children: [
+      { label: "The Team", href: "/company/team" },
+      { label: "The History", href: "/company/history" },
+      { label: "The Vision", href: "/company/vision" },
+    ],
+  },
   {
     label: "The Products",
     href: "/products",
@@ -27,15 +35,6 @@ const navItems = [
     ],
   },
   { label: "The Projects", href: "/projects" },
-  {
-    label: "Knowledge Hub",
-    href: "/knowledge-hub",
-    children: [
-      { label: "Articles", href: "/knowledge-hub/articles" },
-      { label: "Industry Insights", href: "/knowledge-hub/industry-insights" },
-      { label: "Technical Guides", href: "/knowledge-hub/technical-guides" },
-    ],
-  },
 ];
 
 export default function Navigation() {

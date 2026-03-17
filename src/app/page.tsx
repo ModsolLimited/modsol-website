@@ -6,7 +6,6 @@ import ProductsSection from "@/components/sections/ProductsSection";
 import IndustriesSection from "@/components/sections/IndustriesSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import BrandStatement from "@/components/sections/BrandStatement";
-import KnowledgePreview from "@/components/sections/KnowledgePreview";
 import ContactCTA from "@/components/sections/ContactCTA";
 
 export const metadata: Metadata = {
@@ -25,7 +24,6 @@ export default function HomePage() {
       <IndustriesSection />
       <ProjectsSection />
       <BrandStatement />
-      <KnowledgePreview />
       <ContactCTA />
     </>
   );

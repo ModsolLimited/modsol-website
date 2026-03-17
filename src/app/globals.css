@@ -173,6 +173,17 @@ body {
 .nav-item:hover .nav-item-label { color: var(--white); }
 .nav-item:hover .chevron { transform: rotate(180deg); }
 
+/* Invisible bridge fills the gap between label and dropdown so mouse stays in hover zone */
+.nav-item::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: -20px;
+  right: -20px;
+  height: 20px;
+  background: transparent;
+}
+
 .nav-dropdown {
   position: absolute;
   top: calc(100% + 14px);
@@ -872,33 +883,51 @@ section { position: relative; }
 /* ─── BRAND STATEMENT ──────────────────────────────────────── */
 .brand-statement {
   background: var(--dark);
-  padding: 100px 0;
+  padding: 100px 0 80px;
   overflow: hidden;
   border-top: 1px solid rgba(255,255,255,0.05);
 }
-.statement-words { display: flex; flex-direction: column; }
+.statement-words {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
 .statement-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  padding: 0 40px;
   white-space: nowrap;
+  gap: clamp(12px, 1.5vw, 28px);
 }
+.statement-left  { justify-content: flex-start; }
+.statement-right { justify-content: flex-end; }
 .big-word {
   font-family: var(--font-display);
-  font-size: clamp(48px, 5.5vw, 88px);
+  font-size: clamp(72px, 11vw, 165px);
   letter-spacing: 0.01em;
-  line-height: 0.9;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255,255,255,0.12);
-  transition: color 0.3s, -webkit-text-stroke 0.3s;
+  line-height: 0.88;
+  transition: color 0.25s, -webkit-text-stroke 0.25s, filter 0.25s;
   cursor: default;
   user-select: none;
 }
-.big-word.filled { color: var(--white); -webkit-text-stroke: 0px; }
-.big-word.yellow-fill { color: var(--yellow); -webkit-text-stroke: 0px; }
-.big-word:hover { color: var(--yellow); -webkit-text-stroke: 0px; }
-.dot-separator {
-  width: 12px; height: 12px;
+.big-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.55);
+}
+.big-outline:hover {
+  color: var(--white);
+  -webkit-text-stroke: 0px;
+}
+.big-yellow {
+  color: var(--yellow);
+  -webkit-text-stroke: 0px;
+}
+.big-yellow:hover {
+  filter: brightness(1.18);
+}
+.dot-sep {
+  width: clamp(10px, 1.1vw, 16px);
+  height: clamp(10px, 1.1vw, 16px);
   background: var(--yellow);
   flex-shrink: 0;
   align-self: center;
