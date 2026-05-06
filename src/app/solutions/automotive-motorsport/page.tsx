@@ -1,194 +1,983 @@
-import type { Metadata } from "next";
+"use client";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import PageHero from "@/components/layout/PageHero";
-import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
+import KeyFeatures from "@/components/sections/KeyFeatures";
 
-export const metadata: Metadata = { title: "Automotive & Motorsport Solutions" };
+const tabs = ["THE MODBLOCK", "THE MODWALL", "THE MODFRAME"] as const;
+type Tab = typeof tabs[number];
 
-const capabilities = [
+const tabContent: Record<Tab, {
+  img: string;
+  logo: string;
+  logoWidth: number;
+  heading: string;
+  body: string;
+  bullets: string[];
+  link: string;
+}> = {
+  "THE MODBLOCK": {
+    img: "/Modblock/MODBLOCK RETAIL ACTIVATION THE NORTH FACE 2.png",
+    logo: "/Modblock/MODBLOCK R yellow transparent.png",
+    logoWidth: 160,
+    heading: "PADDOCK PRESENCE. BUILT TO WIN.",
+    body: "The Modblock provides the hospitality and operational structures that motorsport paddocks and automotive brand events demand — from multi-storey VIP hospitality suites and team engineering offices to driver briefing rooms and press facilities. Built to F1 and GT specification, deployed in hours.",
+    bullets: [
+      "Multi-storey paddock hospitality configurations",
+      "F1 and GT specification engineering available",
+      "Rapid deployment — operational before the first session",
+    ],
+    link: "/products/modblock",
+  },
+  "THE MODWALL": {
+    img: "/Modwall/Modwall 1.jpg",
+    logo: "/Modwall/MODWALL R yellow transparent.png",
+    logoWidth: 160,
+    heading: "HOSPITALITY INTERIORS. RACE-READY.",
+    body: "The Modwall delivers the premium interior finish that motorsport hospitality environments demand — VIP dining areas, driver lounge partitions, sponsor suites and media rooms finished to the standards that team principals, sponsors and broadcast crews expect at the highest level of the sport.",
+    bullets: [
+      "Premium hospitality suite and VIP lounge interiors",
+      "Sponsor branding integration on every panel",
+      "Media and press facility configurations",
+    ],
+    link: "/products/modwall",
+  },
+  "THE MODFRAME": {
+    img: "/Modframe/Renault.jpg",
+    logo: "/Modframe/MODFRAME yellow.png",
+    logoWidth: 160,
+    heading: "THE CANOPY ABOVE THE ACTION.",
+    body: "The Modframe delivers the branded canopies, awnings and overhead structures that define automotive brand environments and motorsport hospitality compounds — providing covered outdoor viewing terraces, car display areas and team activation zones that withstand the demands of a race weekend.",
+    bullets: [
+      "Weatherproof covered terrace and viewing configurations",
+      "Car display and brand activation canopies",
+      "Wind and weather rated for outdoor race environments",
+    ],
+    link: "/products/modframe",
+  },
+};
+
+const stats = [
+  { value: "F1",    label: "& GT SPECIFICATION" },
+  { value: "ANY",   label: "CLEAR SPAN" },
+  { value: "RAPID", label: "DEPLOYMENT" },
+  { value: "100%",  label: "WEATHERPROOF" },
+];
+
+const projects = [
   {
-    title: "Race Circuit Hospitality Suites",
-    body: "Purpose-built hospitality structures for race circuits worldwide — from permanent paddock clubs to seasonal VIP suites. Designed to perform under the scrutiny of the world's most demanding motorsport audiences. Full-height facades, premium finishes, integrated climate systems.",
+    img: "/Modblock/MODBLOCK ACTIVATION NIKE 2.png",
+    title: "F1 PADDOCK HOSPITALITY SUITE",
+    category: "Motorsport",
+    desc: "A double-deck Modblock hospitality structure deployed in the paddock at a Formula 1 Grand Prix — VIP dining on the upper level, team operations on the ground floor and a branded Modframe terrace overlooking the pit lane, built in a 48-hour window.",
   },
   {
-    title: "Paddock Club Environments",
-    body: "Full-season paddock hospitality for Formula 1, MotoGP, World Endurance Championship, and touring car series. Pre-numbered component systems that build identically at every circuit — same quality from Bahrain to Las Vegas, Melbourne to Monaco.",
-  },
-  {
-    title: "Brand Activation at Motorsport Events",
-    body: "Branded activation environments in and around race circuits — fan zones, sponsor experiences, retail activations, and interactive brand spaces. Structures designed to draw audiences in and hold them for the duration of a race weekend.",
-  },
-  {
-    title: "Temporary Garages & Team Environments",
-    body: "Modular garage structures, technical facilities, and team support environments for race series that require temporary or semi-permanent team infrastructure. Engineered to accommodate workshop equipment, vehicle preparation, and team operations.",
-  },
-  {
-    title: "Fan Zones & Spectator Villages",
-    body: "Large-scale fan engagement environments at major motorsport events — ticketed zones, broadcast viewing areas, sponsor activation villages, catering structures, and live spectator infrastructure for 5,000 to 50,000 people.",
-  },
-  {
-    title: "Automotive Brand Launches",
-    body: "Temporary architectural environments for vehicle launches, press reveals, and dealer events. Modsol structures give automotive brands complete control over the reveal environment — lighting, acoustics, sight lines, approach sequence — without the constraints of a fixed venue.",
+    img: "/Modframe/Renault.jpg",
+    title: "AUTOMOTIVE BRAND PAVILION",
+    category: "Automotive",
+    desc: "A full Modblock and Modframe automotive brand pavilion deployed at a major UK motorsport event — car display area, customer lounge, media suite and covered outdoor terrace, delivering a permanent-quality brand environment for the full race weekend.",
   },
 ];
 
-const process = [
-  { step: "01", title: "Circuit Assessment", body: "We review your circuit or venue brief, site constraints, and seasonal schedule. Our motorsport team has experience across all major global circuits and understands access, assembly windows, and local regulations." },
-  { step: "02", title: "Structural Design & Certification", body: "All structures are designed to circuit and event authority specifications. Certified structural drawings, load calculations, and H&S documentation produced in-house and ready for FIA or series submission where required." },
-  { step: "03", title: "Season-Ready System Pack", body: "For full-season clients, components are numbered, packed and shipped to each circuit on schedule. The system builds identically every time — same components, same process, same result, regardless of continent." },
-  { step: "04", title: "Build, Race, Strike", body: "Our SAFEPASS-certified crew executes the build within the permitted access window — typically 24–48 hours. We manage full site logistics, coordinate with circuit teams, and execute a clean, timely strike after every event." },
+// ── Gallery ────────────────────────────────────────────────────────────────
+const allImages = [
+  // MODBLOCK
+  { src: '/Modblock/MODBLOCK MOTORSPORT PORSCHE 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK MOTORSPORT MERCEDES BENZ 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK EXPERIENTIAL MARKETING NETFLIX 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK EXPERIENTIAL MARKETING PEPSI 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK EXPERIENTIAL REDBULL 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK EXPERIENTIAL PLAYSTATION 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/COFFEE SHOP 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK COMMERCIAL OFFICE 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK RETAIL ACTIVATION THE NORTH FACE 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK ACTIVATION NIKE 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK RETAIL ADIDAS 3.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK ACTIVATION GYM POD.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK RETAIL ACTIVATION THE NORTH FACE 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK RETAIL CARTIER 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK RETAIL ADIDAS 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK RETAIL PUMA 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK RETAIL IKEA 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/CONFERENCE SPACE 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK DOMESTIC RESIDENTIAL 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK DOMESTIC GLAMPING POD 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/MODBLOCK AUTOMOTIVE AUDI 2.png', product: 'MODBLOCK' },
+  { src: '/Modblock/Modblock - Festival.png', product: 'MODBLOCK' },
+  { src: '/Modblock/Gaucho - Modblock.png', product: 'MODBLOCK' },
+  // MODWALL
+  { src: '/Modwall/Modwall 1.jpg', product: 'MODWALL' },
+  { src: '/Modwall/Modwall - Exhibition.png', product: 'MODWALL' },
+  { src: '/Modwall/Modwall - Exhibition2.png', product: 'MODWALL' },
+  { src: '/Modwall/Modwall - Exhibition4.png', product: 'MODWALL' },
+  { src: '/Modwall/Modwall - Office.png', product: 'MODWALL' },
+  { src: '/Modwall/Modwall - Dressing Room.png', product: 'MODWALL' },
+  { src: '/Modwall/Modwall - Clothes.png', product: 'MODWALL' },
+  { src: '/Modwall/Modwall - Vinyl.png', product: 'MODWALL' },
+  { src: '/Modwall/Modwall - White Colour Shop.png', product: 'MODWALL' },
+  { src: '/Modwall/Modwall - BedStay.jpg', product: 'MODWALL' },
+  { src: '/Modwall/MODWALL SLATWALL.png', product: 'MODWALL' },
+  { src: '/Modwall/MODWALL - PEGBOARD.png', product: 'MODWALL' },
+  // MODFRAME
+  { src: '/Modframe/Renault.jpg', product: 'MODFRAME' },
+  { src: '/Modframe/Oasis.JPG', product: 'MODFRAME' },
+  { src: '/Modframe/Events-Ford-001.jpg', product: 'MODFRAME' },
+  { src: '/Modframe/The Politico Pub.JPG', product: 'MODFRAME' },
+  { src: '/Modframe/NFL.JPG', product: 'MODFRAME' },
+  { src: '/Modframe/Events-Nugget-Box-17.jpg', product: 'MODFRAME' },
+  { src: '/Modframe/Aston Martin Internal.JPG', product: 'MODFRAME' },
 ];
 
-export default function AutomotiveMotorsportPage() {
+const galleryGridLayout = [
+  { gridColumn: '1', gridRow: '1 / 3' },
+  { gridColumn: '2', gridRow: '1' },
+  { gridColumn: '3', gridRow: '1' },
+  { gridColumn: '2', gridRow: '2' },
+  { gridColumn: '3', gridRow: '2' },
+];
+
+function GallerySection() {
+  const [hoveredCell, setHoveredCell] = useState<number | null>(null);
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const [lightboxProduct, setLightboxProduct] = useState<string>('');
+  const [selected, setSelected] = useState<typeof allImages>([]);
+
+  useEffect(() => {
+    // Always pick at least one from each product type
+    const modblockPool = allImages.filter(i => i.product === 'MODBLOCK')
+    const modwallPool  = allImages.filter(i => i.product === 'MODWALL')
+    const modframePool = allImages.filter(i => i.product === 'MODFRAME')
+
+    const shuffle = (arr: typeof allImages) => [...arr].sort(() => Math.random() - 0.5)
+
+    // Pick one guaranteed from each
+    const guaranteed = [
+      shuffle(modblockPool)[0],
+      shuffle(modwallPool)[0],
+      shuffle(modframePool)[0],
+    ]
+
+    // Fill remaining 2 slots from the full shuffled pool, avoiding duplicates
+    const usedSrcs = new Set(guaranteed.map(i => i.src))
+    const remaining = shuffle(allImages).filter(i => !usedSrcs.has(i.src))
+    const extra = remaining.slice(0, 2)
+
+    // Shuffle the final 5 so guaranteed ones aren't always in the same position
+    const final = shuffle([...guaranteed, ...extra])
+    setSelected(final)
+  }, []);
+
+  useEffect(() => {
+    if (!lightboxSrc) return;
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setLightboxSrc(null);
+    }
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [lightboxSrc]);
+
   return (
     <>
-      <PageHero
-        label="Solution — Automotive & Motorsport"
-        title="Built for<br/>the Circuit."
-        subtitle="Race-proven modular structures for the world's most demanding motorsport environments. From Formula 1 paddock hospitality to fan zones, team facilities, and automotive brand experiences."
-      />
-
-      {/* Intro */}
-      <section className="section-pad" style={{ background: "var(--black)" }}>
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
-            <div className="reveal">
-              <p className="section-label">Motorsport Capability</p>
-              <h2 className="section-title" style={{ marginBottom: "24px" }}>23 Races.<br /><span style={{ color: "var(--yellow)" }}>Zero Build Failures.</span></h2>
-              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.9", marginBottom: "24px" }}>
-                Motorsport is the most demanding temporary architecture brief in the world. The structure must perform to the same standard at every venue — from the precision of Silverstone to the heat of Abu Dhabi, the grandeur of Monaco to the scale of Las Vegas. The access window is measured in hours. The standard is non-negotiable.
-              </p>
-              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.9", marginBottom: "24px" }}>
-                Modsol's motorsport systems are built for this brief. Pre-numbered component packs. Certified structural drawings accepted by FIA and circuit authorities. A build crew that has executed the same system across every major racing circuit in the world.
-              </p>
-              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.9", marginBottom: "40px" }}>
-                Our most visible motorsport work is the Aston Martin F1 team&apos;s full-season paddock hospitality — a Modsol structure rebuilt identically at all 23 Grand Prix circuits across the 2024 season. Same components. Same quality. Different continent every two weeks.
-              </p>
-              <div style={{ padding: "24px", background: "rgba(198,255,2,0.04)", borderLeft: "2px solid var(--yellow)" }}>
-                <p style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--yellow)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "12px" }}>Aston Martin F1</p>
-                <p style={{ fontSize: "14px", color: "var(--off-white)", lineHeight: "1.7" }}>
-                  &ldquo;The Modsol paddock club has become a defining part of the Aston Martin F1 race weekend experience. The quality is consistent, the build is reliable, and it looks exceptional at every circuit.&rdquo;
-                </p>
-              </div>
+      {lightboxSrc && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9000,
+            background: 'rgba(0,0,0,0.95)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          onClick={() => setLightboxSrc(null)}
+        >
+          <div
+            style={{ width: '90vw', height: '85vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={lightboxSrc}
+              alt="Gallery image"
+              style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+            />
+          </div>
+          <button
+            onClick={() => setLightboxSrc(null)}
+            style={{
+              position: 'fixed',
+              top: '24px',
+              right: '32px',
+              background: 'none',
+              border: 'none',
+              color: '#fff',
+              fontSize: '28px',
+              cursor: 'pointer',
+              lineHeight: 1,
+              zIndex: 9001,
+            }}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+          <div style={{
+            position: 'fixed',
+            bottom: '32px',
+            left: '32px',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '9px',
+            letterSpacing: '0.2em',
+            color: '#C6FF02',
+            textTransform: 'uppercase',
+            zIndex: 9001,
+          }}>
+            {lightboxProduct}
+          </div>
+        </div>
+      )}
+      <div
+        className="mosaic-grid"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '2fr 1fr 1fr',
+          gridTemplateRows: '320px 320px',
+          gap: '2px',
+          background: '#C6FF02',
+          width: '100%',
+        }}
+      >
+        {selected.length === 0 ? (
+          galleryGridLayout.map((layout, i) => (
+            <div
+              key={i}
+              style={{
+                gridColumn: layout.gridColumn,
+                gridRow: layout.gridRow,
+                position: 'relative',
+                overflow: 'hidden',
+                background: '#111111',
+                backgroundImage: 'linear-gradient(rgba(198,255,2,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(198,255,2,0.03) 1px, transparent 1px)',
+                backgroundSize: '32px 32px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <span style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '9px',
+                letterSpacing: '0.2em',
+                color: 'rgba(198,255,2,0.3)',
+                textTransform: 'uppercase',
+              }}>
+                LOADING...
+              </span>
             </div>
-            <div className="reveal" style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
-              <ImagePlaceholder label="Motorsport — Aston Martin F1 Paddock Club" aspectRatio="4/3" />
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px" }}>
-                <ImagePlaceholder label="Motorsport — Circuit Fan Zone" aspectRatio="1/1" />
-                <ImagePlaceholder label="Motorsport — Brand Activation Area" aspectRatio="1/1" />
+          ))
+        ) : (
+          selected.map((img, i) => {
+            const layout = galleryGridLayout[i];
+            const isHovered = hoveredCell === i;
+            return (
+              <div
+                key={i}
+                style={{
+                  gridColumn: layout.gridColumn,
+                  gridRow: layout.gridRow,
+                  position: 'relative',
+                  overflow: 'hidden',
+                  cursor: 'pointer',
+                  outline: isHovered ? '2px solid #C6FF02' : 'none',
+                  outlineOffset: '-2px',
+                  transition: 'outline 0.3s ease',
+                }}
+                onMouseEnter={() => setHoveredCell(i)}
+                onMouseLeave={() => setHoveredCell(null)}
+                onClick={() => { setLightboxSrc(img.src); setLightboxProduct(img.product); }}
+              >
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: '#111111',
+                  backgroundImage: 'linear-gradient(rgba(198,255,2,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(198,255,2,0.03) 1px, transparent 1px)',
+                  backgroundSize: '32px 32px',
+                }} />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={img.src}
+                  alt={img.product}
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block',
+                    filter: isHovered ? 'brightness(0.9) grayscale(0)' : 'brightness(0.65) grayscale(0.2)',
+                    transform: isHovered ? 'scale(1.04)' : 'scale(1)',
+                    transition: 'filter 0.5s ease, transform 0.5s ease',
+                  }}
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                />
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '9px',
+                  letterSpacing: '0.2em',
+                  color: '#C6FF02',
+                  padding: '12px 16px',
+                  background: 'rgba(0,0,0,0.6)',
+                  opacity: isHovered ? 1 : 0,
+                  transition: 'opacity 0.3s ease',
+                  pointerEvents: 'none',
+                  textTransform: 'uppercase',
+                }}>
+                  {img.product}
+                </div>
               </div>
-            </div>
+            );
+          })
+        )}
+      </div>
+    </>
+  );
+}
+
+export default function AutomotiveMotorsportPage() {
+  const [activeTab, setActiveTab] = useState<Tab>("THE MODBLOCK");
+  function switchTab(tab: Tab) {
+    if (tab === activeTab) return;
+    setActiveTab(tab);
+  }
+
+  return (
+    <>
+      {/* ── SECTION 1: HERO ─────────────────────────────────────── */}
+      <section style={{
+        position: "relative",
+        width: "100%",
+        height: "100vh",
+        minHeight: "600px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden",
+      }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/Modblock/MODBLOCK AUTOMOTIVE AUDI 2.png"
+          alt=""
+          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
+        />
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7))",
+        }} />
+
+        <div style={{
+          position: "absolute",
+          top: "100px",
+          left: "clamp(40px, 4vw, 80px)",
+          fontFamily: "var(--font-mono)",
+          fontSize: "10px",
+          color: "var(--yellow)",
+          letterSpacing: "0.3em",
+          textTransform: "uppercase",
+          zIndex: 10,
+        }}>
+          THE SOLUTIONS
+        </div>
+
+        <div style={{
+          position: "relative",
+          zIndex: 10,
+          textAlign: "center",
+          padding: "0 clamp(24px, 4vw, 80px)",
+          maxWidth: "1000px",
+        }}>
+          <p style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: "11px",
+            color: "#C6FF02",
+            letterSpacing: "0.3em",
+            textTransform: "uppercase",
+            marginBottom: "24px",
+          }}>
+            AUTOMOTIVE &amp; MOTORSPORT
+          </p>
+          <h1 style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(60px, 10vw, 140px)",
+            color: "var(--white)",
+            lineHeight: 0.92,
+            letterSpacing: "0.01em",
+            textAlign: "center",
+            marginBottom: "32px",
+          }}>
+            ENGINEERED<br />FOR THE<br />PADDOCK.
+          </h1>
+          <p style={{
+            fontFamily: "var(--font-body)",
+            fontSize: "16px",
+            color: "rgba(255,255,255,0.7)",
+            lineHeight: "1.7",
+            maxWidth: "600px",
+            margin: "0 auto",
+          }}>
+            Hospitality suites, pit structures and brand pavilions built to the standards the motorsport world demands.
+          </p>
+        </div>
+
+        <div style={{
+          position: "absolute",
+          bottom: "40px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "8px",
+          zIndex: 10,
+        }}>
+          <div style={{
+            width: "1px",
+            height: "60px",
+            background: "linear-gradient(to bottom, rgba(198,255,2,0) 0%, #C6FF02 100%)",
+            animation: "scrollPulse 2s ease-in-out infinite",
+          }} />
+        </div>
+      </section>
+
+      {/* ── SECTION 2: THE CHALLENGE ─────────────────────────────── */}
+      <section style={{ background: "#000", padding: "clamp(80px, 10vh, 140px) 0", position: "relative", overflow: "hidden" }}>
+        <div style={{
+          position: "absolute",
+          top: "-60px",
+          left: "-40px",
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(200px, 28vw, 400px)",
+          color: "rgba(198,255,2,0.04)",
+          lineHeight: 1,
+          userSelect: "none",
+          pointerEvents: "none",
+          whiteSpace: "nowrap",
+        }}>
+          RACE.
+        </div>
+
+        <div style={{
+          maxWidth: "1400px",
+          margin: "0 auto",
+          padding: "0 clamp(40px, 4vw, 80px)",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "clamp(48px, 6vw, 100px)",
+          alignItems: "center",
+          position: "relative",
+          zIndex: 1,
+        }}>
+          <div>
+            <p style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "10px",
+              color: "#C6FF02",
+              letterSpacing: "0.3em",
+              textTransform: "uppercase",
+              marginBottom: "24px",
+            }}>
+              THE CHALLENGE
+            </p>
+            <h2 style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(36px, 4.5vw, 64px)",
+              color: "var(--white)",
+              lineHeight: 1.0,
+              letterSpacing: "0.02em",
+              marginBottom: "32px",
+            }}>
+              THE PADDOCK DEMANDS<br />
+              <span style={{ color: "#C6FF02" }}>PERFECTION.<br />THE CALENDAR DEMANDS PACE.</span>
+            </h2>
+            <p style={{
+              fontSize: "15px",
+              color: "rgba(255,255,255,0.6)",
+              lineHeight: "1.9",
+            }}>
+              Motorsport and automotive brand environments operate to some of the tightest build schedules in any sector — 48 hours from empty tarmac to fully operational hospitality suite. Structures must meet the premium expectations of VIP guests, team principals and global broadcast audiences simultaneously.
+            </p>
+          </div>
+
+          <div style={{
+            position: "relative",
+            height: "clamp(360px, 50vw, 560px)",
+            overflow: "hidden",
+            borderLeft: "2px solid #C6FF02",
+          }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/Modblock/MODBLOCK RETAIL ADIDAS 3.png"
+              alt="Motorsport environment"
+              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center",
+              }}
+            />
+            <div style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 100%)",
+            }} />
           </div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section style={{ background: "var(--dark)", borderTop: "1px solid rgba(255,255,255,0.05)", padding: "48px 0" }}>
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1px", background: "rgba(255,255,255,0.06)" }}>
-            {[["23","Race Weekends p/a"],["5","Continents Covered"],["48h","Max Build Window"],["0","Build Failures"]].map(([n, l]) => (
-              <div key={l} style={{ background: "var(--dark)", padding: "32px 40px" }}>
-                <div style={{ fontFamily: "var(--font-display)", fontSize: "48px", color: "var(--yellow)", letterSpacing: "0.02em", lineHeight: 1 }}>{n}</div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "var(--muted)", letterSpacing: "0.15em", textTransform: "uppercase", marginTop: "8px" }}>{l}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── SECTION 3: PRODUCT SELECTOR ──────────────────────────── */}
+      <section style={{ background: "#0A0A0A", paddingTop: "clamp(80px, 10vh, 120px)" }}>
 
-      {/* Capabilities */}
-      <section className="section-pad" style={{ background: "var(--black)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <div className="container">
-          <p className="section-label">Capabilities</p>
-          <h2 className="section-title reveal" style={{ marginBottom: "48px" }}>Every Format.<br /><span style={{ color: "var(--yellow)" }}>Every Circuit.</span></h2>
-          <div className="platform-cards reveal">
-            {capabilities.map((c) => (
-              <div className="platform-card" key={c.title}>
-                <h3>{c.title}</h3>
-                <p>{c.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Aston Martin Feature */}
-      <section className="section-pad" style={{ background: "var(--dark)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
-            <div className="reveal">
-              <p className="section-label">Featured Project</p>
-              <h2 className="section-title" style={{ marginBottom: "24px" }}>Aston Martin F1<br /><span style={{ color: "var(--yellow)" }}>Paddock Club.</span></h2>
-              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.9", marginBottom: "24px" }}>
-                The Aston Martin F1 paddock club is one of the most recognised hospitality structures on the Formula 1 grid. Built by Modsol for the full 23-race 2024 season, the structure travels with the team to every circuit — assembled, dressed, operated, and struck at each venue.
-              </p>
-              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.9", marginBottom: "24px" }}>
-                The brief: a hospitality environment that reflects the quality of the Aston Martin brand, performs identically regardless of circuit conditions or local infrastructure, and builds within the circuit&apos;s permitted access window. Every single race weekend.
-              </p>
-              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.9" }}>
-                The result is a Modsol Modblock-based structure with Modwall panels, integrated lighting and climate control, branded exterior facade and premium interior specification — rebuilt 23 times across 5 continents without a single failure.
-              </p>
-            </div>
-            <div className="reveal" style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
-              <ImagePlaceholder label="Aston Martin F1 — Paddock Club Facade" aspectRatio="16/9" />
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px" }}>
-                <ImagePlaceholder label="Aston Martin F1 — Interior" aspectRatio="4/3" />
-                <ImagePlaceholder label="Aston Martin F1 — Circuit Build" aspectRatio="4/3" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="section-pad" style={{ background: "var(--black)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <div className="container">
-          <p className="section-label">How We Work</p>
-          <h2 className="section-title reveal" style={{ marginBottom: "48px" }}>From Brief<br /><span style={{ color: "var(--yellow)" }}>to Circuit.</span></h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: "1px", background: "rgba(255,255,255,0.06)" }}>
-            {process.map((p) => (
-              <div key={p.step} style={{ background: "var(--black)", padding: "40px", display: "grid", gridTemplateColumns: "80px 200px 1fr", gap: "40px", alignItems: "start" }}>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--yellow)", letterSpacing: "0.2em" }}>{p.step}</div>
-                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "22px", color: "var(--white)", letterSpacing: "0.05em", lineHeight: 1.1 }}>{p.title}</h3>
-                <p style={{ fontSize: "14px", color: "var(--muted)", lineHeight: "1.8" }}>{p.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery */}
-      <section className="section-pad" style={{ background: "var(--dark)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <div className="container">
-          <p className="section-label">Project Gallery</p>
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "1px", background: "rgba(255,255,255,0.06)", marginTop: "48px" }}>
-            <ImagePlaceholder label="Motorsport — Aston Martin F1 Paddock Club, Monaco" aspectRatio="16/9" />
-            <div style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
-              <ImagePlaceholder label="Motorsport — Fan Zone, British GP" aspectRatio="4/3" />
-              <ImagePlaceholder label="Motorsport — Le Mans 24h Hospitality" aspectRatio="4/3" />
-            </div>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1px", background: "rgba(255,255,255,0.06)", marginTop: "1px" }}>
-            <ImagePlaceholder label="Motorsport — MotoGP Paddock Environment" aspectRatio="4/3" />
-            <ImagePlaceholder label="Motorsport — Automotive Brand Launch" aspectRatio="4/3" />
-            <ImagePlaceholder label="Motorsport — Temporary Garage Structure" aspectRatio="4/3" />
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section-pad" style={{ background: "var(--dark2)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <div className="container" style={{ textAlign: "center" }}>
-          <p className="section-label" style={{ justifyContent: "center" }}>Brief us on your circuit</p>
-          <h2 className="section-title reveal" style={{ marginBottom: "32px" }}>
-            Let&apos;s Build at<br /><span style={{ color: "var(--yellow)" }}>Your Circuit.</span>
+        <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 clamp(40px, 4vw, 80px)", paddingBottom: "48px" }}>
+          <p style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: "10px",
+            color: "#C6FF02",
+            letterSpacing: "0.3em",
+            textTransform: "uppercase",
+            marginBottom: "16px",
+          }}>
+            THE MODSOL SOLUTION
+          </p>
+          <h2 style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(36px, 4vw, 60px)",
+            color: "var(--white)",
+            letterSpacing: "0.02em",
+            lineHeight: 1.0,
+          }}>
+            ONE PLATFORM. <span style={{ color: "#C6FF02" }}>EVERY REQUIREMENT.</span>
           </h2>
-          <div style={{ display: "flex", gap: "16px", justifyContent: "center" }}>
-            <Link href="/contact" className="btn-primary">Start a Project</Link>
-            <Link href="/solutions" className="btn-secondary">All Solutions</Link>
+        </div>
+
+        <p style={{
+          fontFamily: "var(--font-mono)",
+          fontSize: "13px",
+          color: "#C6FF02",
+          letterSpacing: "0.35em",
+          textTransform: "uppercase",
+          textAlign: "left",
+          padding: "24px clamp(40px, 4vw, 120px) 16px",
+          margin: 0,
+          borderTop: "1px solid rgba(198,255,2,0.2)",
+        }}>
+          — SELECT A SYSTEM —
+        </p>
+
+        <div style={{
+          display: "flex",
+          flexWrap: "nowrap",
+          gap: 0,
+          width: "100%",
+          background: "linear-gradient(rgba(198,255,2,0.015), rgba(198,255,2,0.015)), #0D0D0D",
+          borderTop: "1px solid rgba(198,255,2,0.25)",
+          borderBottom: "1px solid rgba(198,255,2,0.25)",
+        }}>
+          {tabs.map((tab, tabIndex) => {
+            const isActive = activeTab === tab;
+            const tabNumber = String(tabIndex + 1).padStart(2, "0");
+            return (
+              <button
+                key={tab}
+                onClick={() => switchTab(tab)}
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "12px",
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
+                  color: isActive ? "#C6FF02" : "rgba(255,255,255,0.5)",
+                  background: isActive ? "rgba(198,255,2,0.1)" : "transparent",
+                  border: "none",
+                  borderRight: "1px solid rgba(255,255,255,0.08)",
+                  borderBottom: isActive ? "3px solid #C6FF02" : "3px solid transparent",
+                  flex: 1,
+                  textAlign: "center",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px",
+                  padding: "28px 56px",
+                  cursor: "pointer",
+                  transition: "all 0.25s ease",
+                  textShadow: isActive ? "0 0 20px rgba(198,255,2,0.4)" : "none",
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+                    e.currentTarget.style.background = "rgba(198,255,2,0.06)";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.color = "rgba(255,255,255,0.5)";
+                    e.currentTarget.style.background = "transparent";
+                  }
+                }}
+              >
+                <span style={{
+                  fontSize: "9px",
+                  letterSpacing: "0.15em",
+                  color: "#C6FF02",
+                  opacity: isActive ? 1 : 0.35,
+                }}>
+                  {tabNumber}
+                </span>
+                {tab}
+              </button>
+            );
+          })}
+        </div>
+
+        {tabs.map((tab) => {
+          const c = tabContent[tab];
+          const tabImg = tab === "THE MODBLOCK"
+            ? "/Modblock/MODBLOCK RETAIL ACTIVATION THE NORTH FACE 2.png"
+            : tab === "THE MODWALL"
+            ? "/Modwall/Modwall 1.jpg"
+            : "/Modframe/Renault.jpg";
+          return (
+            <div
+              key={tab}
+              style={{
+                display: activeTab === tab ? "grid" : "none",
+                gridTemplateColumns: "1fr 1fr",
+                width: "100%",
+              }}
+            >
+              <div style={{ position: "relative", minHeight: "520px", overflow: "hidden" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={tabImg}
+                  alt={tab}
+                  loading="eager"
+                  fetchPriority="high"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                    position: "absolute",
+                    inset: 0,
+                  }}
+                />
+                <div style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%)",
+                }} />
+              </div>
+
+              <div style={{
+                background: "#0A0A0A",
+                padding: "clamp(48px, 6vw, 100px)",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: "24px",
+              }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={c.logo}
+                  alt={tab}
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+                  style={{
+                    width: `${c.logoWidth}px`,
+                    height: "auto",
+                    objectFit: "contain",
+                    display: "block",
+                  }}
+                />
+                <h3 style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(24px, 2.5vw, 36px)",
+                  color: "var(--white)",
+                  letterSpacing: "0.03em",
+                  lineHeight: 1.1,
+                }}>
+                  {c.heading}
+                </h3>
+                <p style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: "15px",
+                  color: "rgba(255,255,255,0.6)",
+                  lineHeight: "1.8",
+                }}>
+                  {c.body}
+                </p>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
+                  {c.bullets.map((b) => (
+                    <li key={b} style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
+                      <span style={{
+                        display: "inline-block",
+                        width: "6px",
+                        height: "6px",
+                        background: "#C6FF02",
+                        marginTop: "6px",
+                        flexShrink: 0,
+                      }} />
+                      <span style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "rgba(255,255,255,0.65)", lineHeight: "1.6" }}>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div>
+                  <Link
+                    href={c.link}
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "11px",
+                      color: "#C6FF02",
+                      letterSpacing: "0.2em",
+                      textTransform: "uppercase",
+                      textDecoration: "none",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      borderBottom: "1px solid rgba(198,255,2,0.3)",
+                      paddingBottom: "4px",
+                    }}
+                  >
+                    LEARN MORE →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+
+      </section>
+
+      {/* ── SECTION 3.5: THE GALLERY — IMAGE MOSAIC ──────────────── */}
+      <section style={{ background: "#000", padding: 0, width: "100%" }}>
+
+        <div style={{
+          textAlign: "center",
+          padding: "clamp(60px, 6vw, 100px) clamp(40px, 4vw, 120px) 40px",
+        }}>
+          <p style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: "10px",
+            color: "#C6FF02",
+            letterSpacing: "0.3em",
+            textTransform: "uppercase",
+            margin: "0 0 16px",
+          }}>
+            — THE GALLERY —
+          </p>
+          <h2 style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(36px, 5vw, 72px)",
+            color: "var(--white)",
+            lineHeight: 1.0,
+            letterSpacing: "0.02em",
+            marginBottom: "16px",
+          }}>
+            EVERY BUILD. A STATEMENT.
+          </h2>
+          <p style={{
+            fontFamily: "var(--font-body)",
+            fontSize: "15px",
+            color: "rgba(255,255,255,0.5)",
+            lineHeight: "1.7",
+          }}>
+            From intimate brand spaces to full-scale festival architecture — these are the structures Modsol has designed, engineered and delivered. Each one built to specification, on time, and impossible to ignore.
+          </p>
+        </div>
+
+        <GallerySection />
+
+      </section>
+
+      {/* ── SECTION 4: PROJECT REFERENCE ─────────────────────────── */}
+      <section style={{ background: "#000", padding: "clamp(80px, 10vh, 120px) 0 clamp(40px, 5vh, 60px)" }}>
+        <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 clamp(40px, 4vw, 80px)" }}>
+          <p style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: "10px",
+            color: "#C6FF02",
+            letterSpacing: "0.3em",
+            textTransform: "uppercase",
+            marginBottom: "48px",
+          }}>
+            SEEN IN ACTION
+          </p>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "1px",
+            background: "rgba(255,255,255,0.06)",
+          }}>
+            {projects.map((p) => (
+              <div
+                key={p.title}
+                style={{
+                  background: "#000",
+                  display: "flex",
+                  flexDirection: "column",
+                  overflow: "hidden",
+                  border: "1px solid rgba(255,255,255,0.04)",
+                  transition: "border-color 0.3s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#C6FF02")}
+                onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.04)")}
+              >
+                <div style={{ position: "relative", height: "260px", overflow: "hidden" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={p.img}
+                    alt={p.title}
+                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      objectPosition: "center",
+                    }}
+                  />
+                  <div style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 60%)",
+                  }} />
+                </div>
+                <div style={{ padding: "32px", flex: 1 }}>
+                  <p style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "9px",
+                    color: "#C6FF02",
+                    letterSpacing: "0.25em",
+                    textTransform: "uppercase",
+                    marginBottom: "12px",
+                  }}>
+                    {p.category}
+                  </p>
+                  <h3 style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(22px, 2.5vw, 32px)",
+                    color: "var(--white)",
+                    letterSpacing: "0.03em",
+                    lineHeight: 1.1,
+                    marginBottom: "12px",
+                  }}>
+                    {p.title}
+                  </h3>
+                  <p style={{
+                    fontSize: "14px",
+                    color: "rgba(255,255,255,0.5)",
+                    lineHeight: "1.7",
+                  }}>
+                    {p.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: "40px", display: "flex", justifyContent: "flex-end" }}>
+            <Link
+              href="/projects/case-studies"
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: "11px",
+                color: "#C6FF02",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                borderBottom: "1px solid rgba(198,255,2,0.3)",
+                paddingBottom: "4px",
+              }}
+            >
+              VIEW ALL PROJECTS →
+            </Link>
           </div>
         </div>
       </section>
+
+      <KeyFeatures />
+
+      {/* ── SECTION 6: CTA ───────────────────────────────────────── */}
+      <section style={{
+        background: "#C6FF02",
+        padding: "clamp(80px, 10vh, 120px) clamp(40px, 4vw, 80px)",
+        textAlign: "center",
+      }}>
+        <h2 style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(48px, 7vw, 100px)",
+          color: "#000",
+          lineHeight: 0.95,
+          letterSpacing: "0.02em",
+          marginBottom: "24px",
+        }}>
+          READY TO BUILD BOLD?
+        </h2>
+        <p style={{
+          fontFamily: "var(--font-body)",
+          fontSize: "16px",
+          color: "rgba(0,0,0,0.65)",
+          marginBottom: "40px",
+        }}>
+          Tell us about your next automotive or motorsport brief.
+        </p>
+        <Link
+          href="/contact"
+          style={{
+            display: "inline-block",
+            fontFamily: "var(--font-mono)",
+            fontSize: "11px",
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            color: "#C6FF02",
+            background: "#000",
+            padding: "18px 40px",
+            textDecoration: "none",
+            transition: "background 0.2s",
+          }}
+        >
+          GET IN TOUCH →
+        </Link>
+      </section>
+
+      <style>{`
+        @keyframes scrollPulse {
+          0%   { opacity: 0; transform: scaleY(0); transform-origin: top; }
+          50%  { opacity: 1; transform: scaleY(1); transform-origin: top; }
+          100% { opacity: 0; transform: scaleY(1); transform-origin: top; }
+        }
+        @media (max-width: 768px) {
+          .mosaic-grid {
+            grid-template-columns: 1fr !important;
+            grid-template-rows: none !important;
+          }
+          .mosaic-grid > div {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+            height: 260px !important;
+          }
+        }
+      `}</style>
     </>
   );
 }

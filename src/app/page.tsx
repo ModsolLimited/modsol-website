@@ -9,7 +9,7 @@ import BrandStatement from "@/components/sections/BrandStatement";
 import ContactCTA from "@/components/sections/ContactCTA";
 
 export const metadata: Metadata = {
-  title: "Modsol Limited — Build. Bold. Modular Systems for Temporary Architecture.",
+  title: "Modsol Limited — Build. Bold. Modular Systems for Modular Architecture.",
 };
 
 export default function HomePage() {

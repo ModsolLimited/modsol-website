@@ -60,14 +60,16 @@ export default function BrandStatement() {
       width: '100%',
       display: 'flex',
       justifyContent: 'center',
+      paddingTop: 'clamp(80px, 10vh, 120px)',
+      paddingBottom: 'clamp(80px, 10vh, 120px)',
     }}>
       <div
         ref={containerRef}
         style={{
           width: '100%',
-          maxWidth: '1440px',
+          maxWidth: '1920px',
           margin: '0 auto',
-          padding: '0 40px',
+          padding: '0 clamp(40px, 4vw, 120px)',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',

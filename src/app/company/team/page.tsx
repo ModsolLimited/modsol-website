@@ -1,62 +1,118 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import PageHero from "@/components/layout/PageHero";
+import TeamGrid from "@/components/sections/TeamGrid";
 
 export const metadata: Metadata = { title: "The Team — Modsol Limited" };
 
 export default function TeamPage() {
   return (
     <>
-      <PageHero
-        label="The Company — The Team"
-        title="The People<br/>Behind the Platform."
-        subtitle="A cross-disciplinary team of structural engineers, event production specialists, industrial designers, and project managers — every discipline that matters in temporary architecture, in-house."
-      />
+      {/* Custom hero with watermark logo */}
+      <section className="page-hero">
+        {/* Watermark logo */}
+        <div
+          className="hero-logo-watermark"
+          style={{
+            position: "absolute",
+            top: "50%",
+            right: "clamp(40px, 4vw, 120px)",
+            transform: "translateY(-50%)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        >
+          <Image
+            src="/logo.png"
+            alt=""
+            width={360}
+            height={360}
+            className="team-hero-logo"
+            style={{
+              width: "clamp(200px, 20vw, 360px)",
+              height: "auto",
+              opacity: 0.06,
+              maskImage: "linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%)",
+              WebkitMaskImage: "linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%)",
+            }}
+          />
+        </div>
 
-      <section className="section-pad" style={{ background: "var(--black)" }}>
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
-            <div className="reveal">
-              <p className="section-label">Our People</p>
-              <h2 className="section-title" style={{ marginBottom: "32px" }}>
-                Built by the best<br /><span style={{ color: "var(--yellow)" }}>in the business.</span>
-              </h2>
-              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.9", marginBottom: "24px" }}>
-                Modsol is built by a cross-disciplinary team of structural engineers, event production specialists, industrial designers, and project managers. Every discipline that matters in temporary architecture is represented in-house — not outsourced, not contracted in at the last minute.
-              </p>
-              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.9", marginBottom: "24px" }}>
-                Our structural engineers carry the same certifications demanded by permanent construction. Our production team has collective experience across hundreds of major events. Our project managers have never missed a build deadline in five years of tracking.
-              </p>
-              <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.9" }}>
-                That combination — architectural rigour with event-industry discipline — is what makes Modsol different from both a standard events supplier and a traditional construction company.
-              </p>
-            </div>
-            <div className="reveal">
-              <div className="stats-row" style={{ marginTop: "0", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px" }}>
-                {[["45+","Team Members"],["3","Core Disciplines"],["CE","Certified"],["ISO","9001 Compliant"]].map(([n, l]) => (
-                  <div className="stat-item" key={l} style={{ padding: "32px", background: "var(--dark3)", borderTop: "2px solid var(--yellow)" }}>
-                    <div className="stat-num">{n}</div>
-                    <div className="stat-label">{l}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+        <div className="container" style={{ position: "relative", zIndex: 1 }}>
+          <p className="section-label">The Company</p>
+          <h1
+            className="section-title"
+            style={{ marginBottom: "24px", maxWidth: "800px" }}
+          >
+            THE TEAM
+          </h1>
+          <p className="section-body" style={{ marginTop: "16px" }}>
+            Meet the people behind Modsol — the founders and specialists who design, engineer, and deliver every project.
+          </p>
         </div>
       </section>
 
-      <section className="section-pad" style={{ background: "var(--dark)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <div className="container" style={{ textAlign: "center" }}>
-          <p className="section-label" style={{ justifyContent: "center" }}>Join Us</p>
-          <h2 className="section-title reveal" style={{ marginBottom: "32px" }}>
-            Work With<br /><span style={{ color: "var(--yellow)" }}>The Best.</span>
-          </h2>
-          <p style={{ fontSize: "15px", color: "var(--muted)", maxWidth: "560px", margin: "0 auto 40px", lineHeight: "1.9" }}>
-            We are always looking for exceptional people. If you believe temporary architecture deserves the same rigour as permanent construction, we want to hear from you.
+      <section style={{ background: "#000", padding: "32px 0 80px" }}>
+        <div className="container">
+          <p
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "11px",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "var(--yellow)",
+              marginBottom: "32px",
+            }}
+          >
+            The People Behind the Platform
           </p>
-          <div style={{ display: "flex", gap: "16px", justifyContent: "center" }}>
-            <Link href="/contact" className="btn-primary">Get In Touch</Link>
-            <Link href="/company" className="btn-secondary">The Company</Link>
+
+          <TeamGrid />
+        </div>
+      </section>
+
+      <section
+        style={{
+          background: "var(--dark)",
+          borderTop: "1px solid rgba(255,255,255,0.05)",
+          padding: "80px 0",
+        }}
+      >
+        <div className="container" style={{ textAlign: "center" }}>
+          <p className="section-label" style={{ justifyContent: "center" }}>
+            Join Us
+          </p>
+          <h2
+            className="section-title reveal"
+            style={{ marginBottom: "32px" }}
+          >
+            Work With
+            <br />
+            <span style={{ color: "var(--yellow)" }}>The Best.</span>
+          </h2>
+          <p
+            style={{
+              fontSize: "15px",
+              color: "var(--muted)",
+              maxWidth: "560px",
+              margin: "0 auto 40px",
+              lineHeight: "1.9",
+            }}
+          >
+            We are always looking for exceptional people. If you believe
+            modular architecture deserves the same rigour as permanent
+            construction, we want to hear from you.
+          </p>
+          <div
+            style={{ display: "flex", gap: "16px", justifyContent: "center" }}
+          >
+            <Link href="/contact" className="btn-primary">
+              Get In Touch
+            </Link>
+            <Link href="/company" className="btn-secondary">
+              The Company
+            </Link>
           </div>
         </div>
       </section>

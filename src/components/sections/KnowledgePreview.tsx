@@ -27,7 +27,7 @@ const articles = [
   },
   {
     cat: "Industry",
-    title: "Temporary Architecture vs Permanent Construction",
+    title: "Modular Architecture vs Permanent Construction",
     excerpt: "Breaking down the false divide between temporary and permanent — and how modular systems are closing the quality gap.",
     href: "/knowledge-hub/industry-insights",
   },

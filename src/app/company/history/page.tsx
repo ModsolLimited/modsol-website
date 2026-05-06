@@ -1,58 +1,170 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
-import PageHero from "@/components/layout/PageHero";
+import { useState } from "react";
 
-export const metadata: Metadata = { title: "The History — Modsol Limited" };
-
-const timeline = [
-  { year: "2008", title: "The Beginning", body: "Modsol is founded as a specialist in premium event marquees and temporary structure solutions. Our first builds serve the UK's festival and corporate events market — high-end frame marquees, tensile canopies, and bespoke event shelters for brands who refused to accept the standard tent." },
-  { year: "2011", title: "The Pivot", body: "After three years building the best marquees in the business, we notice something: our clients want more. More permanence of feel. More structural ambition. More architectural credibility. We begin developing proprietary modular systems that go beyond what marquee solutions can offer." },
-  { year: "2014", title: "The Platform Emerges", body: "The first generation Modblock and Modwall systems are launched. Rather than adapting existing structural products, we engineer our own — from the ground up, for the specific demands of temporary architecture at premium quality. The response from the market is immediate." },
-  { year: "2017", title: "Going Global", body: "Modsol completes its first international deployments — F1 paddock hospitality structures in Europe and a major exhibition installation in the Middle East. Our systems travel to 12 countries in a single year. The Modframe launches to meet demand for large-span overhead structures." },
-  { year: "2020", title: "Resilience & Reinvention", body: "With the live events industry paused, Modsol deploys its systems for temporary healthcare facilities, site welfare units, and emergency command structures. Our platform proves its versatility beyond events — and we emerge stronger, with a broader client base and a deeper understanding of what modular architecture can do." },
-  { year: "Today", title: "The Architecture Company", body: "We no longer describe ourselves as an events company. We are a temporary architecture company — one with 15 years of structural precision, event-proven reliability, and a platform that genuinely competes with permanent construction on quality, while offering everything temporary architecture should: speed, flexibility, and redeployability." },
+const milestones = [
+  {
+    year: "2018",
+    title: "THE FOUNDATION",
+    body: "Steven Hill joins Mahood Marquees Limited as Project Manager. A pivotal appointment that would, in time, bring together the expertise, relationships and ambition needed to build something entirely new.",
+  },
+  {
+    year: "2020",
+    title: "THE VISION FORMS",
+    body: "Commercial success across corporate hospitality and major sporting environments reveals a clear gap in the market. Steve, Rich and Kieran recognise the demand for a single, trusted point of contact — one business capable of delivering across the full project lifecycle.",
+  },
+  {
+    year: "2022",
+    title: "MODSOL IS BORN",
+    body: "Modsol Limited is founded. Initially operating as a specialist intermediary and site management business, the company is built on a foundation of industry relationships, operational excellence and an uncompromising approach to delivery.",
+  },
+  {
+    year: "2023",
+    title: "THE PIVOT TO PRODUCT",
+    body: "The team identifies a critical gap in the market — premium modular architecture that delivers architectural quality without the costs and constraints of permanent construction. Modblock design commences. The engineering journey begins.",
+  },
+  {
+    year: "2024",
+    title: "FIRST PRODUCT. FIRST LANDMARK.",
+    body: "The Modframe is designed, manufactured and brought to market — developed in close collaboration with trusted industry partners. In March 2024, the system is deployed for its first major client: Aston Martin. A statement of intent delivered at race pace.",
+  },
+  {
+    year: "2025",
+    title: "THE PLATFORM EXPANDS",
+    body: "Demand grows for a precision modular walling system capable of performing inside temporary structures and marquee environments. The Modwall is designed, engineered and introduced to the market. Its debut installation? Coldplay. The platform is growing.",
+  },
+  {
+    year: "2026",
+    title: "THE FLAGSHIP ARRIVES",
+    body: "The Modblock — Modsol's most ambitious product — is officially announced. After years of engineering development, the system is ready. Multiple contracts already agreed. Deployment commences across the UK, Europe and internationally. The platform is complete.",
+  },
 ];
 
 export default function HistoryPage() {
+  const [selected, setSelected] = useState(0);
+  const [hovered, setHovered] = useState<number | null>(null);
+
+  const isLineGlowing = (lineIndex: number) => {
+    if (lineIndex < selected) return true;
+    if (hovered !== null) {
+      const lo = Math.min(hovered, selected);
+      const hi = Math.max(hovered, selected);
+      if (lineIndex >= lo && lineIndex < hi) return true;
+    }
+    return false;
+  };
+
+  const current = milestones[selected];
+
   return (
     <>
-      <PageHero
-        label="The Company — The History"
-        title="15 Years of<br/>Bold Building."
-        subtitle="From premium marquees to a globally deployed modular architecture platform. This is how Modsol became what it is today."
-      />
-
-      <section className="section-pad" style={{ background: "var(--dark)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <div className="container">
-          <p className="section-label">15 Years</p>
-          <h2 className="section-title reveal" style={{ marginBottom: "64px" }}>From Marquees<br /><span style={{ color: "var(--yellow)" }}>to Architecture.</span></h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: "1px", background: "rgba(255,255,255,0.06)" }}>
-            {timeline.map((t, i) => (
-              <div key={t.year} className="reveal" style={{ background: "var(--dark)", padding: "40px", display: "grid", gridTemplateColumns: "120px 1fr 2fr", gap: "48px", alignItems: "start", borderBottom: i < timeline.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none" }}>
-                <div style={{ fontFamily: "var(--font-display)", fontSize: "36px", color: "var(--yellow)", letterSpacing: "0.02em" }}>{t.year}</div>
-                <div>
-                  <h3 style={{ fontFamily: "var(--font-display)", fontSize: "22px", color: "var(--white)", letterSpacing: "0.05em", lineHeight: 1.1 }}>{t.title}</h3>
-                </div>
-                <p style={{ fontSize: "14px", color: "var(--muted)", lineHeight: "1.8" }}>{t.body}</p>
-              </div>
-            ))}
-          </div>
+      {/* Hero */}
+      <section className="page-hero">
+        <div className="container" style={{ position: "relative", zIndex: 1 }}>
+          <p className="section-label">The Company</p>
+          <h1 className="section-title" style={{ marginBottom: "24px", maxWidth: "800px" }}>
+            THE HISTORY
+          </h1>
+          <p className="section-body" style={{ marginTop: "16px" }}>
+            From a single project manager to a globally deployable modular platform. This is how Modsol was built.
+          </p>
         </div>
       </section>
 
-      <section className="section-pad" style={{ background: "var(--black)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <div className="container" style={{ textAlign: "center" }}>
-          <p className="section-label" style={{ justifyContent: "center" }}>What&apos;s Next</p>
-          <h2 className="section-title reveal" style={{ marginBottom: "32px" }}>
-            The Next<br /><span style={{ color: "var(--yellow)" }}>Chapter.</span>
-          </h2>
-          <p style={{ fontSize: "15px", color: "var(--muted)", maxWidth: "560px", margin: "0 auto 40px", lineHeight: "1.9" }}>
-            Fifteen years in, and we&apos;re still building. Discover the vision that&apos;s driving the next generation of the Modsol platform.
-          </p>
-          <div style={{ display: "flex", gap: "16px", justifyContent: "center" }}>
-            <Link href="/company/vision" className="btn-primary">The Vision</Link>
-            <Link href="/company" className="btn-secondary">The Company</Link>
+      {/* Timeline */}
+      <section style={{ background: "#000", padding: "80px 0" }}>
+        <div className="container">
+
+          {/* Block row */}
+          <div className="tl-row">
+            {milestones.map((m, i) => {
+              const isSelected = i === selected;
+              const isHovered = i === hovered;
+
+              return (
+                <div key={m.year} className="tl-block-wrap">
+                  {/* Connector line before this block (except first) */}
+                  {i > 0 && (
+                    <div
+                      className="tl-line"
+                      style={{
+                        background: isLineGlowing(i - 1)
+                          ? "#C6FF02"
+                          : "rgba(255,255,255,0.1)",
+                        boxShadow: isLineGlowing(i - 1)
+                          ? "0 0 8px rgba(198,255,2,0.4)"
+                          : "none",
+                      }}
+                    />
+                  )}
+
+                  {/* Block */}
+                  <button
+                    className={`tl-block${isSelected ? " tl-block-selected" : ""}${isHovered && !isSelected ? " tl-block-hovered" : ""}`}
+                    onClick={() => setSelected(i)}
+                    onMouseEnter={() => setHovered(i)}
+                    onMouseLeave={() => setHovered(null)}
+                    aria-pressed={isSelected}
+                  >
+                    <span className="tl-year">{m.year}</span>
+                  </button>
+                </div>
+              );
+            })}
           </div>
+
+          {/* Content panel */}
+          <div className="tl-panel" key={selected}>
+            <div className="tl-panel-inner">
+              <div className="tl-panel-year">{current.year}</div>
+              <div className="tl-panel-content">
+                <h2 className="tl-panel-title">{current.title}</h2>
+                <div className="tl-panel-accent" />
+                <p className="tl-panel-body">{current.body}</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Closing */}
+      <section
+        style={{
+          background: "#000",
+          borderTop: "1px solid rgba(255,255,255,0.06)",
+          padding: "100px 0",
+          textAlign: "center",
+        }}
+      >
+        <div className="container">
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(48px, 8vw, 96px)",
+              color: "#fff",
+              lineHeight: 1,
+              marginBottom: "24px",
+            }}
+          >
+            THE STORY ISN&apos;T OVER.
+          </h2>
+          <p
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "16px",
+              color: "#888",
+              maxWidth: "520px",
+              margin: "0 auto 40px",
+              lineHeight: "1.8",
+            }}
+          >
+            Every year brings a new system, a new client, a new milestone. Modsol is built to keep building.
+          </p>
+          <Link href="/contact" className="btn-primary">
+            Get In Touch
+          </Link>
         </div>
       </section>
     </>

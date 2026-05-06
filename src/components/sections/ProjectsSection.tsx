@@ -3,7 +3,7 @@ import Link from "next/link";
 const projects = [
   {
     cls: "proj-am",
-    cat: "Hospitality · Motorsport",
+    cat: "HOSPITALITY",
     title: "Aston Martin\nHospitality Suite",
     desc: "Premium modular hospitality environment for Aston Martin's Formula 1 programme. Flat-packed. Deployed in 48 hours. Delivered at race pace.",
     watermark: "ASTON\nMARTIN",
@@ -12,20 +12,10 @@ const projects = [
     image: "/Aston Martin Internal.JPG",
   },
   {
-    cls: "proj-pp",
-    cat: "Hospitality · Media",
-    title: "The Politico Pub",
-    desc: "Fully branded modular pub environment for Politico's political convention activation.",
-    watermark: "THE\nPOLITICO\nPUB",
-    watermarkColor: "rgba(255,255,255,0.08)",
-    watermarkSize: "60px",
-    image: "/The Politico Pub.JPG",
-  },
-  {
     cls: "proj-oa",
-    cat: "Retail · Music",
-    title: "Oasis Live '25\nMerch Environment",
-    desc: "Large-scale modular merchandise retail environment for the Oasis reunion tour.",
+    cat: "SHOWS & FESTIVALS",
+    title: "Oasis Live '25\nTour Infrastructure",
+    desc: "Large-scale modular tour infrastructure and merchandise retail environment for the Oasis reunion tour.",
     watermark: "OASIS\nLIVE '25",
     watermarkColor: "rgba(198,255,2,0.1)",
     watermarkSize: "60px",
@@ -33,13 +23,23 @@ const projects = [
   },
   {
     cls: "proj-nfl",
-    cat: "Retail · Sport",
-    title: "NFL Fan\nRetail Experience",
-    desc: "Fan retail activation and brand environment for the NFL's London series.",
+    cat: "BRAND ACTIVATION",
+    title: "NFL Wembley\nMegastore",
+    desc: "Fan retail activation and brand environment for the NFL's London series at Wembley.",
     watermark: "NFL\nFAN\nZONE",
     watermarkColor: "rgba(255,255,255,0.07)",
     watermarkSize: "60px",
     image: "/NFL.JPG",
+  },
+  {
+    cls: "proj-pp",
+    cat: "EXPERIENTIAL",
+    title: "The Politico\nPub",
+    desc: "Fully branded modular pub environment for Politico's political convention activation.",
+    watermark: "THE\nPOLITICO\nPUB",
+    watermarkColor: "rgba(255,255,255,0.08)",
+    watermarkSize: "60px",
+    image: "/The Politico Pub.JPG",
   },
 ];
 
@@ -52,12 +52,12 @@ export default function ProjectsSection() {
             <p className="section-label">THE PROJECTS</p>
             <h2 className="section-title reveal">Our<br />Work</h2>
           </div>
-          <Link href="/projects" className="btn-secondary reveal">View All Projects</Link>
+          <Link href="/projects/case-studies" className="btn-secondary reveal">View All Projects</Link>
         </div>
 
         <div className="projects-grid">
           {projects.map((proj, i) => (
-            <Link key={i} href="/projects" style={{ textDecoration: "none" }}>
+            <Link key={i} href="/projects/case-studies" style={{ textDecoration: "none" }}>
               <div className="project-card">
                 <div className="project-card-image">
                   <div className={`project-image-fill ${proj.cls}`} style={{

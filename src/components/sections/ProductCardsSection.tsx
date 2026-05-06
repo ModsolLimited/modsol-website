@@ -5,8 +5,9 @@ const cards = [
     num: "01",
     href: "/products/modblock",
     title: "The Modblock",
-    image: "/Modblock Vodafone.png",
-    desc: "A premium modular building system engineered for adaptable temporary architecture. Flat-packable. Rapidly deployable. Infinitely scalable.",
+    image: "/Modblock/MODBLOCK RETAIL ADIDAS 3.png",
+    imagePosition: "center 20%",
+    desc: "A premium modular building system engineered for adaptable modular architecture. Flat-packable. Rapidly deployable. Infinitely scalable.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="22" height="22">
         <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
@@ -52,7 +53,7 @@ export default function ProductCardsSection() {
           {cards.map((card) => (
             <div className="platform-card" key={card.num}>
               <div className="platform-card-image">
-                <div className="platform-card-image-bg" style={{ backgroundImage: `url('${card.image}')` }} />
+                <div className="platform-card-image-bg" style={{ backgroundImage: `url('${card.image}')`, ...(card.imagePosition ? { backgroundPosition: card.imagePosition } : {}) }} />
                 <div className="platform-card-image-overlay" />
               </div>
               <div className="platform-card-num">{card.num}</div>

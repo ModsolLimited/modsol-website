@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "The Company" };
 
 const values = [
   { num: "01", title: "Precision Engineering", body: "Every system we manufacture is built to tolerance — not close to spec, but to spec. That discipline runs from material selection through to the final bolt torque on site. It began with marquee systems where a millimetre matters, and it defines everything we build today." },
-  { num: "02", title: "Bold Design", body: "We believe temporary architecture should be as considered as permanent design. Every Modsol structure should stop someone in their tracks — even before the brand dresses it. This conviction was forged in fifteen years of raising structures that had to earn their place in extraordinary settings." },
+  { num: "02", title: "Bold Design", body: "We believe modular architecture should be as considered as permanent design. Every Modsol structure should stop someone in their tracks — even before the brand dresses it. This conviction was forged in fifteen years of raising structures that had to earn their place in extraordinary settings." },
   { num: "03", title: "Modular Intelligence", body: "A system isn't modular just because it can be moved. True modularity means infinite combination without compromise — every element designed for every configuration. Our platform emerged from years of solving real problems on real event sites, where adaptability isn't optional." },
   { num: "04", title: "Delivery Confidence", body: "Events don't slip. Builds have to happen on time, every time. Our delivery record and project management capability give clients the confidence to specify boldly — knowing that whatever they brief, we will build." },
 ];
@@ -15,10 +15,10 @@ const values = [
 const timeline = [
   { year: "2008", title: "The Beginning", body: "Modsol is founded as a specialist in premium event marquees and temporary structure solutions. Our first builds serve the UK's festival and corporate events market — high-end frame marquees, tensile canopies, and bespoke event shelters for brands who refused to accept the standard tent." },
   { year: "2011", title: "The Pivot", body: "After three years building the best marquees in the business, we notice something: our clients want more. More permanence of feel. More structural ambition. More architectural credibility. We begin developing proprietary modular systems that go beyond what marquee solutions can offer." },
-  { year: "2014", title: "The Platform Emerges", body: "The first generation Modblock and Modwall systems are launched. Rather than adapting existing structural products, we engineer our own — from the ground up, for the specific demands of temporary architecture at premium quality. The response from the market is immediate." },
+  { year: "2014", title: "The Platform Emerges", body: "The first generation Modblock and Modwall systems are launched. Rather than adapting existing structural products, we engineer our own — from the ground up, for the specific demands of modular architecture at premium quality. The response from the market is immediate." },
   { year: "2017", title: "Going Global", body: "Modsol completes its first international deployments — F1 paddock hospitality structures in Europe and a major exhibition installation in the Middle East. Our systems travel to 12 countries in a single year. The Modframe launches to meet demand for large-span overhead structures." },
   { year: "2020", title: "Resilience & Reinvention", body: "With the live events industry paused, Modsol deploys its systems for temporary healthcare facilities, site welfare units, and emergency command structures. Our platform proves its versatility beyond events — and we emerge stronger, with a broader client base and a deeper understanding of what modular architecture can do." },
-  { year: "Today", title: "The Architecture Company", body: "We no longer describe ourselves as an events company. We are a temporary architecture company — one with 15 years of structural precision, event-proven reliability, and a platform that genuinely competes with permanent construction on quality, while offering everything temporary architecture should: speed, flexibility, and redeployability." },
+  { year: "Today", title: "The Architecture Company", body: "We no longer describe ourselves as an events company. We are a modular architecture company — one with 15 years of structural precision, event-proven reliability, and a platform that genuinely competes with permanent construction on quality, while offering everything modular architecture should: speed, flexibility, and redeployability." },
 ];
 
 export default function CompanyPage() {
@@ -27,7 +27,7 @@ export default function CompanyPage() {
       <PageHero
         label="01 — The Company"
         title="Modsol<br/>Limited"
-        subtitle="Designing and manufacturing modular systems for temporary architecture, events, exhibitions, and branded environments. Built on 15 years of structural precision."
+        subtitle="Designing and manufacturing modular systems for modular architecture, events, exhibitions, and branded environments. Built on 15 years of structural precision."
       />
 
       {/* Origin Story */}
@@ -112,7 +112,7 @@ export default function CompanyPage() {
               <p className="section-label">The Team</p>
               <h2 className="section-title" style={{ marginBottom: "32px" }}>The People<br /><span style={{ color: "var(--yellow)" }}>Behind the Platform.</span></h2>
               <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.9", marginBottom: "24px" }}>
-                Modsol is built by a cross-disciplinary team of structural engineers, event production specialists, industrial designers, and project managers. Every discipline that matters in temporary architecture is represented in-house — not outsourced, not contracted in at the last minute.
+                Modsol is built by a cross-disciplinary team of structural engineers, event production specialists, industrial designers, and project managers. Every discipline that matters in modular architecture is represented in-house — not outsourced, not contracted in at the last minute.
               </p>
               <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.9", marginBottom: "24px" }}>
                 Our structural engineers carry the same certifications demanded by permanent construction. Our production team has collective experience across hundreds of major events. Our project managers have never missed a build deadline in five years of tracking.

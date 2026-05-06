@@ -20,6 +20,7 @@ const navItems = [
       { label: "The Modblock", href: "/products/modblock" },
       { label: "The Modwall", href: "/products/modwall" },
       { label: "The Modframe", href: "/products/modframe" },
+      { label: "The Modlab", href: "/products/modlab" },
     ],
   },
   {
@@ -38,7 +39,7 @@ const navItems = [
   },
   {
     label: "The Projects",
-    href: "/projects",
+    href: "/projects/case-studies",
     children: [
       { label: "Case Studies", href: "/projects/case-studies" },
       { label: "Videos", href: "/projects/videos" },
@@ -99,10 +100,8 @@ export default function Navigation() {
               onMouseEnter={() => handleMouseEnter(item.label)}
               onMouseLeave={() => handleMouseLeave(item.label)}
             >
-              <span className="nav-item-label">
-                <Link href={item.href} style={{ color: "inherit", textDecoration: "none", fontFamily: "inherit", fontSize: "inherit", letterSpacing: "inherit", textTransform: "inherit" }}>
-                  {item.label}
-                </Link>
+              <span className="nav-item-label" style={{ cursor: "default" }}>
+                <span>{item.label}</span>
                 <span className="chevron">▾</span>
               </span>
               <div className="nav-dropdown">

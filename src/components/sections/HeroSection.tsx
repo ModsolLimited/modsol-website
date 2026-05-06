@@ -148,7 +148,7 @@ export default function HeroSection() {
           <span className="line2">BOLD.</span>
         </h1>
         <p className="hero-sub">
-          Modular systems engineered for the next generation of temporary architecture.
+          Modular systems engineered for the next generation of modular architecture.
         </p>
         <div className="hero-buttons">
           <Link href="/products" className="btn-primary">Explore The Products</Link>

@@ -7,11 +7,11 @@ import ScrollReveal from "@/components/layout/ScrollReveal";
 
 export const metadata: Metadata = {
   title: {
-    default: "Modsol Limited — Build. Bold. Modular Systems for Temporary Architecture.",
+    default: "Modsol Limited — Build. Bold. Modular Systems for Modular Architecture.",
     template: "%s | Modsol Limited",
   },
   description:
-    "Modsol designs and manufactures modular systems for temporary architecture, events, exhibitions, branded environments and commercial spaces. Build Bold.",
+    "Modsol designs and manufactures modular systems for modular architecture, events, exhibitions, branded environments and commercial spaces. Build Bold.",
   keywords: [
     "modular architecture systems",
     "modular event structures",
