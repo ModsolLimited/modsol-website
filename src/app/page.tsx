@@ -6,7 +6,7 @@ import ProductCardsSection from "@/components/sections/ProductCardsSection";
 import IndustriesSection from "@/components/sections/IndustriesSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import BrandStatement from "@/components/sections/BrandStatement";
-import ContactCTA from "@/components/sections/ContactCTA";
+import ContactForm from "@/components/sections/ContactForm";
 
 export const metadata: Metadata = {
   title: "Modsol Limited — Build. Bold. Modular Systems for Modular Architecture.",
@@ -23,7 +23,7 @@ export default function HomePage() {
       <IndustriesSection />
       <ProjectsSection />
       <BrandStatement />
-      <ContactCTA />
+      <ContactForm />
     </>
   );
 }
