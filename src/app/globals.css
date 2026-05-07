@@ -845,7 +845,7 @@ section { position: relative; width: 100%; }
 }
 
 /* ─── INDUSTRIES ───────────────────────────────────────────── */
-.industries-section { background: var(--dark); width: 100%; }
+.industries-section { background: var(--dark); width: 100%; overflow: hidden; }
 .industries-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);

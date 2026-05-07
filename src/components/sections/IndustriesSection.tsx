@@ -89,7 +89,7 @@ export default function IndustriesSection() {
     <section className="industries-section section-pad" id="solutions" style={{ paddingTop: "clamp(20px, 2.5vh, 30px)" }}>
       <div className="container">
         <div style={{ marginBottom: "48px" }}>
-          <h2 className="industries-heading" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(80px, 14vw, 240px)", lineHeight: 0.88, letterSpacing: "0.02em", color: "var(--white)", marginBottom: "0", whiteSpace: "nowrap", textAlign: "center" }}>Built for Every Brief.</h2>
+          <h2 className="industries-heading" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(80px, 14vw, 240px)", lineHeight: 0.88, letterSpacing: "0.02em", color: "var(--white)", marginBottom: "0", textAlign: "center" }}>Built for Every Brief.</h2>
           <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--yellow)", marginTop: "96px", marginBottom: "0" }}>THE SOLUTIONS</p>
         </div>
 
