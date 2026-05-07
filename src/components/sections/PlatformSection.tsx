@@ -16,7 +16,7 @@ export default function PlatformSection() {
             </p>
           </div>
           <div style={{ alignSelf: "center" }}>
-            <div className="stats-row reveal" style={{
+            <div className="stats-row reveal platform-grid" style={{
               marginTop: "40px",
               border: "1px solid rgba(255,255,255,0.2)",
               background: "rgba(255,255,255,0.2)",
@@ -29,7 +29,7 @@ export default function PlatformSection() {
                 const isHovered = hovered === s.label;
                 return (
                   <div
-                    className="stat-item"
+                    className="stat-item platform-stat"
                     key={s.label}
                     onMouseEnter={() => setHovered(s.label)}
                     onMouseLeave={() => setHovered(null)}
@@ -69,6 +69,19 @@ export default function PlatformSection() {
           </div>
         </div>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .platform-grid {
+            grid-template-columns: 1fr;
+            width: 100%;
+            overflow: hidden;
+          }
+          .platform-stat {
+            width: 100%;
+            box-sizing: border-box;
+          }
+        }
+      `}</style>
     </section>
   );
 }

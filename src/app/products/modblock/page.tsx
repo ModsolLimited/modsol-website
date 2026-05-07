@@ -128,21 +128,77 @@ const sectionPad = "clamp(80px, 8vh, 120px)";
 export default function ModblockPage() {
   return (
     <>
+      <style>{`
+        .product-hero-content, .product-hero-image { flex: 0 0 50%; }
+        @media (max-width: 768px) {
+          .product-hero {
+            flex-direction: column !important;
+            padding-top: 80px !important;
+          }
+          .product-hero-content {
+            width: 100vw !important;
+            min-width: 100vw !important;
+            max-width: 100vw !important;
+            flex: none !important;
+            padding: 32px 24px !important;
+            box-sizing: border-box !important;
+          }
+          .product-hero-image {
+            width: 100vw !important;
+            min-width: 100vw !important;
+            max-width: 100vw !important;
+            flex: none !important;
+            height: 260px !important;
+            min-height: unset !important;
+            position: relative !important;
+            order: -1 !important;
+          }
+          .product-features-grid {
+            grid-template-columns: 1fr !important;
+            width: 100% !important;
+            overflow: hidden !important;
+          }
+          .product-numbers-grid {
+            grid-template-columns: 1fr 1fr !important;
+            width: 100% !important;
+            margin-left: 0 !important;
+            padding-left: 0 !important;
+            box-sizing: border-box !important;
+          }
+          .product-cta-grid {
+            grid-template-columns: 1fr !important;
+            width: 100% !important;
+          }
+          .product-cta-image {
+            width: 100% !important;
+            height: 240px !important;
+            min-height: unset !important;
+          }
+          .nav-cta {
+            white-space: nowrap !important;
+            padding: 8px 10px !important;
+            font-size: 10px !important;
+            line-height: 1 !important;
+          }
+        }
+      `}</style>
       {/* ── SECTION 1: HERO ─────────────────────────────────────── */}
-      <section style={{
+      <section className="product-hero" style={{
         display: "flex",
         alignItems: "stretch",
+        flexWrap: "wrap",
+        overflow: "hidden",
         background: "#000",
         paddingTop: "100px",
         paddingBottom: "60px",
       }}>
         {/* Left — text */}
-        <div style={{
-          flex: "0 0 50%",
+        <div className="product-hero-content" style={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
           padding: `0 clamp(40px, 4vw, 120px)`,
+          minWidth: "min(100%, 400px)",
         }}>
           <p style={{
             fontFamily: "var(--font-mono)",
@@ -193,7 +249,7 @@ export default function ModblockPage() {
         </div>
 
         {/* Right — hero image */}
-        <div style={{ flex: "0 0 50%", position: "relative", overflow: "hidden" }}>
+        <div className="product-hero-image" style={{ position: "relative", overflow: "hidden", minWidth: "min(100%, 400px)", flex: "1 1 50%" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/Modblock/Modblock - VW.png"
@@ -277,7 +333,7 @@ export default function ModblockPage() {
       {/* ── SECTION 2: OVERVIEW ─────────────────────────────────── */}
       <section style={{ background: "#0A0A0A", padding: `80px 0 ${sectionPad}` }}>
         <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(48px, 6vw, 100px)", alignItems: "start" }}>
+          <div className="product-overview-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(48px, 6vw, 100px)", alignItems: "start" }}>
             <div className="reveal">
               <h2 style={{
                 fontFamily: "var(--font-display)",
@@ -329,7 +385,7 @@ export default function ModblockPage() {
           <h2 className="section-title reveal" style={{ marginBottom: "48px" }}>
             WHAT THE MODBLOCK <span style={{ color: "#C6FF02" }}>DELIVERS</span>
           </h2>
-          <div style={{
+          <div className="product-features-grid" style={{
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
             gap: "1px",
@@ -396,7 +452,7 @@ export default function ModblockPage() {
           <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--muted)", fontStyle: "italic", marginBottom: "48px" }}>
             Full technical specifications available on request. Key indicative data shown below.
           </p>
-          <div style={{
+          <div className="product-numbers-grid" style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
             gap: "1px",
@@ -427,9 +483,9 @@ export default function ModblockPage() {
       {/* ── SECTION 6: PROJECT REFERENCE + CTA ──────────────────── */}
       <section style={{ background: "#0A0A0A", padding: `${sectionPad} 0 clamp(40px, 4vh, 60px)`, borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: "rgba(255,255,255,0.05)" }}>
+          <div className="product-cta-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: "rgba(255,255,255,0.05)" }}>
             {/* Left — project reference */}
-            <div style={{ position: "relative", minHeight: "480px", overflow: "hidden" }}>
+            <div className="product-cta-image" style={{ position: "relative", minHeight: "480px", overflow: "hidden" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/Aston Martin Internal.JPG"

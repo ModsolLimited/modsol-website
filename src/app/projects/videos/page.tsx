@@ -92,20 +92,64 @@ export default function VideosPage() {
         }
         .video-card-product { font-family: var(--font-display); font-size: 22px; color: #C6FF02; letter-spacing: 0.05em; }
         .video-card-label { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 6px; }
-        @media (max-width: 900px) {
-          .videos-layout { grid-template-columns: 1fr; align-items: start; }
-          .video-player-col { padding: 24px 24px 0; }
-          .video-selector {
-            position: static;
-            height: 120px;
-            max-height: 120px;
-            overflow-x: auto;
-            overflow-y: hidden;
-            flex-direction: row;
-            border-top: 1px solid rgba(198,255,2,0.5);
+        @media (max-width: 768px) {
+          .videos-layout {
+            grid-template-columns: 1fr !important;
+            height: auto !important;
           }
-          .video-card { min-width: 200px; border-bottom: none; border-right: 1px solid rgba(198,255,2,0.2); }
-          .video-card-thumb { height: 40px; margin-bottom: 8px; }
+          .video-player-col {
+            width: 100% !important;
+            padding: 80px 16px 16px !important;
+          }
+          .video-selector {
+            position: static !important;
+            height: auto !important;
+            width: 100% !important;
+            border-left: none !important;
+            border-top: 2px solid rgba(198,255,2,0.3) !important;
+            display: flex !important;
+            flex-direction: column !important;
+            counter-reset: video-item !important;
+          }
+          .video-card {
+            display: grid !important;
+            grid-template-columns: 28px 70px 1fr !important;
+            align-items: center !important;
+            gap: 10px !important;
+            padding: 12px 16px !important;
+            min-width: unset !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            counter-increment: video-item !important;
+          }
+          .video-card::before {
+            content: counter(video-item, decimal-leading-zero) !important;
+            font-family: var(--font-mono) !important;
+            font-size: 11px !important;
+            color: #C6FF02 !important;
+            flex-shrink: 0 !important;
+            align-self: center !important;
+          }
+          .video-card-thumbnail {
+            width: 70px !important;
+            height: 44px !important;
+            min-height: unset !important;
+            margin-bottom: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+          }
+          .video-card-title {
+            display: none !important;
+          }
+          .video-card-subtitle {
+            font-size: 9px !important;
+            letter-spacing: 0.08em !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+          }
         }
       `}</style>
 
@@ -114,7 +158,7 @@ export default function VideosPage() {
           <p className="section-label">The Videos</p>
         </div>
 
-        <div className="videos-layout">
+        <div className="videos-layout video-layout">
           {/* Player column */}
           <div className="video-player-col">
             <div className="video-player-wrap">
@@ -146,11 +190,11 @@ export default function VideosPage() {
                 className={`video-card${i === active ? " active" : ""}`}
                 onClick={() => setActive(i)}
               >
-                <div className="video-card-thumb">
+                <div className="video-card-thumb video-card-thumbnail">
                   <span className="video-card-product">{v.product}</span>
                 </div>
-                <div className="video-card-product" style={{ fontSize: "18px" }}>{v.title}</div>
-                <div className="video-card-label">{v.label}</div>
+                <div className="video-card-product video-card-title" style={{ fontSize: "18px" }}>{v.title}</div>
+                <div className="video-card-label video-card-subtitle">{v.label}</div>
               </div>
             ))}
           </div>

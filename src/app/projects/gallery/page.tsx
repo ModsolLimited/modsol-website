@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 type GalleryImage = { src: string; product: string; category: string };
 
@@ -86,6 +86,26 @@ export default function GalleryPage() {
   const [activeFilter, setActiveFilter] = useState("ALL");
   const [lightbox, setLightbox] = useState<{ images: GalleryImage[]; index: number } | null>(null);
   const [validImages, setValidImages] = useState<typeof allImages>([]);
+
+  const filterBarRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true;
+    startX.current = e.pageX - (filterBarRef.current?.offsetLeft || 0);
+    scrollLeft.current = filterBarRef.current?.scrollLeft || 0;
+  };
+  const onMouseLeave = () => { isDragging.current = false; };
+  const onMouseUp = () => { isDragging.current = false; };
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current) return;
+    e.preventDefault();
+    const x = e.pageX - (filterBarRef.current?.offsetLeft || 0);
+    const walk = (x - startX.current) * 1.5;
+    if (filterBarRef.current) filterBarRef.current.scrollLeft = scrollLeft.current - walk;
+  };
 
   useEffect(() => {
     const results: typeof allImages = [];
@@ -202,7 +222,14 @@ export default function GalleryPage() {
           <p className="section-label">The Gallery</p>
         </div>
 
-        <div className="filter-bar">
+        <div
+          className="filter-bar gallery-filter-bar"
+          ref={filterBarRef}
+          onMouseDown={onMouseDown}
+          onMouseLeave={onMouseLeave}
+          onMouseUp={onMouseUp}
+          onMouseMove={onMouseMove}
+        >
           {filters.map((f) => (
             <button
               key={f}

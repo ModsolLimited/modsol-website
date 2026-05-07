@@ -71,6 +71,7 @@ function BgGrid({ rows, cols, maxOpacity = 0.08, style }: { rows: number; cols: 
 /* ─── S2: ECOSYSTEM DIAGRAM ──────────────────────────────────── */
 function EcosystemDiagram() {
   const ref = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current; if (!el) return;
@@ -89,6 +90,13 @@ function EcosystemDiagram() {
     return () => { obs.disconnect(); clearTimeout(timer); };
   }, []);
 
+  useEffect(() => {
+    if (scrollRef.current) {
+      const el = scrollRef.current;
+      el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
+    }
+  }, []);
+
   const cardStyle: React.CSSProperties = {
     width: "220px", height: "110px",
     background: "transparent",
@@ -102,7 +110,8 @@ function EcosystemDiagram() {
   const hoverOff = (e: React.MouseEvent<HTMLDivElement>) => { e.currentTarget.style.borderColor = "rgba(198,255,2,0.25)"; };
 
   return (
-    <div ref={ref} style={{ width: "800px", margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", padding: "60px 0 24px", opacity: 0, transition: "opacity 0.8s ease", position: "relative" }}>
+    <div ref={scrollRef} style={{ width: "100%", overflowX: "auto", overflowY: "hidden", WebkitOverflowScrolling: "touch" }}>
+    <div ref={ref} className="vision-diagram vision-diagram-inner" style={{ width: "800px", margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", padding: "60px 0 24px", opacity: 0, transition: "opacity 0.8s ease", position: "relative", flexShrink: 0 }}>
 
       {/* SVG connection overlay — pixel coords based on fixed 800px container */}
       {/* Row: gap=80px → Modblock(0–220) | Modsol(300–500) | Modwall(580–800) */}
@@ -118,32 +127,33 @@ function EcosystemDiagram() {
       </svg>
 
       {/* Horizontal row: Modblock — Modsol hub — Modwall */}
-      <div style={{ display: "flex", alignItems: "center", gap: "80px" }}>
+      <div className="vision-diagram-row" style={{ display: "flex", alignItems: "center", gap: "80px" }}>
         {/* MODBLOCK */}
-        <div style={cardStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
+        <div className="vision-modblock-box" style={cardStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/Modblock/MODBLOCK R yellow BB rectangle.jpg" alt="Modblock" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block", margin: "0 auto" }} />
         </div>
         {/* M logo hub */}
-        <div style={{ width: "200px", height: "200px", background: "#000", border: "2px solid #C6FF02", padding: "16px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+        <div className="vision-modsol-box" style={{ width: "200px", height: "200px", background: "#000", border: "2px solid #C6FF02", padding: "16px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/Modsol/MODSOL yellow BB.png" alt="Modsol" style={{ maxWidth: "140px", height: "auto", objectFit: "contain" }} />
         </div>
         {/* MODWALL */}
-        <div style={cardStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
+        <div className="vision-modwall-box" style={cardStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/Modwall/MODWALL R yellow BB rectangle.png" alt="Modwall" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block", margin: "0 auto" }} />
         </div>
       </div>
 
       {/* Spacer for vertical connection gap */}
-      <div style={{ height: "66px" }} />
+      <div className="vision-diagram-spacer" style={{ height: "66px" }} />
 
       {/* MODFRAME */}
-      <div style={{ ...cardStyle, overflow: "hidden" }} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
+      <div className="vision-modframe-box" style={{ ...cardStyle, overflow: "hidden" }} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/Modframe/Modframe Yellow On Black.png" alt="Modframe" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block", margin: "0", padding: "0", position: "static", transform: "translateY(-12px) scale(2)", transformOrigin: "center center" }} />
       </div>
+    </div>
     </div>
   );
 }
@@ -333,7 +343,7 @@ export default function VisionPage() {
       {/* ── S3: THE BELIEF ── */}
       <Section id="s3" style={{ background: "#050505", minHeight: "fit-content", justifyContent: "center", textAlign: "center", ...SUBTLE_GRID }}>
         <RadialGlow />
-        <div className="container" style={{ position: "relative", zIndex: 1, padding: "clamp(80px,10vh,160px) clamp(40px,4vw,120px)" }}>
+        <div className="container" style={{ position: "relative", zIndex: 1, padding: "clamp(20px,2.5vh,40px) clamp(40px,4vw,120px)" }}>
           <p style={{ fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C6FF02", marginBottom: "40px", display: "flex", justifyContent: "center" }}>The Belief</p>
           <WordByWord />
         </div>
@@ -341,7 +351,7 @@ export default function VisionPage() {
 
       {/* ── S4: THE ROADMAP ── */}
       <Section id="s4" style={{ background: "transparent", backgroundImage: "linear-gradient(rgba(198,255,2,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(198,255,2,0.03) 1px, transparent 1px)", backgroundSize: "40px 40px", minHeight: "50vh" }}>
-        <div className="container" style={{ position: "relative", zIndex: 1, width: "100%", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(24px,4vw,64px)", alignItems: "center", padding: "clamp(30px,4vh,60px) clamp(40px,4vw,120px)" }}>
+        <div className="container vision-world-grid" style={{ position: "relative", zIndex: 1, width: "100%", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(24px,4vw,64px)", alignItems: "center", padding: "clamp(30px,4vh,60px) clamp(40px,4vw,120px)" }}>
           <div style={{ display: "flex", gap: "clamp(20px,2.5vw,40px)", alignItems: "flex-start" }}>
             <RoadmapLine />
             <div style={{ flex: 1 }}>
@@ -364,7 +374,7 @@ export default function VisionPage() {
               ))}
             </div>
           </div>
-          <div data-reveal className="reveal-right stagger-2" style={{ overflow: "hidden", width: "100%", height: "100%", background: "transparent" }}>
+          <div data-reveal className="reveal-right stagger-2 vision-world-image" style={{ overflow: "hidden", width: "100%", height: "100%", background: "transparent" }}>
             <img
               src="/world-atlas.jpg"
               alt="Global reach"
@@ -388,7 +398,7 @@ export default function VisionPage() {
         <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px)", backgroundSize: "60px 60px", pointerEvents: "none", zIndex: 0 }} />
         <EqualiserBars />
         <div className="container" style={{ position: "relative", zIndex: 1, width: "100%", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px,5vw,80px)", alignItems: "center", padding: "clamp(80px,10vh,160px) clamp(40px,4vw,120px)" }}>
-          <div>
+          <div className="vision-text-section">
             <p data-reveal className="reveal-left stagger-1" style={{ fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C6FF02", marginBottom: "20px" }}>Ongoing Innovation</p>
             <h2 data-reveal className="reveal-left stagger-2" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px,4vw,52px)", color: "#fff", lineHeight: 1.05, marginBottom: "20px" }}>
               THE PLATFORM NEVER STOPS EVOLVING.
@@ -397,7 +407,7 @@ export default function VisionPage() {
               Every project teaches us something. Every installation reveals an opportunity. Modsol is committed to continuous product development — refining existing systems and engineering new ones. The next product is already in development.
             </p>
           </div>
-          <div data-reveal className="reveal-right stagger-2" style={{ display: "flex", justifyContent: "center" }}>
+          <div data-reveal className="reveal-right stagger-2 innovation-grid-container" style={{ display: "flex", justifyContent: "center" }}>
             <InnovationGrid />
           </div>
         </div>

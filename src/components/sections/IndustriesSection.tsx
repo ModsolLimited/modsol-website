@@ -89,7 +89,7 @@ export default function IndustriesSection() {
     <section className="industries-section section-pad" id="solutions" style={{ paddingTop: "clamp(20px, 2.5vh, 30px)" }}>
       <div className="container">
         <div style={{ marginBottom: "48px" }}>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(80px, 14vw, 240px)", lineHeight: 0.88, letterSpacing: "0.02em", color: "var(--white)", marginBottom: "0", whiteSpace: "nowrap", textAlign: "center" }}>Built for Every Brief.</h2>
+          <h2 className="industries-heading" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(80px, 14vw, 240px)", lineHeight: 0.88, letterSpacing: "0.02em", color: "var(--white)", marginBottom: "0", whiteSpace: "nowrap", textAlign: "center" }}>Built for Every Brief.</h2>
           <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--yellow)", marginTop: "96px", marginBottom: "0" }}>THE SOLUTIONS</p>
         </div>
 
@@ -117,6 +117,25 @@ export default function IndustriesSection() {
           <Link href="/solutions" className="link-arrow">View all solutions</Link>
         </div>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .industries-section {
+            overflow: hidden;
+            width: 100%;
+          }
+          .industries-heading {
+            font-size: clamp(48px, 12vw, 100px) !important;
+            white-space: normal;
+            word-break: break-word;
+          }
+          .industries-grid {
+            width: 100%;
+            margin-left: 0 !important;
+            padding-left: 0 !important;
+            box-sizing: border-box;
+          }
+        }
+      `}</style>
     </section>
   );
 }

@@ -594,7 +594,7 @@ export default function ShowsFestivalsPage() {
         </p>
 
         {/* Tab bar — full viewport width */}
-        <div style={{
+        <div className="system-tab-bar" style={{
           display: "flex",
           flexWrap: "nowrap",
           gap: 0,

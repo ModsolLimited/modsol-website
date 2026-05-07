@@ -1,10 +1,18 @@
 'use client'
-import { useMemo } from 'react'
+import { useState, useEffect } from 'react'
+
+const rows = 6
+const cols = 6
 
 export default function InnovationGrid() {
-  const opacities = useMemo(() =>
-    Array.from({ length: 36 }, () => Math.random() * 0.7 + 0.15)
-  , [])
+  const [opacities, setOpacities] = useState<number[]>([])
+
+  useEffect(() => {
+    const count = rows * cols
+    setOpacities(Array.from({ length: count }, () => Math.random() * 0.7 + 0.15))
+  }, [])
+
+  if (opacities.length === 0) return null
 
   return (
     <>

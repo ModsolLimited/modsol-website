@@ -85,6 +85,16 @@ export default function Navigation() {
 
   return (
     <>
+      <style>{`
+        @media (max-width: 768px) {
+          .nav-cta {
+            white-space: nowrap !important;
+            padding: 8px 10px !important;
+            font-size: 10px !important;
+            line-height: 1 !important;
+          }
+        }
+      `}</style>
       <nav className={`site-nav${scrolled ? " scrolled" : ""}`}>
         {/* Logo */}
         <Link href="/" className="nav-logo">
