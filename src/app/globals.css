@@ -2907,3 +2907,121 @@ footer {
     min-width: unset !important;
   }
 }
+
+@media (max-width: 768px) {
+  .stat-number-wrapper {
+    height: clamp(60px, 15vw, 100px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .stat-number-wrapper svg {
+    width: clamp(60px, 15vw, 100px) !important;
+    height: auto !important;
+  }
+  .stat-label {
+    text-align: center !important;
+    margin-top: 12px !important;
+  }
+  .stat-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-hero .container {
+    grid-template-columns: 1fr !important;
+    min-height: unset !important;
+    padding-top: 100px !important;
+    padding-bottom: 40px !important;
+    gap: 32px !important;
+  }
+  .page-hero .container > div:last-child {
+    display: none !important;
+  }
+  .page-hero .section-title {
+    font-size: clamp(48px, 12vw, 80px) !important;
+    margin-bottom: 0 !important;
+  }
+  .page-hero .section-body {
+    max-width: 100% !important;
+    margin-top: 16px !important;
+  }
+  .page-hero h1 + svg {
+    display: none !important;
+  }
+  .modlab-hero-container {
+    grid-template-columns: 1fr !important;
+    min-height: unset !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    text-align: center !important;
+  }
+  .modlab-hero-container > div:last-child {
+    display: none !important;
+  }
+  .modlab-hero-container > div:first-child {
+    width: 100% !important;
+    padding: 0 24px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .modlab-hero-container > div:first-child p {
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+  .modlab-hero-container > div:first-child > div {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    gap: 16px !important;
+  }
+  .modlab-hero-container > div:first-child > div svg {
+    height: 80px !important;
+    width: auto !important;
+    display: block !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-hero p {
+    max-width: 100% !important;
+    margin-top: 16px !important;
+  }
+  .modlab-intro-section {
+    padding: 40px 24px !important;
+    box-sizing: border-box !important;
+  }
+  .modlab-intro-section > div > div {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .modlab-services-grid {
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+  }
+  .modlab-image-showcase {
+    grid-template-columns: 1fr 1fr !important;
+    height: auto !important;
+  }
+  .modlab-image-showcase > div {
+    height: 200px !important;
+  }
+  .modlab-process-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+  .modlab-process-grid > *:last-child {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+  }
+}

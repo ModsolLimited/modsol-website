@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const systems = [
   { value: 'modblock', label: 'The Modblock', sub: 'Structural System' },
@@ -71,9 +71,10 @@ export default function ContactForm() {
     return () => window.removeEventListener('resize', updateMax);
   }, []);
 
-  const TARGET = useMemo(() => {
+  const [TARGET, setTARGET] = useState(0);
+  useEffect(() => {
     const m = maxSlider || 228;
-    return Math.floor(m * 0.2) + Math.floor(Math.random() * Math.floor(m * 0.6));
+    setTARGET(Math.floor(m * 0.2) + Math.floor(Math.random() * Math.floor(m * 0.6)));
   }, [captchaKey, maxSlider]);
 
   const handleSlider = (e: React.ChangeEvent<HTMLInputElement>) => {

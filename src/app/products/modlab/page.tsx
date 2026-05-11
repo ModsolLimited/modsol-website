@@ -113,8 +113,8 @@ export default function ModlabPage() {
         }
       `}</style>
       {/* Hero */}
-      <section className="page-hero" style={{ overflow: "hidden" }}>
-        <div className="container" style={{ position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0", alignItems: "center", minHeight: "260px" }}>
+      <section className="page-hero" style={{ overflow: "hidden", padding: "70px 0 40px" }}>
+        <div className="container modlab-hero-container" style={{ position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0", alignItems: "center", minHeight: "260px" }}>
           {/* Left — text */}
           <div>
             <p className="section-label">THE PRODUCTS</p>
@@ -263,7 +263,7 @@ export default function ModlabPage() {
       </div>
 
       {/* Introduction */}
-      <section className="section-pad" style={{ background: "var(--black)" }}>
+      <section className="modlab-intro-section section-pad" style={{ background: "var(--black)" }}>
         <div className="container">
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
             <div className="reveal">
@@ -289,7 +289,7 @@ export default function ModlabPage() {
           <h2 className="section-title reveal" style={{ marginBottom: "48px" }}>
             BESPOKE <span style={{ color: "var(--yellow)" }}>SERVICES</span>
           </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(255,255,255,0.06)" }}>
+          <div className="modlab-services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(255,255,255,0.06)" }}>
             {services.map((s) => (
               <div
                 key={s.title}
@@ -319,7 +319,7 @@ export default function ModlabPage() {
       </section>
 
       {/* Image Showcase */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", height: "500px", width: "100%" }}>
+      <div className="modlab-image-showcase" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", height: "500px", width: "100%" }}>
         {[
           { src: "/Modlab/Canopies.jpg",       label: "STRUCTURAL CANOPIES & EXTENSIONS" },
           { src: "/Modlab/Car Parks.jpg",       label: "MODULAR CAR PARKS" },

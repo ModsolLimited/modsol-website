@@ -47,7 +47,7 @@ export default function ModlabProcess() {
   return (
     <div>
       {/* Step header row */}
-      <div style={{ display: "flex", alignItems: "flex-start" }}>
+      <div className="modlab-process-grid" style={{ display: "flex", alignItems: "flex-start" }}>
         {steps.map((step, i) => (
           <div key={step.num} style={{ display: "flex", alignItems: "flex-start", flex: i < 4 ? "1 1 auto" : "0 0 auto" }}>
             {/* Step card */}

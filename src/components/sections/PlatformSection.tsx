@@ -40,7 +40,7 @@ export default function PlatformSection() {
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "center",
-                      justifyContent: "center",
+                      justifyContent: "space-between",
                       textAlign: "center",
                       backgroundImage: "linear-gradient(rgba(198,255,2,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(198,255,2,0.03) 1px, transparent 1px)",
                       backgroundSize: "30px 30px",
@@ -48,24 +48,28 @@ export default function PlatformSection() {
                       transition: "all 0.3s ease",
                     }}
                   >
-                    <div className="stat-num" style={{
+                    <div className="stat-num stat-number-wrapper" style={{
                       fontSize: "clamp(80px, 10vw, 140px)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      height: "clamp(80px, 12vw, 180px)",
                       lineHeight: 1,
                       textShadow: isHovered ? "0 0 30px rgba(198,255,2,0.8), 0 0 60px rgba(198,255,2,0.4)" : "none",
                       transition: "all 0.3s ease",
                     }}>
                       {isInfinity ? (
-                        <svg viewBox="0 0 60 30" width="60" height="30" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', width: 'clamp(80px, 10vw, 140px)', height: 'auto', filter: isHovered ? 'drop-shadow(0 0 15px rgba(198,255,2,0.8))' : 'none', transition: 'filter 0.3s ease' }}>
-                          <path d="M15,15 C15,8 20,4 26,4 C32,4 36,8 40,15 C36,22 32,26 26,26 C20,26 15,22 15,15 Z M45,15 C45,8 40,4 34,4 C28,4 24,8 20,15 C24,22 28,26 34,26 C40,26 45,22 45,15 Z" fill="none" stroke="#C6FF02" strokeWidth="2.5"/>
+                        <svg viewBox="0 0 120 48" xmlns="http://www.w3.org/2000/svg" style={{
+                          display: 'block', width: 'clamp(80px, 10vw, 140px)', height: 'auto', filter: isHovered ? 'drop-shadow(0 0 15px rgba(198,255,2,0.8))' : 'none', transition: 'filter 0.3s ease'
+                        }}>
+                          <path d="M60,24 C60,17 70,7 83,7 C96,7 106,14 106,24 C106,34 96,41 83,41 C70,41 60,31 60,24 C60,17 50,7 37,7 C24,7 14,14 14,24 C14,34 24,41 37,41 C50,41 60,31 60,24 Z" fill="none" stroke="#C6FF02" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                       ) : s.num}
                     </div>
                     <div className="stat-label" style={{
                       fontSize: "13px",
                       textAlign: "center",
+                      marginTop: "16px",
                       color: isHovered ? "#C6FF02" : undefined,
                       transition: "all 0.3s ease",
                     }}>{s.label}</div>
