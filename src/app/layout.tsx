@@ -20,6 +20,13 @@ export const metadata: Metadata = {
     "modular wall systems",
     "modular branding structures",
   ],
+  icons: {
+    icon: [
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    shortcut: '/favicon-32x32.png',
+    apple: '/favicon-32x32.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
