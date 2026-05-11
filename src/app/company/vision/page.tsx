@@ -151,7 +151,7 @@ function EcosystemDiagram() {
       {/* MODFRAME */}
       <div className="vision-modframe-box" style={{ ...cardStyle, overflow: "hidden" }} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/Modframe/Modframe Yellow On Black.png" alt="Modframe" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block", margin: "0", padding: "0", position: "static", transform: "translateY(-12px) scale(2)", transformOrigin: "center center" }} />
+        <img src="/Modframe/Modframe Yellow On Black.png" alt="Modframe" className="vision-modframe-img" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block", margin: "0", padding: "0", position: "static", transform: "translateY(-12px) scale(2)", transformOrigin: "center center" }} />
       </div>
     </div>
     </div>
