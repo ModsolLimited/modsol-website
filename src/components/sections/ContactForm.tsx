@@ -153,7 +153,7 @@ export default function ContactForm() {
         letterSpacing: '0.2em',
         fontSize: '14px',
       }}>
-        BRIEF RECEIVED — WE&apos;LL BE IN TOUCH WITHIN 1–3 BUSINESS DAYS ✓
+        BRIEF RECEIVED — WE&apos;LL BE IN TOUCH WITHIN 3–5 BUSINESS DAYS ✓
       </div>
     );
   }

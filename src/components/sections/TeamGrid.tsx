@@ -21,6 +21,7 @@ const team = [
   {
     name: "Adrian Jackson",
     role: "Lead Architect & Designer",
+    qualification: "BA(Hons) DIP ARCH RIBA M.APS",
     founder: false,
   },
   {
@@ -109,6 +110,20 @@ export default function TeamGrid() {
             >
               {member.role}
             </p>
+
+            {member.qualification && (
+              <p style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: "10px",
+                color: "var(--muted)",
+                textTransform: "uppercase",
+                letterSpacing: "0.15em",
+                marginTop: "6px",
+                marginBottom: 0,
+              }}>
+                {member.qualification}
+              </p>
+            )}
 
             {member.founder && (
               <span

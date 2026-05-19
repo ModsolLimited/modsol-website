@@ -65,7 +65,7 @@ export default function ContactClient() {
                 </div>
                 <div>
                   <div style={{ fontFamily: "var(--font-mono)", fontSize: "12px", color: "var(--muted)", letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "8px" }}>Response Time</div>
-                  <div style={{ fontFamily: "var(--font-body)", fontSize: "clamp(18px, 2vw, 24px)", fontWeight: 300, color: "var(--white)" }}>Within 1–3 Business Days</div>
+                  <div style={{ fontFamily: "var(--font-body)", fontSize: "clamp(18px, 2vw, 24px)", fontWeight: 300, color: "var(--white)" }}>Within 3–5 Business Days</div>
                 </div>
               </div>
 
@@ -118,7 +118,7 @@ export default function ContactClient() {
           <h2 className="section-title reveal" style={{ marginBottom: "48px" }}>From Brief<br /><span style={{ color: "var(--yellow)" }}>to Build.</span></h2>
           <div style={{ display: "flex", flexDirection: "column", gap: "1px", background: "rgba(255,255,255,0.06)" }}>
             {[
-              { step: "01", title: "We Read Your Brief", body: "Every enquiry is reviewed by a project manager and structural engineer within one business day. If we need clarification, we call — we don't send a form." },
+              { step: "01", title: "We Read Your Brief", body: "Every enquiry is reviewed by a project manager and structural engineer. We respond within 3–5 business days (sooner if we can). If we need clarification, we call — we don't send a form." },
               { step: "02", title: "Initial Assessment", body: "We provide an honest initial assessment of feasibility, timeline and indicative cost range. If your brief needs refining, we'll tell you what information would make our response more accurate." },
               { step: "03", title: "Proposal & Structural Design", body: "For confirmed projects, we produce a full structural proposal with certified drawings, programme schedule and detailed pricing. No surprises downstream." },
               { step: "04", title: "We Build It", body: "Our crew builds to schedule. You get a structure that matches the specification, delivered on time, managed throughout. That's been our record for 15 years and it's not changing." },
