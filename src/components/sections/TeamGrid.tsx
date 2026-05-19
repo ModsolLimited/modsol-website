@@ -27,6 +27,7 @@ const team = [
   {
     name: "Mark Welding",
     role: "Project Architect",
+    qualification: "BA(Hons) Architecture",
     founder: false,
   },
 ];

@@ -2,9 +2,11 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-type CS = { img: string; tag: string; heading: string; body: string };
+type CS = { img: string; tag: string; heading: string; body: string; images?: string[] };
 
+// New case studies go at the TOP of this array.
 const caseStudies: CS[] = [
+  { img: "/case-studies/take-that-southampton-26/modwall-catering-1.jpeg", tag: "MODWALL — SHOWS & FESTIVALS", heading: "TAKE THAT — SOUTHAMPTON 2026", body: "A headline arena run demanded a complete backstage world, delivered to performance standard and built at touring pace. Modsol answered with a fully connected Modwall complex — laundry facilities, wardrobe suites, dressing rooms, catering spaces and VIP hospitality areas — engineered as one continuous modular architecture rather than a collection of separate units. Every panel locked to the next on a precision post system, giving the production a clean, finished, demountable environment that went up fast, performed under the pressure of a live show, and struck without trace.", images: ["/case-studies/take-that-southampton-26/modwall-catering-1.jpeg", "/case-studies/take-that-southampton-26/modwall-make-up.jpeg", "/case-studies/take-that-southampton-26/modwall-dressing-room.jpeg"] },
   { img: "/Modwall/Aston Martin Internal.JPG", tag: "MODWALL — HOSPITALITY", heading: "ASTON MARTIN HOSPITALITY FIT-OUT", body: "The Modwall system was deployed to create a premium interior environment for Aston Martin's hospitality suite. Clean panel construction provided the architectural backdrop for integrated TVs, curated artwork and branded fixtures — delivering a permanent-quality finish on a temporary timeline. Every surface specified to reflect the Aston Martin standard." },
   { img: "/Modwall/Modwall 1.jpg", tag: "MODWALL — SHOWS & FESTIVALS", heading: "COLDPLAY — HULL 2025", body: "Deployed at Coldplay's Hull concert in 2025, the Modwall system created a series of private changing rooms, dressing rooms and artist support spaces within the festival footprint. Rapid installation, clean finish and fully demountable — the system was on site, operational and struck without disrupting the event schedule." },
   { img: "/Modframe/Events-Ford-001.jpg", tag: "MODFRAME — EXHIBITION", heading: "FORD — BESPOKE CURVED EXHIBITION BACKDROP", body: "The Modframe TFS system was engineered and installed to produce a large-format curved fabric backdrop for Ford's exhibition presence. The system's flexibility allowed for a sweeping architectural form that standard exhibition structures cannot achieve — delivering a centrepiece that commanded the floor." },
@@ -21,11 +23,13 @@ const caseStudies: CS[] = [
 
 export default function CaseStudiesPage() {
   const [selected, setSelected] = useState<CS | null>(null);
+  const [lbIndex, setLbIndex] = useState(0);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setSelected(null); };
     if (selected) {
       document.body.style.overflow = "hidden";
+      setLbIndex(0);
       window.addEventListener("keydown", onKey);
     } else {
       document.body.style.overflow = "";
@@ -46,7 +50,7 @@ export default function CaseStudiesPage() {
 
       <style>{`
         .case-study-bar { display: grid; grid-template-columns: 420px 1fr; border-bottom: 1px solid rgba(255,255,255,0.06); background: var(--black); transition: background 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
-        .case-study-bar img { width: 100%; height: 320px; object-fit: cover; filter: brightness(0.85); display: block; transition: filter 0.4s ease; }
+        .case-study-bar img { width: 100%; height: 100%; min-height: 320px; object-fit: cover; filter: brightness(0.85); display: block; transition: filter 0.4s ease; }
         .case-study-bar:hover { background: rgba(198, 255, 2, 0.03); box-shadow: inset 0 0 0 1px rgba(198, 255, 2, 0.15), 0 0 40px rgba(198, 255, 2, 0.04); }
         .case-study-bar:hover img { filter: brightness(1.0); }
         .cs-content { padding: 48px; display: flex; flex-direction: column; justify-content: center; }
@@ -70,23 +74,49 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      {selected && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 1000, background: "#000", display: "flex" }}>
-          <div style={{ flex: "0 0 65%", height: "100%", overflow: "hidden" }}>
-            <img src={selected.img} alt={selected.heading} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+      {selected && (() => {
+        const lbImages = selected.images && selected.images.length > 0 ? selected.images : [selected.img];
+        return (
+          <div className="cs-modal" style={{ position: "fixed", inset: 0, zIndex: 1000, background: "#000", display: "flex" }}>
+            <div className="cs-modal-image" style={{ flex: "0 0 65%", height: "100%", overflow: "hidden" }}>
+              <img src={lbImages[lbIndex]} alt={selected.heading} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            </div>
+            <div className="cs-modal-text" style={{ flex: "0 0 35%", background: "#111111", padding: "40px", display: "flex", flexDirection: "column", justifyContent: "flex-end", overflowY: "auto" }}>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "#C6FF02", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "16px" }}>{selected.tag}</div>
+              <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px, 4vw, 64px)", color: "#fff", lineHeight: 1, marginBottom: "24px" }}>{selected.heading}</h2>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "#888888", lineHeight: 1.7, margin: 0 }}>{selected.body}</p>
+              {lbImages.length > 1 && (
+                <div className="cs-modal-thumbs" style={{ display: "flex", gap: "8px", marginTop: "24px", flexWrap: "wrap" }}>
+                  {lbImages.map((src, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setLbIndex(i)}
+                      aria-label={`View image ${i + 1}`}
+                      style={{
+                        width: "64px",
+                        height: "48px",
+                        padding: 0,
+                        border: i === lbIndex ? "1px solid #C6FF02" : "1px solid rgba(255,255,255,0.15)",
+                        background: "#161616",
+                        cursor: "pointer",
+                        overflow: "hidden",
+                        flexShrink: 0,
+                      }}
+                    >
+                      <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <button
+              onClick={() => setSelected(null)}
+              style={{ position: "absolute", top: "24px", right: "24px", background: "none", border: "none", color: "#fff", fontSize: "24px", cursor: "pointer", lineHeight: 1, padding: 0 }}
+              aria-label="Close"
+            >✕</button>
           </div>
-          <div style={{ flex: "0 0 35%", background: "#111111", padding: "40px", display: "flex", flexDirection: "column", justifyContent: "flex-end", overflowY: "auto" }}>
-            <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "#C6FF02", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "16px" }}>{selected.tag}</div>
-            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px, 4vw, 64px)", color: "#fff", lineHeight: 1, marginBottom: "24px" }}>{selected.heading}</h2>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "#888888", lineHeight: 1.7, margin: 0 }}>{selected.body}</p>
-          </div>
-          <button
-            onClick={() => setSelected(null)}
-            style={{ position: "absolute", top: "24px", right: "24px", background: "none", border: "none", color: "#fff", fontSize: "24px", cursor: "pointer", lineHeight: 1, padding: 0 }}
-            aria-label="Close"
-          >✕</button>
-        </div>
-      )}
+        );
+      })()}
 
 
       <section className="section-pad" style={{ background: "var(--dark2)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>

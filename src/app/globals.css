@@ -3032,3 +3032,30 @@ footer {
     width: 100% !important;
   }
 }
+
+/* ─── CASE STUDIES LIGHTBOX — MOBILE PORTRAIT ───────────────── */
+@media (max-width: 768px) {
+  .cs-modal {
+    flex-direction: column !important;
+  }
+  .cs-modal-image {
+    flex: none !important;
+    width: 100% !important;
+    height: 40vh !important;
+  }
+  .cs-modal-text {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    padding: 24px !important;
+    justify-content: flex-start !important;
+    overflow-y: auto !important;
+  }
+  .cs-modal-thumbs {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+  .cs-modal-thumbs button {
+    width: 56px !important;
+    height: 42px !important;
+  }
+}
