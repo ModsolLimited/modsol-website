@@ -4,7 +4,50 @@ import { useState, useEffect } from "react";
 
 type CS = { img: string; tag: string; heading: string; body: string; images?: string[] };
 
-// New case studies go at the TOP of this array.
+/*
+ * ─── CASE STUDIES — CONTENT RULES ───────────────────────────────────────────
+ *
+ * ORDER: New entries go at the TOP of this array. Newest first, always.
+ *
+ * FIELDS (all required unless marked optional):
+ *
+ *   img        Primary image path — shown on the card and as the first lightbox
+ *              image. Use /case-studies/<kebab-slug>/<kebab-filename>.jpeg
+ *              Images must be landscape, high quality, minimum 1200px wide.
+ *              No white-bordered or branded overlay images — real photography only.
+ *
+ *   tag        System and category label. ALL CAPS, format: "SYSTEM — CATEGORY"
+ *              System must be one of: MODBLOCK · MODWALL · MODFRAME · MODLAB
+ *              or a combined form e.g. "MODWALL & MODFRAME"
+ *              Category must match an existing value — do not invent new ones:
+ *                HOSPITALITY · SHOWS & FESTIVALS · SHOWS & CONFERENCES
+ *                EXHIBITION · BRAND ACTIVATION · BRAND ACTIVATION & EXPERIENTIAL
+ *                SPORT & RETAIL · AUTOMOTIVE & MOTORSPORT · DOMESTIC & COMMERCIAL
+ *
+ *   heading    Project title. ALL CAPS. Format: "CLIENT — DESCRIPTOR" or
+ *              "PROJECT NAME — LOCATION/EVENT". Keep concise — max ~6 words.
+ *              Match the rhythm of existing headings. No sentence case, no punctuation
+ *              other than em dashes (—) and ampersands (&).
+ *
+ *   body       Write-up in Modsol's voice — sharp, engineered, confident. Use
+ *              "modular architecture" not "temporary structure". No passive voice.
+ *              No bullet points — flowing prose only. Aim for 60–100 words.
+ *              All entries must be consistent in length and register.
+ *
+ *   images     Optional. Array of image paths for multi-image lightbox switching.
+ *              Include img as the first element. Minimum 2 images to activate controls.
+ *              All images must be from the same /case-studies/<slug>/ directory.
+ *              If only one image exists, omit this field entirely.
+ *
+ * AESTHETIC RULES (enforced by the renderer — do not work around them):
+ *   · Cards render at fixed grid width (420px image + fluid content)
+ *   · Image height fills the full row — no fixed px overrides on card images
+ *   · Lightbox: 65% image / 35% text on desktop, stacked column on mobile portrait
+ *   · Thumbnail controls appear automatically when images[] has 2+ entries
+ *   · No inline style changes permitted — all visual rules live in CSS classes
+ *
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 const caseStudies: CS[] = [
   { img: "/case-studies/take-that-southampton-26/modwall-catering-1.jpeg", tag: "MODWALL — SHOWS & FESTIVALS", heading: "TAKE THAT — SOUTHAMPTON 2026", body: "A headline arena run demanded a complete backstage world, delivered to performance standard and built at touring pace. Modsol answered with a fully connected Modwall complex — laundry facilities, wardrobe suites, dressing rooms, catering spaces and VIP hospitality areas — engineered as one continuous modular architecture rather than a collection of separate units. Every panel locked to the next on a precision post system, giving the production a clean, finished, demountable environment that went up fast, performed under the pressure of a live show, and struck without trace.", images: ["/case-studies/take-that-southampton-26/modwall-catering-1.jpeg", "/case-studies/take-that-southampton-26/modwall-make-up.jpeg", "/case-studies/take-that-southampton-26/modwall-dressing-room.jpeg"] },
   { img: "/Modwall/Aston Martin Internal.JPG", tag: "MODWALL — HOSPITALITY", heading: "ASTON MARTIN HOSPITALITY FIT-OUT", body: "The Modwall system was deployed to create a premium interior environment for Aston Martin's hospitality suite. Clean panel construction provided the architectural backdrop for integrated TVs, curated artwork and branded fixtures — delivering a permanent-quality finish on a temporary timeline. Every surface specified to reflect the Aston Martin standard." },
