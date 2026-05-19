@@ -7,18 +7,24 @@ import ScrollReveal from "@/components/layout/ScrollReveal";
 
 export const metadata: Metadata = {
   title: {
-    default: "Modsol Limited — Build. Bold. Modular Systems for Modular Architecture.",
+    default: "Modsol Limited — Build. Bold. Modular Architecture Systems.",
     template: "%s | Modsol Limited",
   },
   description:
-    "Modsol designs and manufactures modular systems for modular architecture, events, exhibitions, branded environments and commercial spaces. Build Bold.",
+    "Modsol Limited — modular architecture engineered for events, exhibitions, retail, hospitality and commercial spaces. Three core systems: The Modblock, The Modwall and The Modframe, plus The Modlab bespoke division. Build Bold.",
   keywords: [
-    "modular architecture systems",
-    "modular event structures",
-    "modular exhibition systems",
-    "temporary modular buildings",
-    "modular wall systems",
-    "modular branding structures",
+    "Modsol",
+    "modular architecture",
+    "Modblock",
+    "Modwall",
+    "Modframe",
+    "Modlab",
+    "modular building systems",
+    "modular exhibition stands",
+    "event structures",
+    "brand activations",
+    "modular hospitality",
+    "flat-pack architecture",
   ],
   icons: {
     icon: [
