@@ -32,13 +32,13 @@ const features: Record<SystemId, { title: string; desc: string }[]> = {
     { title: "Any Surface Finish",       desc: "Raw paint, vinyl wrap, printed graphic, LED integration or fabric — any finish is possible." },
   ],
   modframe: [
-    { title: "6M Clear Span",           desc: "The primary frame achieves 6 metres of uninterrupted span without intermediate support." },
+    { title: "Bolt-On Build",           desc: "An aluminium frame that bolts onto existing structures. Scales to any length without specialist fabrication." },
     { title: "Fabric Ready",            desc: "Integrated keder rail accepts any fabric specification — PVC, mesh, printed or blockout." },
     { title: "Rapid Build",             desc: "Primary frame components connect without specialist tools. Structure is up in hours." },
     { title: "Any Configuration",       desc: "Straight runs, L-shapes, curves and bespoke geometry are all achievable within the same system." },
     { title: "Branded Fascia",          desc: "Large-format graphic panels clip directly to the primary frame for instant brand presence at scale." },
     { title: "Weatherproof",            desc: "Engineered for outdoor use in all UK weather conditions. No compromises on structural integrity." },
-    { title: "Modular Extension",       desc: "Add bays, extend runs and reconfigure layouts between deployments with the same components." },
+    { title: "Modular Components",      desc: "Add bays, extend runs and reconfigure layouts between deployments with the same components." },
     { title: "Standalone or Integrated",desc: "Works as a freestanding canopy or integrates directly with Modblock and Modwall systems." },
   ],
 };

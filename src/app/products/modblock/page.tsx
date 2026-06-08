@@ -239,7 +239,7 @@ export default function ModblockPage() {
             maxWidth: "460px",
             marginBottom: "48px",
           }}>
-            The Modblock is Modsol&apos;s flagship modular building system. Engineered for premium modular architecture — from motorsport hospitality suites to festival retail environments. Flat-packable, rapidly deployable and scales in infinite 14m² multiples.
+            The Modblock is Modsol&apos;s flagship modular building system. Engineered for premium modular architecture — from motorsport hospitality suites to festival retail environments. Flat-packable, rapidly deployable and scales in infinite 15m² multiples.
           </p>
 
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>

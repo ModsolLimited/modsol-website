@@ -24,7 +24,7 @@ const tabContent: Record<Tab, {
     bullets: [
       "Deploys in hours — not days",
       "Fully weatherproof for outdoor environments",
-      "Scales in 14m² increments — no upper limit",
+      "Scales in 15m² increments — no upper limit",
     ],
     link: "/products/modblock",
   },

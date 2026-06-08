@@ -12,7 +12,7 @@ const products = [
     tag: "Structural",
     desc: "Modular Architecture - Redefined. Flat pack system, stackable, fully configurable wall panels for repeated solutions.",
     specs: [
-      "14m² unit footprint",
+      "15m² unit footprint",
       "5KN/M2 (Floor Capacity)",
       "3 Tier (Stack)",
     ],

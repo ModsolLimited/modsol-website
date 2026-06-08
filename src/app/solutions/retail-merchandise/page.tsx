@@ -22,7 +22,7 @@ const tabContent: Record<Tab, {
     heading: "RETAIL ARCHITECTURE THAT PERFORMS.",
     body: "The Modblock is the structural platform for temporary retail environments that need to perform at permanent standard — pop-up flagship stores, festival merchandise units and brand retail activations. Fast to deploy, configurable to any footprint and fully reusable across multiple locations.",
     bullets: [
-      "Configurable retail footprint — scales in 14m² increments",
+      "Configurable retail footprint — scales in 15m² increments",
       "Integrated point-of-sale and till counter options",
       "Flat-pack logistics — fits in a standard truck",
     ],
