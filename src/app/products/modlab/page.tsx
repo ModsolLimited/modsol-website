@@ -265,18 +265,31 @@ export default function ModlabPage() {
       {/* Introduction */}
       <section className="modlab-intro-section section-pad" style={{ background: "var(--black)" }}>
         <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
+          <div className="product-overview-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(48px, 6vw, 100px)", alignItems: "start" }}>
             <div className="reveal">
-              <p className="section-label">About The Modlab</p>
+              <p className="section-label">ABOUT THE MODLAB</p>
               <h2 className="section-title" style={{ marginBottom: "24px" }}>
                 CUSTOM FABRICATION.<br />
                 <span style={{ color: "var(--yellow)" }}>BESPOKE ENGINEERING.</span>
               </h2>
-            </div>
-            <div className="reveal" style={{ paddingTop: "8px" }}>
               <p style={{ fontSize: "15px", color: "var(--muted)", lineHeight: "1.9" }}>
                 The Modlab is Modsol&apos;s bespoke design and fabrication division. For projects that demand something beyond the standard platform — we engineer it from scratch. From modular car parks to container conversions, from architecturally designed structures to one-off brand installations — The Modlab exists to turn ambition into reality.
               </p>
+            </div>
+            <div className="reveal" style={{ position: "relative", minHeight: "400px" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/Modlab/Custom.jpg"
+                alt="Modlab custom fabrication"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                }}
+              />
             </div>
           </div>
         </div>
