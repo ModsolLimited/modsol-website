@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-type CS = { img: string; tag: string; heading: string; body: string; images?: string[] };
+type CS = { img: string; tag: string; heading: string; body: string; images?: string[]; href?: string };
 
 /*
  * ─── CASE STUDIES — CONTENT RULES ───────────────────────────────────────────
@@ -49,6 +49,8 @@ type CS = { img: string; tag: string; heading: string; body: string; images?: st
  * ────────────────────────────────────────────────────────────────────────────
  */
 const caseStudies: CS[] = [
+  { href: "/projects/politico-pub-2026", img: "/Case%20Studies/Politico%20Pub%202026%20-Labour%20Conference/8cf13c7d-45a5-48bf-96cc-5a7a5ca75fb7.JPG", tag: "MODFRAME & MODWALL — SHOWS & CONFERENCES", heading: "THE POLITICO PUB — LABOUR CONFERENCE 2026", body: "Returning for a second consecutive year, Modsol delivered The Politico Pub — the iconic hospitality environment at the Labour Party Conference — alongside sister company Mahood Marquees. The Modframe shaped the bold exterior façade while the Modwall configured a premium interior of bar areas and private spaces, raising the standard on the previous year's build. The result was an activation that hosted some of the most influential figures in British politics, including the Prime Minister." },
+  { href: "/projects/hot-wheels-carfest", img: "/Case%20Studies/Hot%20Wheels%20-%20CarFest%2026/26982250-92e6-4856-aae3-ed6153b28522.JPG", tag: "MODFRAME & MODWALL — BRAND ACTIVATION & EXPERIENTIAL", heading: "HOT WHEELS — CARFEST SOUTH 2026", body: "Working in close partnership with sister company Mahood Marquees, Modsol deployed both the Modframe and Modwall systems to deliver Hot Wheels' branded activation environment at CarFest South 2026 — one of the UK's most celebrated family motorsport festivals. The Modframe delivered a bold, large-scale façade that commanded attention across the festival site, while the Modwall shaped the interior environment with clean, precision-fitted panel divisions. Two systems, one unified brand environment, built to the energy and identity of one of the world's most iconic brands." },
   { img: "/case-studies/take-that-sunderland-26/modwall-external.jpeg", tag: "MODWALL — SHOWS & FESTIVALS", heading: "TAKE THAT — SUNDERLAND 2026", body: "From Southampton, the Take That 2026 tour moved north to Sunderland — and Modsol moved with it. Another full Modwall backstage build, delivered to the same performance standard and the same touring pace. The system is engineered to scale a tour rather than start over at every stop: panels, connection posts and doors lock into one continuous modular solution — engineered to scale up or down with each location's demands and environment, delivering a clean architectural finish for every internal space. It goes up fast, performs under live-show pressure, and strikes without trace.", images: ["/case-studies/take-that-sunderland-26/modwall-external.jpeg", "/case-studies/take-that-sunderland-26/modwall-aerial.jpeg", "/case-studies/take-that-sunderland-26/modwall-corridor.jpeg", "/case-studies/take-that-sunderland-26/modwall-double-door-2.jpeg", "/case-studies/take-that-sunderland-26/modwall-dressing-1.jpeg", "/case-studies/take-that-sunderland-26/modwall-dressing-2.jpeg", "/case-studies/take-that-sunderland-26/modwall-dressing-3.jpeg", "/case-studies/take-that-sunderland-26/modwall-dressing-4.jpeg", "/case-studies/take-that-sunderland-26/modwall-laundry-wardrobe.jpeg", "/case-studies/take-that-sunderland-26/modwall-wardrobe-double-door.jpeg"] },
   { img: "/case-studies/take-that-southampton-26/modwall-catering-1.jpeg", tag: "MODWALL — SHOWS & FESTIVALS", heading: "TAKE THAT — SOUTHAMPTON 2026", body: "A headline arena run demanded a complete backstage world, delivered to performance standard and built at touring pace. Modsol answered with a fully connected Modwall complex — laundry facilities, wardrobe suites, dressing rooms, catering spaces and VIP hospitality areas — engineered as one continuous modular architecture rather than a collection of separate units. Every panel locked to the next on a precision post system, giving the production a clean, finished, demountable environment that went up fast, performed under the pressure of a live show, and struck without trace.", images: ["/case-studies/take-that-southampton-26/modwall-catering-1.jpeg", "/case-studies/take-that-southampton-26/modwall-make-up.jpeg", "/case-studies/take-that-southampton-26/modwall-dressing-room.jpeg"] },
   { img: "/Modwall/Aston Martin Internal.JPG", tag: "MODWALL — HOSPITALITY", heading: "ASTON MARTIN HOSPITALITY FIT-OUT", body: "The Modwall system was deployed to create a premium interior environment for Aston Martin's hospitality suite. Clean panel construction provided the architectural backdrop for integrated TVs, curated artwork and branded fixtures — delivering a permanent-quality finish on a temporary timeline. Every surface specified to reflect the Aston Martin standard." },
@@ -105,16 +107,27 @@ export default function CaseStudiesPage() {
       `}</style>
       <section style={{ background: "var(--black)", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div>
-          {caseStudies.map((cs, i) => (
-            <div key={i} className="case-study-bar" onClick={() => setSelected(cs)}>
-              <img src={cs.img} alt={cs.heading} />
-              <div className="cs-content">
-                <div className="cs-tag">{cs.tag}</div>
-                <h3 className="cs-heading">{cs.heading}</h3>
-                <p className="cs-body">{cs.body}</p>
+          {caseStudies.map((cs, i) =>
+            cs.href ? (
+              <Link key={i} href={cs.href} className="case-study-bar" style={{ textDecoration: "none" }}>
+                <img src={cs.img} alt={cs.heading} />
+                <div className="cs-content">
+                  <div className="cs-tag">{cs.tag}</div>
+                  <h3 className="cs-heading">{cs.heading}</h3>
+                  <p className="cs-body">{cs.body}</p>
+                </div>
+              </Link>
+            ) : (
+              <div key={i} className="case-study-bar" onClick={() => setSelected(cs)}>
+                <img src={cs.img} alt={cs.heading} />
+                <div className="cs-content">
+                  <div className="cs-tag">{cs.tag}</div>
+                  <h3 className="cs-heading">{cs.heading}</h3>
+                  <p className="cs-body">{cs.body}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
         </div>
       </section>
 
