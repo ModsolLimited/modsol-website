@@ -34,7 +34,9 @@ export default function ShareBar({ title, label = "Share", size = 36 }: { title:
   const showLabel = label.length > 0;
   const [copied, setCopied] = useState(false);
   const iconBtnStyle: React.CSSProperties = {
-    background: "transparent",
+    background: "rgba(255,255,255,0.05)",
+    border: "1px solid rgba(255,255,255,0.25)",
+    color: "rgba(255,255,255,0.75)",
     padding: 0,
     position: "relative",
     width: `${size}px`,
