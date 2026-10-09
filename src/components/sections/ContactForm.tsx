@@ -208,8 +208,12 @@ export default function ContactForm() {
           font-weight: 300;
           width: 100%;
         }
+        .form-input:focus-visible, .form-textarea:focus-visible {
+          outline: 2px solid #C6FF02;
+          outline-offset: 2px;
+        }
         .form-input::placeholder, .form-textarea::placeholder {
-          color: rgba(255,255,255,0.2);
+          color: rgba(255,255,255,0.55);
         }
         .form-textarea {
           resize: none;
@@ -309,8 +313,12 @@ export default function ContactForm() {
           align-items: center;
           padding: 0;
         }
+        .picker-trigger:focus-visible {
+          outline: 2px solid #C6FF02;
+          outline-offset: 2px;
+        }
         .picker-trigger-placeholder {
-          color: rgba(255,255,255,0.2);
+          color: rgba(255,255,255,0.55);
         }
         .picker-trigger-value {
           color: #fff;
@@ -370,7 +378,7 @@ export default function ContactForm() {
           font-size: 9px;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.4);
+          color: rgba(255,255,255,0.6);
           display: block;
           margin-top: 4px;
         }
@@ -613,7 +621,7 @@ export default function ContactForm() {
                   : `✓ ${wordCount} WORDS`
               }
             </span>
-            <span style={{ color: 'rgba(255,255,255,0.2)' }}>
+            <span style={{ color: 'rgba(255,255,255,0.6)' }}>
               {values.message.trim() === '' ? '' : `${wordCount}/10 MIN`}
             </span>
           </div>
@@ -748,7 +756,7 @@ export default function ContactForm() {
               marginTop: '6px',
               fontFamily: 'var(--font-mono)',
               fontSize: '10px',
-              color: 'rgba(255,255,255,0.3)',
+              color: 'rgba(255,255,255,0.6)',
               letterSpacing: '0.12em',
             }}>
               SLIDE THE BLOCK INTO THE MARKED POSITION

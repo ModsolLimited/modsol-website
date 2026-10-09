@@ -54,7 +54,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Email error:', error)
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('Email error:', error)
+    }
     return NextResponse.json({ success: false, error: 'Failed to send email' }, { status: 500 })
   }
 }

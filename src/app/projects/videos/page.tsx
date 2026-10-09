@@ -91,7 +91,7 @@ export default function VideosPage() {
           margin-bottom: 14px;
         }
         .video-card-product { font-family: var(--font-display); font-size: 22px; color: #C6FF02; letter-spacing: 0.05em; }
-        .video-card-label { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 6px; }
+        .video-card-label { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.6); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 6px; }
         @media (max-width: 768px) {
           .videos-layout {
             grid-template-columns: 1fr !important;

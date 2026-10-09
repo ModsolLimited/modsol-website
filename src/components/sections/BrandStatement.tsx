@@ -91,7 +91,7 @@ export default function BrandStatement() {
               <span
                 key={wi}
                 style={{
-                  fontFamily: "'Bebas Neue', sans-serif",
+                  fontFamily: "var(--font-display)",
                   fontSize: '100px',
                   lineHeight: '0.9',
                   color: word.yellow ? '#C6FF02' : 'transparent',

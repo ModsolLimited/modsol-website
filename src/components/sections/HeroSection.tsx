@@ -159,7 +159,7 @@ export default function HeroSection() {
       {/* Scroll indicator */}
       <div className="hero-scroll-indicator">
         <div className="hero-scroll-line" />
-        <span className="mono" style={{ fontSize: "8px", color: "rgba(255,255,255,0.2)" }}>Scroll</span>
+        <span className="mono" style={{ fontSize: "8px", color: "rgba(255,255,255,0.6)" }}>Scroll</span>
       </div>
     </section>
   );

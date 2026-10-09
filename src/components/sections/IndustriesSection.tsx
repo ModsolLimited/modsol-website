@@ -107,7 +107,7 @@ export default function IndustriesSection() {
                 <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--yellow)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "8px" }}>{ind.tag}</div>
                 <h4 style={{ fontSize: "clamp(18px, 1.8vw, 26px)" }}>{ind.title}</h4>
                 <p style={{ marginTop: "10px", flex: 1, fontSize: "14px", lineHeight: 1.7 }}>{ind.desc}</p>
-                <div style={{ marginTop: "20px", fontFamily: "var(--font-mono)", fontSize: "11px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.15em", textTransform: "uppercase" }}>Explore →</div>
+                <div style={{ marginTop: "20px", fontFamily: "var(--font-mono)", fontSize: "11px", color: "rgba(255,255,255,0.6)", letterSpacing: "0.15em", textTransform: "uppercase" }}>Explore →</div>
               </div>
             </Link>
           ))}

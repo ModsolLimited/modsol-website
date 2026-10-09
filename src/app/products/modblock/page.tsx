@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = { title: "The Modblock — Modsol" };
 
@@ -250,15 +251,12 @@ export default function ModblockPage() {
 
         {/* Right — hero image */}
         <div className="product-hero-image" style={{ position: "relative", overflow: "hidden", minWidth: "min(100%, 400px)", flex: "1 1 50%" }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/Modblock/Modblock - VW.png"
             alt="Modblock — Vodafone"
+            fill
+            priority
             style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
               objectFit: "cover",
               objectPosition: "center",
             }}
@@ -467,7 +465,7 @@ export default function ModblockPage() {
                   {value}
                 </p>
                 {sub && (
-                  <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "rgba(255,255,255,0.4)", marginTop: "8px" }}>
+                  <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "rgba(255,255,255,0.6)", marginTop: "8px" }}>
                     {sub}
                   </p>
                 )}

@@ -205,7 +205,7 @@ export default function GalleryPage() {
         .lightbox-img { max-width: 90vw; max-height: 90vh; object-fit: contain; display: block; }
         .lightbox-close { position: absolute; top: 24px; right: 32px; font-family: var(--font-mono); font-size: 14px; color: rgba(255,255,255,0.5); cursor: pointer; background: none; border: none; letter-spacing: 0.1em; padding: 8px; transition: color 0.2s; }
         .lightbox-close:hover { color: #C6FF02; }
-        .lightbox-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--font-mono); font-size: 20px; color: rgba(255,255,255,0.4); cursor: pointer; background: none; border: none; padding: 16px; transition: color 0.2s; }
+        .lightbox-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--font-mono); font-size: 20px; color: rgba(255,255,255,0.6); cursor: pointer; background: none; border: none; padding: 16px; transition: color 0.2s; }
         .lightbox-arrow:hover { color: #C6FF02; }
         .lightbox-arrow-left { left: 24px; }
         .lightbox-arrow-right { right: 24px; }

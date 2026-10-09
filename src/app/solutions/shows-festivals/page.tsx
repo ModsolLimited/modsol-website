@@ -290,9 +290,15 @@ function GallerySection() {
                   outlineOffset: '-2px',
                   transition: 'outline 0.3s ease',
                 }}
+                tabIndex={0}
+                role="button"
+                aria-label={`View ${img.product} image`}
                 onMouseEnter={() => setHoveredCell(i)}
                 onMouseLeave={() => setHoveredCell(null)}
+                onFocus={() => setHoveredCell(i)}
+                onBlur={() => setHoveredCell(null)}
                 onClick={() => { setLightboxSrc(img.src); setLightboxProduct(img.product); }}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLightboxSrc(img.src); setLightboxProduct(img.product); } }}
               >
                 <div style={{
                   position: 'absolute',

@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const navItems = [
@@ -98,7 +99,7 @@ export default function Navigation() {
       <nav className={`site-nav${scrolled ? " scrolled" : ""}`}>
         {/* Logo */}
         <Link href="/" className="nav-logo">
-          <img src="/logo.png" alt="Modsol" style={{ height: "40px", width: "auto", display: "block" }} />
+          <Image src="/logo.png" alt="Modsol" width={208} height={40} priority style={{ height: "40px", width: "auto", display: "block" }} />
         </Link>
 
         {/* Desktop links */}
@@ -147,6 +148,8 @@ export default function Navigation() {
               onClick={() => setMobileExpanded(mobileExpanded === item.label ? null : item.label)}
               className="mobile-nav-link"
               style={{ background: "none", border: "none", width: "100%", textAlign: "left", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}
+              aria-expanded={mobileExpanded === item.label}
+              aria-label={`${item.label} submenu`}
             >
               <span>{item.label}</span>
               <span style={{ color: "var(--yellow)", fontSize: "14px", transform: mobileExpanded === item.label ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}>▾</span>

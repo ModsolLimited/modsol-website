@@ -172,7 +172,7 @@ export default function ModlabProcess() {
               style={{
                 fontFamily: "var(--font-body)",
                 fontSize: "13px",
-                color: "rgba(255,255,255,0.4)",
+                color: "rgba(255,255,255,0.6)",
                 fontStyle: "italic",
                 lineHeight: "1.7",
                 marginTop: "12px",

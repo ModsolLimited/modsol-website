@@ -71,7 +71,7 @@ export default function TeamGrid() {
             {member.photo && (
               <img
                 src={member.photo}
-                alt={member.name}
+                alt={`${member.name}, ${member.role}`}
                 style={{
                   position: "absolute",
                   inset: 0,

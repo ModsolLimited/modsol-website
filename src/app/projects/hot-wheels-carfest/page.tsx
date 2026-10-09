@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import ShareBar from "@/components/ui/ShareBar";
 
 const IMG_BASE = "/Case%20Studies/Hot%20Wheels%20-%20CarFest%2026";
@@ -41,8 +42,9 @@ export default function HotWheelsCarfestPage() {
         .hwcf-system-card { background: var(--dark); padding: clamp(32px, 4vw, 48px); position: relative; overflow: hidden; transition: background 0.3s ease; text-decoration: none; display: block; border-top: 2px solid transparent; }
         .hwcf-system-card:hover { background: var(--dark2); border-top-color: var(--yellow); }
         .hwcf-gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-        .hwcf-gallery-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; filter: brightness(0.7); transition: filter 0.3s ease; cursor: pointer; }
-        .hwcf-gallery-img:hover { filter: brightness(1.0); }
+        .hwcf-gallery-cell { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; cursor: pointer; }
+        .hwcf-gallery-img { object-fit: cover; filter: brightness(0.7); transition: filter 0.3s ease; }
+        .hwcf-gallery-cell:hover .hwcf-gallery-img { filter: brightness(1.0); }
         .hwcf-details-row { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.06); gap: 1px; }
         @media (max-width: 1024px) {
           .hwcf-details-row { grid-template-columns: repeat(2, 1fr); }
@@ -64,11 +66,13 @@ export default function HotWheelsCarfestPage() {
         overflow: "hidden",
         background: "#000",
       }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={IMAGES[0]}
           alt="Hot Wheels — CarFest South 2026"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: "cover", zIndex: 0 }}
         />
         <div style={{
           position: "absolute",
@@ -181,8 +185,9 @@ export default function HotWheelsCarfestPage() {
       <section style={{ background: "#0A0A0A" }}>
         <div className="hwcf-gallery-grid">
           {IMAGES.map((src, i) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img key={src} src={src} alt={`Hot Wheels — CarFest South 2026, image ${i + 1}`} className="hwcf-gallery-img" />
+            <div key={src} className="hwcf-gallery-cell">
+              <Image src={src} alt={`Hot Wheels — CarFest South 2026, image ${i + 1}`} fill sizes="(max-width: 768px) 100vw, 50vw" className="hwcf-gallery-img" />
+            </div>
           ))}
         </div>
       </section>
