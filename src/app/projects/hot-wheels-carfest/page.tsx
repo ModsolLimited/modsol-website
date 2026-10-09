@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import ShareBar from "@/components/ui/ShareBar";
 
 const IMG_BASE = "/Case%20Studies/Hot%20Wheels%20-%20CarFest%2026";
 const IMAGES = [
@@ -125,9 +126,11 @@ export default function HotWheelsCarfestPage() {
             color: "rgba(255,255,255,0.7)",
             letterSpacing: "0.15em",
             textTransform: "uppercase",
+            marginBottom: "32px",
           }}>
             MODFRAME · MODWALL · IN COLLABORATION WITH MAHOOD MARQUEES
           </p>
+          <ShareBar title="Hot Wheels — CarFest South 2026 | Modsol" />
         </div>
       </section>
 

@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import ShareBar from "@/components/ui/ShareBar";
 
 const IMG_BASE = "/Case%20Studies/Politico%20Pub%202026%20-Labour%20Conference";
 const IMAGES = [
@@ -125,9 +126,11 @@ export default function PoliticoPub2026Page() {
             color: "rgba(255,255,255,0.7)",
             letterSpacing: "0.15em",
             textTransform: "uppercase",
+            marginBottom: "32px",
           }}>
             MODFRAME · MODWALL · IN COLLABORATION WITH MAHOOD MARQUEES
           </p>
+          <ShareBar title="The Politico Pub — Labour Conference 2026 | Modsol" />
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import ShareBar from "@/components/ui/ShareBar";
 
 type CS = { img: string; tag: string; heading: string; body: string; images?: string[]; href?: string };
 
@@ -142,6 +143,9 @@ export default function CaseStudiesPage() {
               <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "#C6FF02", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "16px" }}>{selected.tag}</div>
               <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px, 4vw, 64px)", color: "#fff", lineHeight: 1, marginBottom: "24px" }}>{selected.heading}</h2>
               <p style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "#888888", lineHeight: 1.7, margin: 0 }}>{selected.body}</p>
+              <div style={{ marginTop: "24px" }}>
+                <ShareBar title={`${selected.heading} | Modsol`} />
+              </div>
               {lbImages.length > 1 && (
                 <div className="cs-modal-thumbs" style={{ display: "flex", gap: "8px", marginTop: "24px", flexWrap: "wrap" }}>
                   {lbImages.map((src, i) => (
