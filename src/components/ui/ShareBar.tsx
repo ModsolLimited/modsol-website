@@ -30,14 +30,16 @@ function LinkIcon() {
   );
 }
 
-const iconBtnStyle: React.CSSProperties = {
-  background: "transparent",
-  padding: 0,
-  position: "relative",
-};
-
-export default function ShareBar({ title, label = "Share" }: { title: string; label?: string }) {
+export default function ShareBar({ title, label = "Share", size = 36 }: { title: string; label?: string; size?: number }) {
+  const showLabel = label.length > 0;
   const [copied, setCopied] = useState(false);
+  const iconBtnStyle: React.CSSProperties = {
+    background: "transparent",
+    padding: 0,
+    position: "relative",
+    width: `${size}px`,
+    height: `${size}px`,
+  };
 
   const getUrl = () => (typeof window !== "undefined" ? window.location.href : "");
 
@@ -77,15 +79,17 @@ export default function ShareBar({ title, label = "Share" }: { title: string; la
 
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
-      <span style={{
-        fontFamily: "var(--font-mono)",
-        fontSize: "11px",
-        color: "var(--muted)",
-        letterSpacing: "0.2em",
-        textTransform: "uppercase",
-      }}>
-        {label}
-      </span>
+      {showLabel && (
+        <span style={{
+          fontFamily: "var(--font-mono)",
+          fontSize: "11px",
+          color: "var(--muted)",
+          letterSpacing: "0.2em",
+          textTransform: "uppercase",
+        }}>
+          {label}
+        </span>
+      )}
       <div style={{ display: "flex", gap: "10px" }}>
         <button type="button" onClick={shareInstagram} aria-label="Share to Instagram" className="social-link" style={iconBtnStyle}>
           <InstagramIcon />

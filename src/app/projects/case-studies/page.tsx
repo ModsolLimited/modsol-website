@@ -96,11 +96,13 @@ export default function CaseStudiesPage() {
       </section>
 
       <style>{`
-        .case-study-bar { display: grid; grid-template-columns: 420px 1fr; border-bottom: 1px solid rgba(255,255,255,0.06); background: var(--black); transition: background 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
+        .case-study-bar { position: relative; display: grid; grid-template-columns: 420px 1fr; border-bottom: 1px solid rgba(255,255,255,0.06); background: var(--black); transition: background 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
         .case-study-bar img { width: 100%; height: 100%; min-height: 320px; object-fit: cover; filter: brightness(0.85); display: block; transition: filter 0.4s ease; }
         .case-study-bar:hover { background: rgba(198, 255, 2, 0.03); box-shadow: inset 0 0 0 1px rgba(198, 255, 2, 0.15), 0 0 40px rgba(198, 255, 2, 0.04); }
         .case-study-bar:hover img { filter: brightness(1.0); }
         .cs-content { padding: 48px; display: flex; flex-direction: column; justify-content: center; }
+        .cs-share { position: absolute; bottom: 24px; right: 32px; z-index: 5; }
+        @media (max-width: 768px) { .cs-share { position: static; margin-top: 20px; padding: 0 0 24px 0; } }
         .cs-tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; color: #C6FF02; text-transform: uppercase; margin-bottom: 12px; }
         .cs-heading { font-family: var(--font-display); font-size: clamp(32px, 4vw, 52px); color: var(--white); line-height: 1; letter-spacing: 0.02em; }
         .cs-body { font-family: var(--font-body); font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.65); line-height: 1.75; max-width: 620px; margin-top: 16px; }
@@ -117,6 +119,12 @@ export default function CaseStudiesPage() {
                   <h3 className="cs-heading">{cs.heading}</h3>
                   <p className="cs-body">{cs.body}</p>
                 </div>
+                <div
+                  className="cs-share"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                >
+                  <ShareBar title={`${cs.heading} | Modsol`} label="" size={32} />
+                </div>
               </Link>
             ) : (
               <div key={i} className="case-study-bar" onClick={() => setSelected(cs)}>
@@ -125,6 +133,12 @@ export default function CaseStudiesPage() {
                   <div className="cs-tag">{cs.tag}</div>
                   <h3 className="cs-heading">{cs.heading}</h3>
                   <p className="cs-body">{cs.body}</p>
+                </div>
+                <div
+                  className="cs-share"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ShareBar title={`${cs.heading} | Modsol`} label="" size={32} />
                 </div>
               </div>
             )
