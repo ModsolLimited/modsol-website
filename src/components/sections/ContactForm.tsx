@@ -422,6 +422,7 @@ export default function ContactForm() {
                 productSystem: values.productSystem,
                 solution: values.solution,
                 projectDescription: values.message,
+                'bot-field': '',
               }),
             });
             if (res.ok) {
