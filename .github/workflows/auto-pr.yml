@@ -1,0 +1,30 @@
+# Opens a pull request automatically whenever a changes/* branch is pushed,
+# so edits made on the shared laptop wait for review instead of going live.
+name: Auto PR for changes branches
+
+on:
+  push:
+    branches: ['changes/**']
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  open-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open PR if one isn't already open
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ github.ref_name }}
+          HEAD_MSG: ${{ github.event.head_commit.message }}
+        run: |
+          existing=$(gh pr list --repo "$REPO" --head "$BRANCH" --state open --json number --jq '.[].number')
+          if [ -z "$existing" ]; then
+            title=$(printf '%s\n' "$HEAD_MSG" | head -n 1)
+            gh pr create --repo "$REPO" --head "$BRANCH" --base main \
+              --title "$title" \
+              --body "Made on the shared laptop. Check the Netlify deploy preview below, then merge to put it live."
+          fi
