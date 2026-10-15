@@ -27,6 +27,11 @@ export default function ContactForm() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
+  // Noted once, on mount, so the server can tell a genuine visitor
+  // (who takes several seconds to read and fill the form) apart from a
+  // script that fires data straight at an endpoint instantly.
+  const [formLoadedAt] = useState(() => Date.now());
+
   const [values, setValues] = useState({
     firstName: '', lastName: '', company: '', email: '',
     landline: '', mobile: '', productSystem: '', solution: '', message: '',
@@ -127,11 +132,6 @@ export default function ContactForm() {
 
   const touch = (field: string) => setTouched(t => ({ ...t, [field]: true }));
   const change = (field: string, value: string) => setValues(v => ({ ...v, [field]: value }));
-
-  const encodeForm = (data: Record<string, string>) =>
-    Object.keys(data)
-      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-      .join('&');
 
   function ValidationIcon({ field }: { field: keyof typeof valid }) {
     if (!touched[field]) return null;
@@ -408,11 +408,10 @@ export default function ContactForm() {
           setIsSubmitting(true);
           setSubmitError(false);
           try {
-            const res = await fetch('/__forms.html', {
+            const res = await fetch('/api/submit-contact', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-              body: encodeForm({
-                'form-name': 'contact',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
                 firstName: values.firstName,
                 lastName: values.lastName,
                 company: values.company,
@@ -422,7 +421,7 @@ export default function ContactForm() {
                 productSystem: values.productSystem,
                 solution: values.solution,
                 projectDescription: values.message,
-                'bot-field': '',
+                formLoadedAt,
               }),
             });
             if (res.ok) {
