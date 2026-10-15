@@ -128,6 +128,11 @@ export default function ContactForm() {
   const touch = (field: string) => setTouched(t => ({ ...t, [field]: true }));
   const change = (field: string, value: string) => setValues(v => ({ ...v, [field]: value }));
 
+  const encodeForm = (data: Record<string, string>) =>
+    Object.keys(data)
+      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .join('&');
+
   function ValidationIcon({ field }: { field: keyof typeof valid }) {
     if (!touched[field]) return null;
     return (
@@ -403,10 +408,11 @@ export default function ContactForm() {
           setIsSubmitting(true);
           setSubmitError(false);
           try {
-            const res = await fetch('/api/contact', {
+            const res = await fetch('/', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: encodeForm({
+                'form-name': 'contact',
                 firstName: values.firstName,
                 lastName: values.lastName,
                 company: values.company,
@@ -418,8 +424,7 @@ export default function ContactForm() {
                 projectDescription: values.message,
               }),
             });
-            const data = await res.json();
-            if (data.success) {
+            if (res.ok) {
               setSubmitSuccess(true);
             } else {
               setSubmitError(true);
